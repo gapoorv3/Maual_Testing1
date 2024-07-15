@@ -1,0 +1,92 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Arial-BoldMT;\f2\fswiss\fcharset0 ArialMT;
+}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red255\green255\blue255;\red18\green0\blue161;
+\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c20000\c20000\c20000;\cssrgb\c100000\c100000\c100000;\cssrgb\c9412\c10196\c69412;
+\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid1\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww21520\viewh12060\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Testing Techniques -> \
+\
+1. Equivalence partinoning : Ex - age b/w 18 - 80 except 60 to 65 -> In this we make basket in which valid and invalid numbers we putt in basket and test it. \
+Invalid -> 0,1,..17; valid -> 18, 19, \'8559; Invalid -> 60,61..65; valid -> 66,67,\'8580 ; Invalid -> 81,82\'85\
+\
+2. Border Value Analysis : Ex - in this if we choose calendar dates, then in it we have to select it for : 0 ; 1 ; 31 ; 32.\
+\
+3. Decision Table : Ex - In login, there are two fields Username and password; we make decision like 4 combination\'97> valid pass/invalid username, invalid pass/valid username \'85..etc.\
+\
+4. State Transition : In this we have to check next state, if we perform any action; then  what state will be checked at next state; we can with Invalid state also; so to validate it.\
+Code -level\
+\
+5. Path testing : define to path on which we use steps to test it. It is like control flow graph -> 1-2 -3 \'85.\
+Code -Level\
+\
+6. Mutation Testing : To find mutation -> any duplicity or not used in code for priority.\
+\
+7. Orthogonal array technique\
+\
+\pard\pardeftab720\sa400\partightenfactor0
+
+\f1\b\fs80 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 List of Software Quality Attributes\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa200\partightenfactor0
+\ls1\ilvl0
+\fs40 \cf4 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Functionality!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Functionality}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\ls1\ilvl0
+\f1\b \cf4 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Performance!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Performance}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\ls1\ilvl0
+\f1\b \cf4 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Reliability!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Reliability}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\ls1\ilvl0
+\f1\b \cf4 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Testability!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Testability}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\ls1\ilvl0
+\f1\b \cf4 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Availability!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Availability}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\ls1\ilvl0
+\f1\b \cf4 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Interoperability!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Interoperability}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\ls1\ilvl0
+\f1\b \cf4 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Security!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Security}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\ls1\ilvl0
+\f1\b \cf4 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Flexibility!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Flexibility}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\ls1\ilvl0
+\f1\b \cf4 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Efficiency!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Efficiency}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\ls1\ilvl0
+\f1\b \cf4 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		{\field{\*\fldinst{HYPERLINK "https://codoid.com/software-testing/the-basics-of-software-quality-attributes/#Usability!"}}{\fldrslt \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Usability}}
+\f2\b0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\
+}

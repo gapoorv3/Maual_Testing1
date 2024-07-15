@@ -1,0 +1,283 @@
+1.dashboard
+2.snapshot
+
+
+ssh -i sb_rishabh.pem ubuntu@10.2.2.0
+
+pod -> container -> microservices
+---------------------------------------------------BASH SCRIPT------------------------------------------------
+
+SNAPSHOT------>>>
+
+curl -X PUT "localhost:9200/_snapshot/snapshot-s3-elastichq?pretty" -H 'Content-Type: application/json' 
+-d'
+{
+  "type": "s3",
+  "settings": {
+    "bucket": "es-backup",
+    "base_path": "elastichq",
+    "region": "us-west-2",
+    "max_snapshot_bytes_per_sec": "500mb",
+    "max_restore_bytes_per_sec": "1gb"
+  }
+}
+'
+
+
+#!/bin/bash
+curl --user elastic:Sapidblue@123 --location --request PUT --header 'Content-Type: application/json' 'http://10.2.2.0:9200/_snapshot/my_s3_repository?pretty' \
+-d'
+{
+  "indices": "cam-backend",
+  "ignore_unavailable": true,
+  "include_global_state": false,
+  "filter": {
+         "range": {
+           "@timestamp": {
+             "from": "now-24h",
+             "to": "now"
+        }
+     }
+  }
+}
+'
+ 
+-----------------------curl------------------------------------------------------
+
+#!/bin/bash
+curl --user elastic:Sapidblue@123 --location --request GET --header 'Content-Type: application/json' 'http://10.2.2.0:9200/cam-backend/_search' \
+ -d '{
+   "query": {
+     "bool": {
+       "must": [
+         {
+           "match_phrase": {
+             "message": "/preLogin/advancePlayerRegistration"
+           }
+         },
+         {
+           "match_phrase": {
+             "message": "errorCode:0"
+           }
+         },
+         {
+           "match_phrase": {
+             "message": "status:'\''ACTIVE'\''"
+           }
+         }
+       ],
+       "filter": {
+         "range": {
+           "@timestamp": {
+             "from": "now-1h",
+             "to": "now"
+           }
+         }
+       }
+     }
+   }
+ }'>/home/ubuntu/docker-elk/Apoorv/srch_query_output.txt
+
+cat /home/ubuntu/docker-elk/Apoorv/srch_query_output.txt | grep '"value":0'
+if [[ $? == 0 ]]
+then
+curl -X POST --data-urlencode "payload={\"channel\": \"#general\", \"username\": \"webhookbot\", \"text\": \"Consumer not registering since 1 hour.\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/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
+else
+echo "Script has been run sucessfully"
+fi
+
+
+-------------------------cronjob------------------------------------
+https://cron.help/
+#*/01 */01 * * * root /usr/bin/bash /home/ubuntu/docker-elk/Apoorv/delete_query.sh
+
+tail -f /var/log/syslog | grep CRON
+
+ */01 * * * * /bin/bash /home/ubuntu/docker-elk/Apoorv/search_query.sh
+ nano /etc/crontab
+ crontab -e
+/var/spool/cron/crontab/<user> ---user specific
+https://linuxhint.com/cron_jobs_complete_beginners_tutorial/
+------------------------delete_query----------------------------------
+
+#!/bin/bash
+curl --user elastic:Sapidblue@123 --location --request POST --header 'Content-Type: application/json' 'http://10.2.2.0:9200/cam-backend/_delete_by_query?scroll_size=10000' \
+ -d '{
+    "query": {
+    "range": {
+      "@timestamp": {
+        "lte": "now"
+      }
+    }
+  }
+}'>/home/ubuntu/docker-elk/Apoorv/del_query_output.txt
+
+
+----------------------------AI ELK -----------------------------------------------
+
+https://dev.to/priscilla_parodi/a-guide-to-machine-learning-ai-with-the-elastic-stack-1dkl
+
+1.Anomaly detection : constructs a probability model and can run continuously to identify unusual events as they occur. (unsupervised)
+The anomaly score (severity) is a value from 0 to 100, which indicates the significance of the observed anomaly compared to previously seen anomalies. Highly anomalous values ​​are shown in red.
+Anomalies with medium or high impact on multiple buckets are represented with a cross symbol instead of a dot.
+---yeh koi alag cheez ho rahi h usse obsrve krega, then hum isse use kr skte h mail/message shoot krne ke liye.---{logs nahi aaye toh mail shoot krna, 
+
+2.Categorization analysis : which is a machine learning process that tokenizes a text field, clusters similar to data together, and classifies it into categories
+---(anomaly checking)agar koi log aate the but nhi aa rhe tab bhi notification bhejega, and agar jo aa rhe h wo nhi aa rhe tab bhi bhejega (in time bucket); yeh logs ko alag alag mlcategory ka cluster bnayega.., then detect krega---
+Categorization-->
+Step 1 - Remove mutable text
+Step 2 - cluster similar messages together
+Step 3 - Count per time bucket
+
+3.Data Visualizer : isme hum fields bna skte h and then uska data visualize kr skte alag alag 
+pata chalta rahega kisne kaha se login kara, kis device se , yeh distinct values ka count ya top aur bhi values show krta h like hum isse city, state and country ke count nikal skte h
+https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime-examples.html
+
+4.Outlier detection : identifies unusual points in a data set by analyzing how close each data point is to others and the density of the cluster of points around it. (unsupervised)
+With Outlier Detection we are looking at clusters of data and evaluating density and distance using multi-variate analysis. We are not interested in tracking evolution of this dataset over time like we do in population anomaly detection and there are no buckets.
+[ https://www.elastic.co/guide/en/machine-learning/7.17/dfa-outlier-detection.html ]
+
+5.Regression : predicts continuous numerical values after it determines certain relationships among your data points. (supervised) --isme jaise feature mein payment rakhdi aur target value mein state rakhdiya
+
+6.Classification : predicts the class or category of a given data point in a dataset. (supervised)
+Kibana provides a normalized confusion matrix that contains the percentage of occurrences where the analysis classified data points correctly with their actual class, for example, TP and TN in the image below are good results when they have a higher percentage than FN and FP because this means that the prediction of "true and false" was correct, corresponding to the real value, in most cases. The higher the percentage in this case, the better.
+Kibana also provides the receiver operating characteristic (ROC) curve as part of the model evaluation. The plot compares the true positive rate (y-axis) to the false positive rate (x-axis) for each class; in this example, true and false. It is a number between 0 and 1. The higher the AUC, the better the model is at predicting the classes correctly.
+
+
+There are 4 types of Anomaly Detection analysis available in Elastic's ML solution:
+
+*--Single Metric analysis, for jobs that analyze a single time series;
+*--Multi-Metric analysis, to split a single time series into multiple time series;
+*--Population analysis, to identify abnormal behaviors in a homogeneous "population" over a period of time;
+*--
+
+ps -ef | grep java
+
+https://www.linkedin.com/pulse/ai-elastic-machine-learning-cheap-phong-le
+
+
+0 0 0 * * ?	Every day at midnight - 12am
+1,619,380
+-------------------------- snapshot -------------------------------------------
+
+** agar mein snapshot se delete krunga, then wo s3 se bhi delete hojayega.
+**Snapshots are incremental, meaning that only the differences between the last snapshot and current snapshot need to be stored. (segments)
+
+Cases :-     
+chunks mein bhi krke dekhna h
+agr mein repo delete krdu, then mein s3 se data vapis kaise leke aaunga(restore)
+
+agr mein repo delete kr rha hu, then nahi ho raha data delete but agr mein snap delete kr rha hu, then data delete ho rha h s3 se
+
+{{yeh bas snapshot delete karega, jo ki s3 se bhi delete hojaynge, logs delete krne ke liye humme delete query lagani padegi}}
+https://stackoverflow.com/questions/60034716/how-to-perform-differential-or-incremental-snapshot-and-how-it-works
+https://discuss.elastic.co/t/is-snapshot-incremental/28872
+
+isme index->shards->segments, toh segments change hote h toh wo naye snapshot mein leta h, isliye shyd purane wale bhi aa rhae h {https://discuss.elastic.co/t/incremental-snapshot-details/97099}
+curator se bhi period hardcoded hoga na
+----------------------------------ELK Advanced Features----------------------------------
+1.ELK Beats - https://www.objectrocket.com/resource/what-are-elasticsearch-beats/ {managing Logs and transfering logs from server side to output to elasticsearch}
+2.Tags - Labels
+3.Spaces - Environment
+4.ELK canvas - PPT
+5.ELK APM - https://medium.com/@skj48817/monitoring-services-with-elasticsearch-apm-353c7eae543c
+
+restored_cam-backend
+alertname
+
+Failed to save rule: failed to update rule group: failed to add rules: a conflicting alert rule is found: rule title under the same organisation and folder should be unique
+
+-----------------------------------------------------------------------------------------------------
+
+1.Creating Dashboard - 
+
+Pre-requisites - Add the sample web logs data - 
+
+On the home page, click Try sample data.
+Click Other sample data sets.
+On the Sample web logs card, click Add data.
+Now, Create the dashboard where you’ll display the visualization panels.
+Open the main menu, then click Dashboard.
+Click Create dashboard.
+Set the time filter to Last 90 days.
+Open the visualization editor, then make sure the correct fields appear.
+On the dashboard, click Create visualization.
+Make sure the Kibana Sample Data Logs data view appears.
+Then select that specific data view.
+To create the visualizations, we’ll use the following fields - 
+message.keyword
+request.keyword
+response.keyword
+timestamp
+referrer.keyword  
+We can use custom keyword search in KQL filter box, like message:”...” and many more.
+Create first visualization -
+Open the Visualization type dropdown, then select specific type; like donut, pie,metric,Bar chart, etc.
+From the available fields list, drag specific keyword to the workspace in the middle screen.
+On right side, there is a panel, where you can edit some more configurations of visualized data, at first there is option to change Data view.
+At second, there is an option Slice by, in which we can choose different filter to filter out specific value from data view logs.
+At third, there is an option of Size, in which we can select Average,Count,Max,Min values and many more functions.
+After doing all selection, click Save and return from top right section.
+Click Save, and give Title to the dashboard.
+Now, specific visualization data is saved in that dashboard.
+
+
+
+
+2.Snapshot and Restore - 
+Pre-requisites - 
+A snapshot repository must be registered and available to the cluster.
+To include an index in a snapshot, the index and its metadata must also be readable. 
+You can only take a snapshot from a running cluster.
+Steps - 
+Select Stack Management from menu bar, then select Snapshot and Restore option in it.
+Now, add a repository, in which backup data or snapshots will be saved.
+Click Register Repository option, now add all the details in your repository like name,repo type.
+In my case, I worked on AWS S3 bucket, so for S3 bucket, give bucket name,base path and some more optional details if you have to give, and at last click on Register.
+Verify the registered repository whether it is connected with S3 or not.
+After registering repository, then create a Policy, which will be used for taking snapshot, when and how and some more configuration details.
+After successfully policy creation, then take a snapshot of specific data view logs in that created repository by running a Policy.
+After a successful snapshot taken in S3 bucket, it will show success time of that snapshot.
+That snapshot can be checked in S3 bucket, of which we have given specific path of folder while registering repository.
+Now, if we have to restore the taken snapshot back to ELK, then in Snapshot menu, select Restore option and then restore status will be open, it can be checked in Restore Status menu.
+For restoring snapshot back to running ELK cluster, after successfully restored snapshot, it will ask to store it in new index or existing data view.
+After selection specific option, we can see backed up logs in that specific indices.
+
+
+3.Creating Data Views -
+Required permissions - 
+Access to Data Views requires the Kibana role management - Data view management.
+To create a data view, you must have the Kibana role management - view_index_metadata.
+If a read-only indicator appears in Kibana, you have insufficient privileges to create or save data views. In addition, the buttons to create data views or save existing data views are not visible.
+Create a data view - 
+Open Lens or Discover, and then open the data view menu.
+Click Create a data view.
+Give your data view a name.
+Start typing in the Index pattern field, and Kibana looks for the names of indices, data streams, and aliases that match your input.
+Open the Timestamp field dropdown, and then select the default field for filtering your data by time.
+Click Save data view to Kibana.
+Now, go to Discover and open a data view menu and select the newly added data view, which will display logs in it.
+------------------------------------------------------------------------------------->>>>>
+
+message:"'exception':'Data Not Found.''"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,118 @@
+1.URL Manipulation 
+2.Session Expiry
+3.privilage Elevation - accessing higher management user roles/privialges.
+4.SQL Injection
+5.Cookie Based Testing - Session & Persistent cookie testing
+6.CSRF - URL should be Encrypted.
+7.Cross Site Scripting (XSS)
+8.Brute Force Attack
+9.What is “Spoofing”?  -->  Spoofing is the creation of hoax look-alike websites and emails.
+10.Penetration Testing
+
+----------------------------------------------------------------------------------------------------------------------
+
+1. URL Manipulation --
+parameter hila diye, jis menu ka access nahi h uska access lena url manipulate krke.
+Ex1- mayank_Bloxmith user pr create business ka page access ho raha h.
+
+What is URL rewriting? In URL rewriting, a URL is modified for different purposes. It can help websites get a higher SEO ranking, but hackers can use this trick to redirect users to fraudulent websites. 
+Cybercriminals typically use URL manipulation to examine directories and file extensions, read sensitive information, and access privilege-protected sections of a website, including hidden files and source scripts. If successful, attackers can gain total control of a website.
+
+-----------------------------------------------------------------------------------------------------------------------
+2. SQL INJECTION --
+Types -> # In band SQLi - 1.Error-based SQLi - jis sql injection se kuch error aajaye databse se, usko error                                based SQLi khete h. ex: ' " \ or 1=0(false condition)
+                            -6'[space] && cat=3 order by 11 --> SQL based error message on UI. 
+                              EX->{BLOXMITH WEBPAGE}
+                          2.Union-based SQLi - *2 queries ko combine karke database ka access krna.
+                                               - union select 1,2,3,4,....11--   ;  - union select                                                             1,2,3,4,....database(),version()--
+                                               *WHERE ItemID = '999' UNION SELECT Username, Password FROM Users;
+         #Inferential (Blind) SQLi - in which attacker does not see output result.
+          Types - #Blind-boolean-based SQLi -> AND 1=1, AND a=a,etc
+                  #Blind-Time-based SQLi -> sleep(5)#, 1 or sleep(5)#, " or sleep(5)#. 
+
+         # Out of band SQLi - yeh ek fetaure pr depend rheta h, and isse commonly use nahi krte.
+
+Ex-> search consumer ke phele - lagane se back endpoint pr jata h and page pr sirf search consumer ha header aata h, no content under it.
+
+#Accelion Attack flow
+According to a report commissioned by Accellion, the combination SQLi and command execution attack worked as follows:
+
+*Attackers performed SQL Injection to gain access to document_root.html, and retrieved encryption keys from the Accellion FTA database.
+*Attackers used the keys to generate valid tokens, and used these tokens to gain access to additional files
+*Attackers exploited an operating system command execution flaw in the sftp_account_edit.php file, allowing them to execute their own commands
+*Attackers created a web shell in the server path /home/seos/courier/oauth.api
+*Using this web shell, they uploaded a custom, full-featured web shell to disk, which included highly customized tooling for exfiltration of data from the Accellion system. The researchers named this shell DEWMODE.
+*Using DEWMODE, the attackers extracted a list of available files from a MySQL database on the Accellion FTA system, and listed files and their metadata on an HTML page
+*The attackers performed file download requests, which contained requests to the DEWMODE component, with encrypted and encoded URL parameters.
+*DEWMODE is able to accept these requests and then delete the download requests from the FTA web logs.
+
+SQLI prevention and mitigation->
+1.The first step is input validation (a.k.a. sanitization), which is the practice of writing code that can identify illegitimate user inputs.
+2.For this reason, a web application firewall (WAF) is commonly employed to filter out SQLI, as well as other online threats.For example, a web application firewall that encounters a suspicious, but not outright malicious input may cross-verify it with IP data before deciding to block the request. It only blocks the input if the IP itself has a bad reputational history.
+Imperva cloud-based WAF uses signature recognition, IP reputation, and other security methodologies to identify and block SQL injections, with a minimal amount of false positives.
+-----------------------------------------------------------------------------------------------------------------------
+3.Cookie Based Testing -- A cookie is a small piece of information that is stored in a text file on user’s (client) hard drive by the web server. This piece of information is then sent back to the server each time the browser requests a page from the server.
+
+Session Cookies: These cookies are active till the browser that triggers the cookie is open. When we close the browser this session cookie gets deleted
+Persistent Cookies: These cookies are written permanently on the user machine and it lasts for months or years
+
+Following is an important checklist and steps on How to test Cookies in website:
+
+Step 1) Disabling cookies
+Disable all cookies and attempt to use the site’s major functions
+
+Step 2) Corrupting cookies
+Manually edit the cookie in notepad and change the parameters with some random values
+
+Step 3) Cookies encryption
+Sensitive information like passwords and usernames should be encrypted before it is sent to our computer
+
+Step 4) Cookie testing with multiple browsers
+Check your website page is writing the cookies properly on a different browser as expected
+
+Step 5) Checking the deletion from your web application page
+Check whether the cookies are deleted from your web application or not
+
+Step 6) Selectively rejecting cookies
+Delete all the cookies for the websites and see how the website reacts to it
+
+Step 7) Access to cookies
+Cookies written by one website should not be accessible by others
+
+Step 8) No overuse of cookies
+If the application under test is a public website, there should not be overuse of cookies
+
+Step 9) Testing with the different setting
+Testing should be done properly to check that website is working well with different cookie setting
+
+Step 10) Categorize cookies separately
+Cookies should not be kept in the same category of the viruses, spam or spyware
+--------------------------------------------------------------------------------------------------------------------------
+4.CSRF - ek website pr dusre website ka link h ya image bhi, toh agr hum dusri website ka link ya image dabaye, to wo kuch bhi operation kar skta h, phele wali website ki session id use karke.
+
+Preventive Mechanisms
+CSRF can be avoided by creating a unique token in a hidden field which would be sent in the body of the HTTP request rather than in an URL, which is more prone to exposure.
+
+Forcing the user to re-authenticate or proving that they are users in order to protect CSRF. For example, CAPTCHA.
+----------------------------------------------------------------------------------------------------------------------------
+5.Cross-site Scripting (XSS) happens whenever an application takes untrusted data and sends it to the client (browser) without validation. This allows attackers to execute malicious scripts in the victim's browser which can result in user sessions hijack, defacing web sites or redirect the user to malicious sites.
+
+Types of XSS
+Stored XSS − Stored XSS also known as persistent XSS occurs when user input is stored on the target server such as database/message forum/comment field etc. Then the victim is able to retrieve the stored data from the web application.
+
+Reflected XSS − Reflected XSS also known as non-persistent XSS occurs when user input is immediately returned by a web application in an error message/search result or the input provided by the user as part of the request and without permanently storing the user provided data.
+
+DOM Based XSS − DOM Based XSS is a form of XSS when the source of the data is in the DOM, the sink is also in the DOM, and the data flow never leaves the browser.
+
+*Preventive Mechanisms
+Developers have to ensure that they escape all untrusted data based on the HTML context such as body, attribute, JavaScript, CSS, or URL that the data is placed into.
+
+For those applications that need special characters as input, there should be robust validation mechanisms in place before accepting them as valid inputs.
+
+
+OWASP -> Open web application security project . It an organisation which tells the top 10 vulnerabilities of web and API. It updates data in every 3 years.
+
+
+
+
+

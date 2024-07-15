@@ -1,0 +1,101 @@
+1. paymt crrct.1 pr amount pr paste functionality rokdi h, saket sir ne usse backend pr rokne ke liye kaha h rahul ko assign h.
+
+*session expire pr UI pr kahi sare toaster aate h.
+*13. light theme mein nxt and previous button theme adapt nhi kr paa rahe.
+--------------------------------------------------------------------
+Business Reg.->
+///1. password policy UI pr show krani h.
+///2. Amount Formatting Required pr YES white display ho raha h; Country ISD Codes pr field box small h baaki ke    comparitive.
+///3. reset dabane pr config value ki entries bhi delete hojati h.
+///4. koi field ki error aa rahi h, to wo page ko top pr scroll kr dega.
+///5. unkown error occured ki error UI pr show nahi ho rahi.
+///5. business register krne ke baad, page refresh nahi hota completely, configs refresh nahi hoti.
+-------------------------------------------------------------------------------------------------------------
+search business ->
+///1.search pr kuch bhi type kro to result dikhata h. search filter nahi chal raha.
+2. pagination button theme adapt nahi kr rahe, and UI achan nahi h unka. also next page buttons dabane pr scroller aata h table pr jisse table float hoti h.\
+3.business details pr jaake UI user friendly nahi h, readable nahi h proper.
+4.update krte waqt address pr state and city call nahi hoti jo already saved h db mein.
+///5.mobile no. ka galat spell hain UI pr.
+6.zip code UI pr hi show krde agar zip code valid nahi, wo api hit hone pr na de.
+///7. business details pr business name show nahi ho raha.
+8. ek baar view krne ke baad back krte hain, to created at UI pr date and time dono display karta h, jo ki phele se hi show hojana chaiyeh.
+9.'created by' response main nahi aa raha, toh UI pr bhi show krne ki jarurat nahi h.
+10. search business pr ' update channel' ka text dikhata hain UI pr.
+11. mobile number update krte waqt config se uthana chaiyeh mobile code, naki sirf us bussiness jo selected tha, jaise infiniti pr ho rahi h.
+12. update box bhaut bada hain.
+
+-------------------------------------------------------------------------------------------------------------
+
+///1. privacy policy pr scroll nahi ho raha.
+///3. UI pr text overflow kar raha h.
+///4. game mode dabane par jo UI screen aati hain, normal mode mein donate-type sign nahi dikh raha h.
+///5. ranking mein session ends ki date format proper nahi h.
+///6. collection pr raider pr restore disable hain by default while gear pr enable hain bina kisi select kre.
+///7. home pr gold proper number mein h, death match pr jaake 11k, 12k hota h.{round off bhi nahi ho raha}
+///8. Ok button UI breaking.
+9. collection pr raiders ko view krte hain toh agr hum filter lagake view kr rahe hain, to sbhi saare dikhata h, also last menu pr recycle raider wali screen pr filter nahi chal raha h dhng se. all deselect nhi ho raha.
+///10. shop pr raider summon pr error nhi display krta ek baar krke.
+///11. font size UI error.
+///12. unresponsive screen.
+
+X--------------------------------------------------------------------------------------------
+Search Users page
+*light theme mein inactive dhng se dikhta nahi.
+search user ->
+///1. Address details light theme dhng se nahi dikh raha.
+///2. search functionality not working.
+///3. mobile number box proper nahi h.
+///4. address details bharne pr getstatelist and getcitylist baar baar call ho rahi h.
+///5. ek baar search hoke address se country change krne pr state refresh hojata h but city nahi hota.
+///11. custom phele set krdiya, fer usse full day krne ke baad bhi wo custom wala time format dikha raha h UI pr.
+///17. table upar scroll krte waqt headers fatt jate h.
+///18. light theme mein menu ke option hain wo dark row ke peeche chup jata h.
+///19.NFT image sample mein nft file wala sample hi download ho raha h.
+6. update krte wqt select pr drop down arrow nahi aa raha, dono theme pr.
+7. password pr UI thoda galat h, scroll krna pdta h user ko user friendly nahi h.
+///8. menu permission pr click krte table float kr rahi h.
+9. update box bhaut bada hain UI ke liye, chota hona chaiyeh. time access details wala box bhi bada h bhaut.
+///10. access details mein not allowed pr box unalign ho rahe baaki ke comparative.
+
+user channel mapping ->
+13. if channel is selected, but tapping on screen, it gives channel is required error on UI.
+
+NFT ->
+///14. minting and listing -> action type pr error galat show ho rahi h.
+///16. search filter not working. -- dono report pr bhi nahi ho rahi.
+///21. bulk upload mein agr network select nahi h to nahi deta required ki error, same on bulk nft update.
+///22. reset dabane pr date reset nahi hoti (dono report menu pr).
+23. pagination mein light theme mein buttons pr white text display hota.
+///24. inventory status report pr date filter work nahi kr rahe.
+-----------------------------------------------------------------------------------------------------------
+1. user reg. -> 
+   *mobile no. field pr no. ki alignment galat h.
+2. search user ->
+   *pagination buttons are in wrong format, in both themes.
+   *update krte wqt select pr drop down arrow nahi aa raha, dono theme pr.
+   *ek baar inactive krke, back aate h toh previous results show krta h, page refresh nahi hota.
+   *role mein single value h wo automatic patch nahi kr rha.
+3. User Update Report ->
+   *reset pr ek hi business patch nahi hota automatically.
+   *table pr next frwrd krte waqt side scroll bar aane se table unalign hoti h.
+4. Nft mangt ->
+   ***search filter not working - always giving Data not found.[both mint & list nft]
+   *bulk nft update mein view ke baad back jaane pr, console pr error fekta h.
+   *reset dabane pr txn type reset nahi hota [txn report pr]
+   *report screen pr side bar remove krna h, uski vajah se unalign hoti h table jab bhi aap search krte ho.
+   * table ko side scroll kroge to UI ftta h. [txn report]
+
+ forgot password screen ->
+1. resend dabane pr jo field pr otp likha h wo remove ho jana chaiyeh field se.
+
+
+
+
+
+
+
+
+
+
+

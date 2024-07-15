@@ -1,0 +1,31 @@
+kubectl get po -n qa
+
+kubectl logs -f "podname" -n qa
+
+kubectl exec -it cam-backend-services-helm-55b5b548cc-r6bkg -n qa sh
+
+grep -i "ERROR com.sb.cam.utility.AppLogger" app_logs.log
+
+tail -f app_logs.log --> for dyanamic logs
+vi app_logs.log 
+
+
+
+GREP COMMANDS ->
+
+*grep -vM: The 'grep -v' command displays lines not matching to the specified word.
+*grep -i: The 'grep -i' command filters output in a case-insensitive way.
+*grep -A/ grep -B/ grep -C
+grep -A command is used to display the line after the result.
+
+grep -B command is used to display the line before the result.
+
+grep -C command is used to display the line after and line before the result.
+
+You can use (A1, A2, A3.....)(B1, B2, B3....)(C1, C2, C3....) to display any number of lines.
+
+The 'grep' command is generally used with pipe (|).
+cat marks.txt | grep 9
+
+grep without pipe
+grep 9 marks.txt  

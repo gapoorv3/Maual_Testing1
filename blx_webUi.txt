@@ -1,0 +1,124 @@
+-------------------------------
+///2. add preloader on every screen, while in b/w no content will be shown, as ex- after hard reload, text is different from when website is fully loaded.
+///3. profile mein mail/ text overlap kar raha h.
+///5. session expire ke baad site pr hi rheta hain, bas meesage dikhata h, usse nikal jana chaiyeh bahar login se, and message do baar dikahta h.
+///6. language change krne pr info button ka jo conten hain, wo en mein hi rheta h.
+///7. ek baar change krne ke baad, ferse back dbane pr language to change ho jati h but language code bar mein wahi rheta h change nahi hota h.
+
+9. ek baar wallet connect krke error aa jaye aur hum usse rok de, toh agr hard reload bhi karenge, tab bhi ferse wo wallet connect krega.
+
+10. abhi wallet bhi connect nahi ho raha.
+
+///11.explore pr jake agr crystal add krna h, then wo screen aake home screen pr chala jata h.
+
+12. login unsuccessful hone par 2 baar error dikhata h UI pr. [jab DB down tha]
+
+
+https://ucm.sapidblue.in/#/pages/business/create_business
+--------------Work in progress--------------------------------
+6.my collectables pr agr data not found ki error aa rahi h, toh uspr success ke saath data not found ki error aa rahi h.
+7.profile update krte wqat, overallUpdateConsumerProfile se please provide valid token ki error aati h, but getConsumerDetails se success ka message aata h, to UI pr success ke saath please provide valid token ki eror show aati h.
+4. getUserActiveMsgChannels se response aa raha h, but ui pr kuch show nahi ho raha, profile pr.
+5. min max price range nahi chal raha h.
+8.filter box is not working properly -> skin select krne pr class krte hain toh skin unselect ho jati h.
+                                     -> price range ka filter clear krne pr deselect nahi hota.
+1. explore screen pr clear dabane pr public-nfts ki api call ho rahi h, jisse uski functionality nahi chal rahi.
+2. login krne ke baad wallet connect nahi hota toh logoutn krne ke baad hard refresh krne ke baad bhi wallet connect ki api call hoti h.
+
+## blx mein error message language specific honi chaiyeh.
+0xa74cfee88f67a8a9
+------------------------------------------------------------------------------
+--> 1.rms backend bo user ko merchant app se login ho ja raha h, force password mein jaake unkonwn error fekk raha h. [DONE]
+2 api pr limit offset lagana h merchant ki [DONE]
+4. consumer pr pay merchant and merchant pr refund pr engine txn id ki error aa rahi h. [DONE]
+
+///3.consumer pr 1 lakh se jyada amount cash in hain,proper dyanamic error message dikhne chaiyeh.
+///4. merchant pr reports section pr filters dekhne h, and next cross bar display hona chaiyeh har entries pr.
+///5. merchant pr location pr pointer nahi chal raha, wo move nahi ho rha bada display krne pr bhi.
+///6. getConfig agr na response de, toh usse app mein handle karna h -> 
+    isme isne jo bhi configs use kre, un sab ko handle kr rakha h, said by anukriti.
+///8. merchant pr app open hote hi signUp screen pr le jata h. 
+///9. refund screen pr successful refund krne pr back dabane pr bhi fetch.... wali api call honi chaiyeh or ok dabane pr bhi.
+///10. merchant pr search krte waqt grey screen ho jati h.
+///11. merchant pr location update nahi ho rahi.
+///12. merchant pr display size hilake location screen ui ko adapt nahi kr pati. [small mein] [location change krne pr bhi interface hil jata h]
+///15. forgot password expire hone ke baad config phatt jati h, no pr limit nahi h.
+///16. merchant pr sign up krte wqt register cert. screen nahi dikhata h.
+///17. theme changes automatic dark hojata h consumer pr.
+18. utility pr naye user sync nahi ho rhe.
+**13. dono app ko ram se hata ke ferse open karoge, to ferse log in krna padta h and net jaane ke baad bhi login page pe redirect krta h.
+-->7. merchant and consumer pr dono time jab nayi app install krte hain , tab wo permission screen ke baad logged in hotah, aur koi api hit hote hi session expired ki error fekta h.
+14. search filter not working on both app.
+
+---------------------------------------------------------------------------------------------------------------
+blx-
+1. add crystal pr bugs hain-
+   ... dalne pr bhi submit button enable hota h.
+   decimal lagane pr aage error aati h
+ 
+2. console pr text aa raha h.
+3. clear all dabane pr price range nahi hatti.
+4. profile name mein agr space dete h like,"Hrishabh Test" update hone pr 'Please Provide Valid Token' de raha h. API->[overallUpdateConsumerProfile]
+5. [getUserActiveMsgChannels] profile pr hit hoti h but UI pr nahi h, to iska use??
+6. txn history mein from and to date field box pr numbers daal paa rhe h and uspr reset button pr bhi nahi chal raha.
+7. my collectables pr preloader ghumta rheta h continously, no api is called[if wallet is not connected]
+8. inbox pr agr Data not found ki error aati h, to banner dikhaye data not found ki, blank screen show hoti h.
+9. terms of service language specific nahi h.
+10. NFT buy screen pr UI phat raha h. {skyped}
+11. privacy and about buttons not working.
+12. korean language mein Data Not found nahi dikhata explore screen pr, pr baaki language mein dikhata h. 
+13. throttling krne pr login krte wqt sign in with google show nahi hota, time lgata h bhaut.
+14. mobile UI pr connect wallet and crystal no. nahi dikh rahe.
+----
+15. chinese mein rumb language specific nahi h, baki language ke comperative. rumb field box pr.
+16. session expiry bug.
+17. filters mein jo dropdown buton h wo visible nahi h proper.
+18. txn history pr chinese lang. pr RUMB hi show kr raha h dropdown list mein and japanese lang. mein prev. button language specific nhi h; chinese mein rumble redeem mein 4700 rumb show krta h; korean mein mein RUMB --- show kr raha h menu mein, rumb language specific nahi h.
+19. redeem rumb mein -- 0,+,-,. se enable ho raha h button and API-[debitTokenInitiate] se 'Database error aa rahi h'.
+20. rumble successfully redeem hone pr menu ke UI pr rumb refresh nahi hote and crystal bar pr bhi crystal refrsh nahi hote.
+21. my collectables pr pagination lagana padega.
+22. txn pr search results mein language specific results nahi show hote.
+23. profile mein kuch bhi update hota h, to succes messsage aane ke baad, Ui refresh nahi hota.
+24. scenerio -> humne profile update screen pr hain, aur waah se humne logout krdiya, then back button dabane ke baad, please provide valid userid in header ki error show krta h UI pr.
+25. 'Select Preference Language' profile update screen pr work nahi kr raha.
+26. wallet cnnct krte wqt jab disconnect krte hain, tab error aati h UI pr. {skyped} [blocto wallet does not belong to current user]
+-=---------------=-=-=-=-=---=-=-=-=-=-=--=-=----------------------------------------------------------
+
+1. clear all pr select range pr dropdown ka filter clear nahi ho raha.
+2. profile mein kuch bhi update hota h, to succes messsage aane ke baad, Ui refresh nahi hota.
+3. language prefrence.
+4. reset button in my txn not working.
+5. session expiry bug
+///6. scenerio -> buying NFT without connecting wallet and closing confirm screen gives error .
+7. scenerio -> humne profile update screen pr hain, aur waah se humne logout krdiya, then back button dabane ke baad, please provide valid userid in header ki error show krta h UI pr.
+8. scenerio -> ek id se login kara, then redeem rumb wali screen pr rumb count dekhne hain, then logout krke dusri id se login kara, then ferse redeem rumb wali screen pr gaye then previous id ke rumb count ko display krta h.
+///9. scenerio -> aap redeem rumb wali screen pr ho then, apne waalet disconnect kiya, then UI pr rumb count dikhata h refresh nahi hota, fer apne reedem rumb kiya, phele wallet connect hoga fer approval mangega txn ki and fer txn success hone ke baad UI pr rumb count ) dikhata, usse refresh marne ke baad rumb count proper dikhata h.    [paste functionality should be stopped]
+
+10. redeem rumb wali screen pr -1 krne ke baad error fekta h unrecognised.
+
+--------------------------------------------------------------------
+
+1. v1.0/nfts
+curl --location 'https://nft-backend.sapidblue.in/v1.0/nfts?businessId=7&channelId=29&status=%2523--MINTED&categoryId=1%3D1' \
+--header 'accept: */*' \
+--header 'Authorization: Bearer 8DCTmXi7DduPopFhHdAIzj5u90_A5Cfb-FO2qL5e5RI'
+
+2.curl --location --request GET 'https://nft-backend-qa.bloxmith.com/preLogin/public-nfts/nft?lang=en&nftId=1 or 1=1' \
+--header 'authority: nft-backend-qa.bloxmith.com' \
+--header 'accept: application/json, text/plain, */*' \
+--header 'accept-language: en-US,en;q=0.9' \
+--header 'aliasname: https://www.bloxmith.com' \
+--header 'clientcode: UCM' \
+--header 'networkid: 2' \
+--header 'origin: https://qa.bloxmith.com' \
+--header 'referer: https://qa.bloxmith.com/' \
+--header 'sec-ch-ua: "Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"' \
+--header 'sec-ch-ua-mobile: ?0' \
+--header 'sec-ch-ua-platform: "Linux"' \
+--header 'sec-fetch-dest: empty' \
+--header 'sec-fetch-mode: cors' \
+--header 'sec-fetch-site: same-site' \
+--header 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36'
+
+
+

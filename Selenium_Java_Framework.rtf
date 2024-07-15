@@ -1,0 +1,433 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 HelveticaNeue-Bold;\f2\fnil\fcharset0 HelveticaNeue;
+\f3\fnil\fcharset0 Menlo-Regular;\f4\fnil\fcharset0 Menlo-Bold;\f5\fswiss\fcharset0 Helvetica-Bold;
+\f6\fnil\fcharset0 Menlo-Italic;\f7\fnil\fcharset0 Menlo-BoldItalic;\f8\fnil\fcharset0 Georgia;
+\f9\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red220\green220\blue220;\red16\green16\blue16;\red0\green0\blue0;
+\red255\green255\blue255;\red204\green108\blue29;\red217\green232\blue247;\red18\green144\blue195;\red249\green250\blue244;
+\red30\green181\blue64;\red121\green171\blue255;\red128\green242\blue246;\red242\green242\blue0;\red230\green230\blue250;
+\red167\green236\blue33;\red243\green236\blue121;\red128\green246\blue167;\red23\green198\blue163;\red194\green0\blue4;
+\red128\green128\blue128;\red255\green255\blue255;\red150\green236\blue63;\red62\green171\blue230;\red141\green218\blue248;
+\red102\green225\blue248;\red251\green0\blue7;\red104\green151\blue187;\red55\green55\blue55;\red58\green83\blue111;
+\red160\green160\blue160;\red235\green235\blue235;}
+{\*\expandedcolortbl;;\cssrgb\c89020\c89020\c89020;\cssrgb\c7451\c7451\c7843;\cssrgb\c0\c1\c1;
+\cssrgb\c100000\c100000\c100000\c0;\csgenericrgb\c80000\c42353\c11373;\csgenericrgb\c85098\c90980\c96863;\csgenericrgb\c7059\c56471\c76471;\csgenericrgb\c97647\c98039\c95686;
+\csgenericrgb\c11765\c70980\c25098;\csgenericrgb\c47451\c67059\c100000;\csgenericrgb\c50196\c94902\c96471;\csgenericrgb\c94902\c94902\c0;\csgenericrgb\c90196\c90196\c98039;
+\csgenericrgb\c65490\c92549\c12941;\csgenericrgb\c95294\c92549\c47451;\csgenericrgb\c50196\c96471\c65490;\csgenericrgb\c9020\c77647\c63922;\cssrgb\c81490\c4389\c0;
+\csgenericrgb\c50196\c50196\c50196;\cssrgb\c100000\c100000\c100000;\csgenericrgb\c58824\c92549\c24706;\csgenericrgb\c24314\c67059\c90196;\csgenericrgb\c55294\c85490\c97255;
+\csgenericrgb\c40000\c88235\c97255;\cssrgb\c100000\c12195\c0;\csgenericrgb\c40784\c59216\c73333;\cssrgb\c27843\c27843\c27843;\cssrgb\c29020\c40392\c50980;
+\csgenericrgb\c62745\c62745\c62745;\csgenericrgb\c92157\c92157\c92157;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww22580\viewh12980\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 1. Pom.xml \'97> It is a file in which we can add dependencies for our maven project, like packages and libraries.\
+\
+2.
+\f1\b\fs32 \cf2 \cb3 	\'95	\expnd0\expndtw0\kerning0
+Maven
+\f2\b0 \'a0is like a\'a0
+\f1\b kitchen assistant
+\f2\b0 \'a0that automates various tasks in the kitchen (development process), including gathering ingredients (dependencies), preparing tools (compiling), and potentially even helping with some cooking steps (running tests).\cb1 \
+\
+
+\fs26 \cf4 \cb5 3
+\fs32 . Just to open a browser with this URL \'97> \
+
+\f3\fs24 \cf6 \cb1 \kerning1\expnd0\expndtw0 public\cf7  \cf6 class\cf7  \cf8 BrowserTest\cf7  \cf9 \{\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf7 	\cf6 public\cf7  \cf6 static\cf7  \cf6 void\cf7  \cf10 main\cf9 (\cf8 String\cf9 []\cf7  \cf11 args\cf9 )\cf7  \cf9 \{\cf0 \
+\cf7 		\cf12 WebDriver\cf7  \cf13 driver\cf7  \cf14 =\cf7  \cf6 new\cf7  \cf15 FirefoxDriver\cf9 ()\cf14 ;\cf0 \
+\cf7 		\cf16 driver\cf14 .\cf17 get\cf9 (\cf18 "https://sprint.xprizo.com/#/login"\cf9 )\cf14 ;\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\
+\cf9 \}\cf0 \
+\
+4. Geckodriver/Chromedriver use if version of Firefox/chrome browser is above 47\'85..\
+System.setProperty(\'93key\'94,\'94\{path\}\'94)\
+\
+5. Helpful tips : If we added the environment path variable of geckodriver/chromedriver, then we don\'92t have to give setProperty line\'85.\
+\
+6. As we have to run script on different browser, so we can use \'93WebdriverManager\'94, first we have to add maven dependency of it; then just use->\
+WebDriverManager.firefox().setup();\
+webDriver driver = new FirefoxDriver();\
+\
+7. XPath is used to find element from page source XML file.\
+   \'97> //input[@id(\'91\'85\'92)]\
+Locators -> ID, class, name, tagname, xpath, css selectors, linktext, partiallinktext\'85.\
+\
+findElement()\'97 find single element\
+findElements() - find multiple elements and stored it in a list.\
+\
+8. Page Object Model (POM) \'97> we have to make separate class for each objects of different webpage; and use that classes for each webpage test like Login or homepage.\
+\
+
+\f4\b 9\cb19 . OOPS \'97> It works on classes and objects, in which classes is a template for creating objects and objects refers to entities\
+With its attributes and functions.\
+Ex - bank account holder withdraws money from bank account from credit card.\
+\'97> In this noun refers to the class like account holder, bank account and credit card.\
+-> In this objects refers to the person having attributes like age, name, etc and functions like deposit money and withdraws money, etc.\
+\
+Class bank holder \{\
+	String name;\
+	int age;\
+	\
+	depositMoney()\{\
+\
+	withdrawsMoney()	\
+\}\
+\
+\}\
+\'97 same as with credit cards and bank account.
+\f3\b0 \cb1 \
+\
+10. TestNG \'97> It is a testing framework for JAVA programming and used to perform unit, functional, integration and end-to-end testing. It makes creation, execution and reporting efficient. It also uses annotation.\
+NG - Next generation\
+Use annotation like @BeforTest, @Test and @AfterTest\'85 and check it only import TestNG. \
+\
+JUNIT is used for simple programs and unit testing and TestNG is used for complex programs and integration, end-end testing.\
+\
+11. Extent reports \'97> It is an open source reporting JAVA API for better reporting UI of tests in selenium java. Also used for .NET\
+\pard\pardeftab720\partightenfactor0
+\cf20 // this is to give file name\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf7 		\cf8 ExtentHtmlReporter\cf7  \cf13 htmlreporter\cf7  \cf14 =\cf7  \cf6 new\cf7  \cf15 ExtentHtmlReporter\cf9 (\cf18 "ExtentReport.html"\cf9 )\cf14 ;\cf0 \
+\cf7 		\cf0 \
+\cf7 		\cf20 // this is to attach reports to this file name\cf0 \
+\cf7 		\cf8 ExtentReports\cf7  \cf13 extent\cf7  \cf14 =\cf7  \cf6 new\cf7  \cf15 ExtentReports\cf9 ()\cf14 ;\cf0 \
+\cf7 		\cf16 extent\cf14 .\cf15 attachReporter\cf9 (\cf16 htmlreporter\cf9 )\cf14 ;\cf0 \
+\cf7 		\cf0 \
+\cf7 		\cf20 // this is give name and description of test\cf0 \
+\cf7 		\cf8 ExtentTest\cf7  \cf13 test\cf7  \cf14 =\cf7  \cf16 extent\cf14 .\cf15 createTest\cf9 (\cf18 "Xprizo Login Test"\cf14 ,\cf7  \cf18 "This is the test to validate Xprizo login functionality"\cf9 )\cf14 ;\
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 12. @Beforesuite \'97> this will run only once before test cases execution; and @aftertest \'97> this will run once after test case execution. This is used when there is multiple tests.\
+\
+13. 
+\f5\b\fs30 \cf0 \cb21 \expnd0\expndtw0\kerning0
+The\'a0{\field{\*\fldinst{HYPERLINK "https://testsigma.com/docs/desired-capabilities/overview/"}}{\fldrslt Desired Capabilities}}\'a0in Selenium help set the browser properties for automating web application testing. The capabilities are stored as key-value pairs encoded in a JSON object. The browser properties include the browser name, settings, version, and platform to customize the test environment.\
+\
+14. TestNG.xml \'97> it is a configuration file in testNG framework, used to control execution testNG test cases.\
+It is used to execute classes parallel or serially. Also we can include methods to to include or exclude methods in it. Also we can give thread count.\
+\
+15. Log4j \'97> It is configuration file used for logging in JAVA application. It can be written in Log4j2.properties or Log4j2.xml format. We have to use Log4j2 properties file, as log4j1 properties file is closed now.\
+We can also on/off in configuration file and by default it overwrites but we can append it to it. \
+\pard\pardeftab720\partightenfactor0
+
+\f3\b0\fs24 \cf7 \cb1 \kerning1\expnd0\expndtw0 appender.file.append=\cf18 true\
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 We use Log4j2.xml file more than properties file, as xml file provide more advanced options in it.\
+\
+16. Properties file -> first config.properties file, then create different class for properties file to getProperty from it.\
+Properties file is used for setting parameters and use it in main code, like \'93browserName=chrome or Firefox\'94 (Key-value pair)\
+\pard\pardeftab720\partightenfactor0
+\cf7 	\cf6 public\cf7  \cf6 static\cf7  \cf6 void\cf7  \cf10 main\cf9 (\cf8 String\cf9 []\cf7  \cf11 args\cf9 )\cf7  \cf9 \{\cf0 \
+\cf7 		
+\f6\i \cf22 getProperty
+\f3\i0 \cf9 ()\cf14 ;\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\
+\cf7 	\cf6 public\cf7  \cf6 static\cf7  \cf6 void\cf7  \cf10 getProperty\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 				\cf6 try\cf7  \cf9 \{\cf0 \
+\cf7 					\cf20 // first create properties object\cf0 \
+\cf7 					\cf8 Properties\cf7  \cf13 prop\cf7  \cf14 =\cf7  \cf6 new\cf7  \cf15 Properties\cf9 ()\cf14 ;\cf0 \
+\cf7 					\cf20 // then give inputStream for the path for config.properties file\cf0 \
+\cf7 					\cf8 String\cf7  \cf13 projectPath\cf7  \cf14 =\cf7  \cf8 System\cf14 .
+\f6\i \cf22 getProperty
+\f3\i0 \cf9 (\cf18 "user.dir"\cf9 )\cf14 ;\cf0 \
+\cf7 					\cf23 InputStream\cf7  \cf13 input\cf7  \cf14 =\cf7  \cf6 new\cf7  \cf15 FileInputStream\cf9 (\cf16 projectPath\cf7  \cf14 +\cf7  \cf18 "/src/test/java/config/config.properties"\cf9 )\cf14 ;\cf0 \
+\cf7 					\cf16 prop\cf14 .\cf15 load\cf9 (\cf16 input\cf9 )\cf14 ;\cf0 \
+\cf7 					\cf8 String\cf7  \cf13 browser\cf7  \cf14 =\cf7  \cf16 prop\cf14 .\cf15 getProperty\cf9 (\cf18 "browser"\cf9 )\cf14 ;\cf0 \
+\cf7 					\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf16 browser\cf9 )\cf14 ;\cf7 						\cf0 \
+\cf7 				\cf9 \}\cf7  \cf0 \
+\cf7 				\cf6 catch\cf7  \cf9 (\cf8 IOException\cf7  \cf13 e\cf9 )\cf7  \cf9 \{\cf0 \
+\cf7 					\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf16 e\cf14 .\cf15 getMessage\cf9 ())\cf14 ;\cf0 \
+\cf7 					\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf16 e\cf14 .\cf15 getCause\cf9 ())\cf14 ;\cf0 \
+\cf7 					\cf16 e\cf14 .\cf15 printStackTrace\cf9 ()\cf14 ;\cf0 \
+\cf7 				\cf9 \}\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\
+\cf9 \
+\pard\pardeftab720\partightenfactor0
+\cf4 Now, to set properties in config.properties file, \
+\pard\pardeftab720\partightenfactor0
+\cf7 	\cf6 public\cf7  \cf6 static\cf7  \cf6 void\cf7  \cf10 setProperties\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 		\cf6 try\cf7  \cf9 \{\cf0 \
+\cf7 			\cf23 OutputStream\cf7  \cf13 output\cf7  \cf14 =\cf7  \cf6 new\cf7  \cf15 FileOutputStream\cf9 (
+\f6\i \cf24 projectPath
+\f3\i0 \cf7  \cf14 +\cf7  \cf18 "/src/test/java/config/config.properties"\cf9 )\cf14 ;\cf0 \
+\cf7 			
+\f6\i \cf24 prop
+\f3\i0 \cf14 .\cf15 setProperty\cf9 (\cf18 "browser"\cf14 ,\cf7  \cf18 "firefox"\cf9 )\cf14 ;\cf0 \
+\cf7 			
+\f6\i \cf24 prop
+\f3\i0 \cf14 .\cf15 store\cf9 (\cf16 output\cf14 ,\cf7  \cf6 null\cf9 )\cf14 ;\cf0 \
+\
+\cf7 		\cf9 \}\cf0 \
+\cf7 		\cf6 catch\cf9 (\cf8 Exception\cf7  \cf13 e\cf9 )\cf7  \cf9 \{\cf0 \
+\cf7 			\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf16 e\cf14 .\cf15 getMessage\cf9 ())\cf14 ;\cf0 \
+\cf7 			\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf16 e\cf14 .\cf15 getCause\cf9 ())\cf14 ;\cf0 \
+\cf7 			\cf16 e\cf14 .\cf15 printStackTrace\cf9 ()\cf14 ;\cf0 \
+\cf7 		\cf9 \}\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\
+\
+17. To use it in mail file to run \'97> \
+\cf8 TestNG_Test.java file \'97> \
+PropertiesFile\cf14 .
+\f6\i \cf22 getProperties
+\f3\i0 \cf9 ()\cf14 ;\cf0 \
+\cf7 		\cf0 \
+\cf7 		\cf6 if\cf9 (
+\f6\i \cf24 browserName
+\f3\i0 \cf14 .\cf15 equalsIgnoreCase\cf9 (\cf18 "chrome"\cf9 ))\cf7  \cf9 \{\cf0 \
+\cf7 			\cf25 driver\cf7  \cf14 =\cf7  \cf6 new\cf7  \cf15 ChromeDriver\cf9 ()\cf14 ;\cf0 \
+\cf7 		\cf9 \}\cf0 \
+\cf7 		\cf6 else\cf7  \cf6 if\cf9 (
+\f6\i \cf24 browserName
+\f3\i0 \cf14 .\cf15 equalsIgnoreCase\cf9 (\cf18 "firefox"\cf9 ))\cf7  \cf9 \{\cf0 \
+\cf7 			\cf25 driver\cf14 =\cf6 new\cf7  \cf15 FirefoxDriver\cf9 ()\cf14 ;\cf0 \
+\cf7 		\cf9 \}\cf7 	\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\
+propertiesFile.java -> \
+\pard\pardeftab720\partightenfactor0
+\cf23 InputStream\cf7  \cf13 input\cf7  \cf14 =\cf7  \cf6 new\cf7  \cf15 FileInputStream\cf9 (
+\f6\i \cf24 projectPath
+\f3\i0 \cf7  \cf14 +\cf7  \cf18 "/src/test/java/config/config.properties"\cf9 )\cf14 ;\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf7 			
+\f6\i \cf24 prop
+\f3\i0 \cf14 .\cf15 load\cf9 (\cf16 input\cf9 )\cf14 ;\cf0 \
+\cf7 			\cf8 String\cf7  \cf13 browser\cf7  \cf14 =\cf7  
+\f6\i \cf24 prop
+\f3\i0 \cf14 .\cf15 getProperty\cf9 (\cf18 "browser"\cf9 )\cf14 ;\cf0 \
+\cf7 			\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf16 browser\cf9 )\cf14 ;\cf0 \
+\cf7 \'97\'97\'97>			
+\f4\b \cf26 TestNG_Test.
+\f7\i browserName
+\f4\i0 =browser;
+\f3\b0 \cf0 \
+\
+\
+18. Listeners -> It is a component in TestNG that listens or keeps a track of execution of test steps, which helps to perform take actions at multiple stages.\
+It takes screenshots, log on console, etc.\
+We use XML file for different classes and suites by using package.\
+\
+19. Priority -> It is used to set priority, in which we give \'93@Test(priority = 1)\'94; in which the lesser the number the higher the priority. Also if there is same priority level, then it takes alphabetical, this case also works when there is no priority given. \
+And if we have given some cases priority and some not, then first unprioritized class works and then prioritised one.\
+\
+20. Grouping -> In this, if we make  groups of several test cases and name them like smoke, regression, sanity, etc..\
+We give annotation like this \'97 @Test(groups = \{\'93smoke\'94,\'94regression\'94\})\
+And we use testNG.xml file and assign it in to execute which groups, like - <class> <groups> <run> <include name = \'93smoke\'94> \'85\'85..\
+We can also define meta groups, in which first we make custom groups by naming it, and then define groups name to include in it\'85\'85 <groups><define name=\'93regression><include name=\'93smoke\'94> \'85\'85.\
+We can also use regular expression, like if we give annotation @Test(group = \{\'93windows.regression\'94\}), and use it in xml file; <groups><run><include name=\'93wiindows.*\'94>\'85\'85\
+\
+21. Implicit wait - It is used for overall wait in test execution flow  \'97> 
+\f6\i \cf24 driver
+\f3\i0 \cf14 .\cf17 manage\cf9 ()\cf14 .\cf17 timeouts\cf9 ()\cf14 .\cf15 implicitlyWait\cf9 (\cf8 Duration\cf14 .
+\f6\i \cf22 ofSeconds
+\f3\i0 \cf9 (\cf27 5\cf9 ))\cf0 \
+By default implicitly wait = \'93250ms\'94\
+Explicitly wait - It is used for specific wait for certain condition only.\
+\'97> WebDriver wait = new WebDriverWait(driver, 10);\
+   WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.name(\'93abcdef\'94));\
+\
+22. Fluent wait -> 
+\f8\fs28 \cf28 \cb21 \expnd0\expndtw0\kerning0
+An implementation of the\'a0{\field{\*\fldinst{HYPERLINK "https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/support/ui/Wait.html"}}{\fldrslt 
+\f9 \cf29 Wait}}\'a0interface that may have its timeout and polling interval configured on the fly.\
+\pard\pardeftab720\sa280\partightenfactor0
+\cf28 Each FluentWait instance defines the maximum amount of time to wait for a condition, as well as the frequency with which to check the condition. Furthermore, the user may configure the wait to ignore specific types of exceptions whilst waiting, such as\'a0{\field{\*\fldinst{HYPERLINK "https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/NoSuchElementException.html"}}{\fldrslt 
+\f9 \cf29 NoSuchElementExceptions}}\'a0when searching for an element on the page.\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f8\fs28 \cf28 \cb21 \expnd0\expndtw0\kerning0
+Sample usage:\
+\pard\pardeftab720\partightenfactor0
+
+\f9 \cf28    // Waiting 30 seconds for an element to be present on the page, checking\
+   // for its presence once every 5 seconds.\
+   Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)\
+       .withTimeout(Duration.ofSeconds(30L))\
+       .pollingEvery(Duration.ofSeconds(5L))\
+       .ignoring(NoSuchElementException.class);\
+\
+   WebElement foo = wait.until(new Function<WebDriver, WebElement>() \{\
+     public WebElement apply(WebDriver driver) \{\
+       return driver.findElement(By.id("foo"));\
+     \}\
+   \});\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+23. Exception Handling -> Try, catch, finally, throws, throw\
+\
+24. Dropdown -> Select\
+\
+25. TestNG sequence -> \cf6 package\cf7  test\cf14 ;\cf0 \
+\
+\cf6 import\cf7  org\cf14 .\cf7 testng\cf14 .\cf7 annotations\cf14 .\cf7 AfterMethod\cf14 ;\cf0 \
+\cf6 import\cf7  org\cf14 .\cf7 testng\cf14 .\cf7 annotations\cf14 .\cf7 AfterSuite\cf14 ;\cf0 \
+\cf6 import\cf7  org\cf14 .\cf7 testng\cf14 .\cf7 annotations\cf14 .\cf7 AfterTest\cf14 ;\cf0 \
+\cf6 import\cf7  org\cf14 .\cf7 testng\cf14 .\cf7 annotations\cf14 .\cf7 BeforeMethod\cf14 ;\cf0 \
+\cf6 import\cf7  org\cf14 .\cf7 testng\cf14 .\cf7 annotations\cf14 .\cf7 BeforeSuite\cf14 ;\cf0 \
+\cf6 import\cf7  org\cf14 .\cf7 testng\cf14 .\cf7 annotations\cf14 .\cf7 BeforeTest\cf14 ;\cf0 \
+\cf6 import\cf7  org\cf14 .\cf7 testng\cf14 .\cf7 annotations\cf14 .\cf7 Test\cf14 ;\cf0 \
+\
+\cf6 public\cf7  \cf6 class\cf7  \cf8 TestNG\cf7  \cf9 \{\cf0 \
+\
+\cf7 	
+\f6\i \cf30 @BeforeSuite
+\f3\i0 \cf0 \
+\cf7 	\cf6 public\cf7  \cf6 void\cf7  \cf10 bs\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 		\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf18 "bs"\cf9 )\cf14 ;\cf0 \
+\cf7 	\cf9 \}\cf7 	\cf0 \
+\cf7 	\cf0 \
+\cf7 	
+\f6\i \cf30 @BeforeTest
+\f3\i0 \cf0 \
+\cf7 	\cf6 public\cf7  \cf6 void\cf7  \cf10 bt\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 		\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf18 "bt"\cf9 )\cf14 ;\cf7 	\cf0 \
+\cf7 		\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\cf7 	\cf0 \
+\cf7 	
+\f6\i \cf30 @BeforeMethod
+\f3\i0 \cf0 \
+\cf7 	\cf6 public\cf7  \cf6 void\cf7  \cf10 bm\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 		\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf18 "bm"\cf9 )\cf14 ;\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\cf7 	\cf0 \
+\cf7 	
+\f6\i \cf30 @Test
+\f3\i0 \cf0 \
+\cf7 	\cf6 public\cf7  \cf6 void\cf7  \cf10 t1\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 		\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf18 "test"\cf9 )\cf14 ;\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\cf7 	\cf0 \
+\cf7 	
+\f6\i \cf30 @Test
+\f3\i0 \cf0 \
+\cf7 	\cf6 public\cf7  \cf6 void\cf7  \cf10 t2\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 		\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf18 "test2"\cf9 )\cf14 ;\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\cf7 	\cf0 \
+\cf7 	
+\f6\i \cf30 @AfterMethod
+\f3\i0 \cf0 \
+\cf7 	\cf6 public\cf7  \cf6 void\cf7  \cf10 am\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 		\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf18 "am"\cf9 )\cf14 ;\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\cf7 	\cf0 \
+\cf7 	
+\f6\i \cf30 @AfterTest
+\f3\i0 \cf0 \
+\cf7 	\cf6 public\cf7  \cf6 void\cf7  \cf10 at\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 		\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf18 "at"\cf9 )\cf14 ;\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\cf7 	\cf0 \
+\cf7 	
+\f6\i \cf30 @AfterSuite
+\f3\i0 \cf0 \
+\cf7 	\cf6 public\cf7  \cf6 void\cf7  \cf10 as\cf9 ()\cf7  \cf9 \{\cf0 \
+\cf7 		\cf8 System\cf14 .
+\f7\i\b \cf24 out
+\f3\i0\b0 \cf14 .\cf15 println\cf9 (\cf18 "as"\cf9 )\cf14 ;\cf0 \
+\cf7 	\cf9 \}\cf0 \
+\cf7 	\cf0 \
+\
+\cf9 \}\cf0 \
+Response \'97> \
+\pard\pardeftab720\partightenfactor0
+\cf4 bs\
+bt\
+bm\
+test\
+am\
+bm\
+test2\
+am\
+at\
+PASSED: test.TestNG.t2\
+PASSED: test.TestNG.t1\
+\
+===============================================\
+    Default test\
+    Tests run: 2, Failures: 0, Skips: 0\
+===============================================\
+\
+as\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf31 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 In this, sequence will start from suite, then it will search BeforeTest, then test, then after afterTest; it will go again to \'93BeforTest\'97BeforeMethod\'97Test\'97AfterMethod\'97AfterTest\'94.\cf0 \
+\
+26. Dependency -> Use @Test(dependsOnMethods=\'93LoginTest\'94); as second method is dependent on first(Login) method in this case. If dependent method gets failed, then it wont consider the methods which is dependent on First method. It will be skipped.\
+\
+27. invocationCount -> To run same test cases multiple times, we use @Test(invocationCount=10).\
+\
+28. Timeout,invocationTimeout \'97> It is used for giving timeout for specific test case, if it does not completed within timeout, then it will give error.\
+It is used as -> @Test(invocationTimeout=2000)\
+\
+29. expectedException -> It is used to define that this exception is expected in this test cases, so it will not failed if that same exception occurs.\
+@Test(expectedException = NumberFormatException.class)\
+\
+30. @parmater annotation -> it is used to define parameters or data driven from testing.xml file, as like URL, emailID or data used in test file.\
+File -> @Test\
+        @parameter(\{\'91url\'92,\'92emailId\'92\})\
+   Public void <methodName>(String url, String emailId\
+\{\};\
+\
+TestNG.XMl -> <parameter name = \'93url\'94, value = \'93\'85..\'94/>\
+              
+\f4\b \cf26 <parameter name = \'93env\'94, value = \'93QA\'94 />
+\f3\b0 \cf0 \
+\
+31. Data driven from XML file -> XSSFWORKBOOK for .xlsx format and HSSFWORKBOOK for .xls format (take reference from Eclipse editor)\
+\
+32. If specific test case, I don\'92t want to test, then use -> @Test(enabled=false)\
+\
+33. Soft assertion \'97> In this, if we use soft assertion, then lines after it, will be executed if that assertion fails.\
+    \
+    SoftAssert softassert = new SoftAssert();\
+    softassert.assert(<exp>,<actual>);\
+    \'97 This will pass all the test cases, but how we all know that where system crashed, it will be considered by using this command -> \
+    Softassert.assertall();\
+    - This will make the code executable if assertion fails, but makes test case failed, and list the test step failed\
+\
+    For multiple test cases, we can use sofassert1, softassert2; as at last it will assert all test cases.\
+\
+    Hard assertion -> In this, if we use hard assertion, then lines after it does not execute, if assertion fails.\
+\
+34. Verbose is used in testNG.XML file, within suite; if we do not defined to then its will give basic information on console (verbose=1); while we can give 1-10; and we should give 5.}

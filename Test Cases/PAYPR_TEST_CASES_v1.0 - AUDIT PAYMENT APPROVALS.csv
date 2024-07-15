@@ -1,0 +1,240 @@
+PROJECT NAME,PAYPR BackOffice Web Application,,,,,
+MODULE NAME,PAYMENT APPROVALS (Audit Payment Approvals)                                      ,,,,,
+CREATED BY,APOORV GUPTA,REVIEWED BY,RISHABH KUMAR,,,
+CREATION DATE,22-3-2023,DATE OF REVIEW,3-27-2023,,,
+,,,,,,
+PRE-REQUISITE:,"User should Logged In BackOffice and present on Consumer Payments menu screen
+Credential - username: rishabh password:P@ssw0rd",,,,,
+TESTCASE ID,TESTCASE,TEST STEPS,TEST DATA,EXPECTED RESULT,ACTUAL RESULT,STATUS(PASS/FAIL)
+TC_1,To Check whether BO user is able to search all Users Audit Payment Approvals request.,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",BO user should be able to search the details of Audit Payment approval request,BO user should be able to search the details of Audit Payment approval request,PASS
+TC_2,To Check whether BO user is able to search Users Audit Payment approvals request of Type 'BO Payment correction'.,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).select Type 'BO Payment Correction' option
+2).Click on search button.","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type=BO Payment Correction
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",BO user should be able to search the details of Audit Payment approval request,BO user should be able to search the details of Audit Payment approval request,PASS
+TC_3,To Check whether BO user is able to search Users Audit Payment approvals request of Type 'Offline Bank Deposits'.,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).select Type 'Offline Bank Deposits'' option
+3).Click on search button.","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type=Offline Bank Deposits
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",BO user should be able to search the details of Audit Payment approval request,BO user should be able to search the details of Audit Payment approval request,PASS
+TC_4,To Check whether BO user is able to search all Users Audit Payment approvals request with request Id,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Provide Request Id input = 60
+3).Click on search button.","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Request Id = 60
+5.Start Date(ByDefaultSelected)= 2 month back from current date
+6.End Date(ByDefaultSelected)= Current Date
+7.Alias(ByDefaultSelected)=www.paypr.com
+
+",BO user should be able to search the details of Audit Payment approval request,BO user should be able to search the details of Audit Payment approval request,PASS
+TC_5,"To Check whether Backoffice User is able to search Users Audit Payment approvals, when changed Start Date ","1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).click on Start Date field
+3).select Start Date
+","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Alias(ByDefaultSelected)=www.paypr.com
+4.Type(ByDefaultSelected)=ALL
+5.Start Date=20/02/2023
+6.End Date(ByDefaultSelected)= Current Date
+
+
+",BO user should be able to search the details of Audit Payment approval request,BO user should be able to search the details of Audit Payment approval request,PASS
+TC_6,"To Check whether Backoffice User is able to search Users Audit Payment approvals, when changed End Date ","1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).click on End Date field
+3).select End Date
+","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Alias(ByDefaultSelected)=www.paypr.com
+4.Type(ByDefaultSelected)=ALL
+5.Start Date(ByDefaultSelected)= 2 month back from current date
+6.End Date=10/03/2023
+
+
+",BO user should be able to search the details of Audit Payment approval request,BO user should be able to search the details of Audit Payment approval request,PASS
+TC_7,"To Check whether Backoffice User is able to search the Users Audit Payment approvals, when changed Start Date and End Date","1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).click on Start Date field
+3).select Start Date
+4).click on End Date field
+5).select End Date
+","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Alias(ByDefaultSelected)=www.paypr.com
+4.Type(ByDefaultSelected)=ALL
+5.Start Date=01/05/2022
+6.End Date=01/03/2023
+
+
+",BO user should be able to search the details of Audit Payment approval request,BO user should be able to search the details of Audit Payment approval request,PASS
+TC_8,"To Check whether Backoffice User is able to 
+Select Start Date greater than current date","1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).click on Start Date field
+3).select Start Date
+","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Alias(ByDefaultSelected)=www.paypr.com
+4.Type(ByDefaultSelected)=ALL
+5.Start Date=Current date
+6.End Date(ByDefaultSelected)=Current date
+
+
+","BO user should not be able to Select Start Date
+greater than current date.","BO user should not be able to Select Start Date
+greater than current date.",PASS
+TC_9,"To Check whether Backoffice User is able to 
+Select End Date greater than current date","1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).click on End Date field
+3).select End Date
+","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Alias(ByDefaultSelected)=www.paypr.com
+4.Type(ByDefaultSelected)=ALL
+5.Start Date(ByDefaultSelected)= 2 month back from current date
+6.End Date=Current date
+
+
+","BO user should not be able to Select End Date
+greater than current date.","BO user should not be able to Select End Date
+greater than current date.",PASS
+TC_10,To check Reset button working properly for searched result table,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).click on reset button","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+
+",BO user should able to reset or clear the page fields after click on reset button.,BO user should able to reset or clear the page fields after click on reset button.,PASS
+TC_11,To Check whether BO user is able to view Audit Payment approvals request successfully after click on 'view ' button on Action column with each Status, click on 'view' button on Action column with each Status,"1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+
+",BO user should able to view Audit Payment approvals request successfully with each Status,BO user should able to view Audit Payment approvals request successfully with each Status,PASS
+TC_12,To check pagination buttons working properly,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).click on pagination buttons","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+
+",Pagination buttons working properly,Pagination buttons working properly,PASS
+TC_13,To check Back button working on Audit Payment Approvals details page,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).Click on Back button on Payment approval details page","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+
+",Screen navigates to Search Payment Approvals request page again,Screen navigates to Search Payment Approvals request page again,PASS
+TC_14,To check Link 'Link_(1)' is working properly,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).Click on Link icon","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",New Tab opens with the uploaded image preview,New Tab opens with the uploaded image preview,PASS
+TC_15,To check Link 'Link_(2)' is working properly,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).Click on Link icon","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",New Tab opens with the uploaded image preview,New Tab opens with the uploaded image preview,PASS
+TC_16,To check Link 'Link_(3)' is working properly,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).Click on Link icon","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",New Tab opens with the uploaded image preview,New Tab opens with the uploaded image preview,PASS
+TC_17,To check 'PROCESSED' status of any payment request on searched result table,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).view the status column with 'PROCESSED' status","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",status column displaying 'PROCESSED' status,status column displaying 'PROCESSED' status,PASS
+TC_18,To check 'PENDING AT LEVEL 1' status of any payment request on searched result table,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).view the status column with 'PENDING AT LEVEL 1' status","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",status column displaying 'PENDING AT LEVEL 1' status,status column displaying 'PENDING AT LEVEL 1' status,PASS
+TC_19,To check 'WITHDRAWAL REJECT' status of any payment request on searched result table,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).view the status column with 'WITHDRAWAL REJECT' status","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",status column displaying 'WITHDRAWAL REJECT' status,status column displaying 'WITHDRAWAL REJECT' status,PASS
+TC_20,To check 'FAILED' status of any payment request on searched result table,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).view the status column with 'FAILED' status","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",status column displaying 'FAILED' status,status column displaying 'FAILED' status,PASS
+TC_21,To check 'PENDING AT LEVEL 2' status of any payment request on searched result table,"1).Click on Audit Payment Approvals sub menu button, in Payment menu
+2).Click on search button.
+3).view the status column with 'PENDING AT LEVEL 2' status","1.Business(ByDefaultSelected)=Paypr
+2.Channel(ByDefaultSelected)=www.paypr.com
+3.Type(ByDefaultSelected)=ALL
+4.Start Date(ByDefaultSelected)= 2 month back from current date
+5.End Date(ByDefaultSelected)= Current Date
+6.Alias(ByDefaultSelected)=www.paypr.com
+
+",status column displaying 'PENDING AT LEVEL 2' status,status column displaying 'PENDING AT LEVEL 2' status,PASS
+TC_22,,,,,,
+TC_23,,,,,,

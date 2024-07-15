@@ -1,0 +1,29 @@
+*https://www.softwaretestinghelp.com/android-app-testing/
+
+--------------------------------------------iOS-------------------------------------------------------------------
+*https://www.softwaretestinghelp.com/ios-app-testing/
+
+If your app is created not just for iOS then there are few pointers that need to be specifically tested for iOS like:
+
+Lists: In iOS when there’s a list to be displayed, it always shows up an altogether new screen, unlike Android where a pop-up shows up.
+
+Messages: When an app crashes then the message shown in iOS is different from that in an Android. Also if you have observed, small messages flash on android phones when you free memory like ‘#GB memory freed’ etc., but we can never see flash messages in iOS.
+
+Delete Confirmation: If you observe closely an iOS app, on a delete confirmation popup, the Cancel action is on left of the Delete option. While in Android or other OS it is vice versa.
+
+--->#4) Catch the Crash Logs: The application for iOS may be freezing or crashing under certain circumstances. To fix the         issue, crash logs play a vital role.
+
+--->#5) Capturing the Console Logs:
+Console logs give the overall information of the applications on the iOS device.
+This can be done using tools such as iTools. In the iTools application, click on the “Toolbox” icon when the iOS device is connected to the system on which iTools is running. Clicking on “Real-Time log” gives the real-time console log.
+
+*https://www.softwaretestinghelp.com/mobile-testing-low-end-devices/
+
+*https://www.softwaretestinghelp.com/ios-android-ui-testing/
+
+
+Under Trust Settings, select Trust this certificate for identifying websites.
+
+Select OK.
+
+10.5.50.174

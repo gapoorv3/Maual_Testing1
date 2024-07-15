@@ -1,0 +1,194 @@
+
+
+* service_obj = Service()
+  driver = webdriver.Chrome(service=service_obj)
+
+--> isme Service() ek package jo phele request web driver ko bhejta h and fer wo delta h and fer wo browser pr execute hota h.
+And dusri line mein service parameter date hain, jisme chrome browser pr request deta h.
+   
+  Second approach will be like download chrome web driver on local, then use that driver.... It will result in fast execution.
+  service_obj = Service("/user/........[path locatiion]")
+
+
+1. methods mein humesha () lagta h jisme hum argument dete h joki class ke parameters mein jaate hain, jisse wo class ki functionality chalti h.
+
+website to practice --> https://the-internet.herokuapp.com/
+                        https://rahulshettyacademy.com/AutomationPractice/
+
+1.methods -> driver.maximize_window(),driver.minimize_window(),driver.forward(),driver.back(),driver.refresh()
+
+2.locators -> ID, name, xpath, cssselector, link text, classname,tag name, partial link text.
+xpath - "//input[@type='submit']" , CSSselector - "input[name='name']" and (//button[@class='select-button placeholder'])[2]
+(AGAR TAG UNIQUE NAHI HAIN, TOH SECTION 10 KE VIDEOS DEKH SKTE H)
+**By name also --> //button[text()='....']
+
+4. Assertion -> assert "[text message]" in {variable}.
+ --> assert {variable} == '...' , 'Test failed because of this'.
+  We write assertion error message after comma, to have brief idea, why this got failed.
+ --> "assert not" is also there 
+
+5. if that element is not unique, then --> ("//placeholer[@attribute='value'][1]")
+
+6. Parent to Chile method --> XPATh - "//form/div[1]/input" ; CSS - "form div:nth-child(2) input"
+
+3.static dropdown -> Select(driver.......) --> select by TEXT, INDEX, VALUE. [yeh sirf <select> tag ke saath chalega]
+
+4. css selector -> #ID, .CLASSNAME
+
+5.<a> anchor tag mein LINK_TEXT ya PARTIAL_LINK_TEXT use hoga.
+
+6.# static dropdown -->
+{if you see static tag-name in dropdown, then it is static and we can use 'Static' library/package in dropdown}
+# dropdown = Select(driver.find_element(By.CLASS_NAME, "select-button"))
+# dropdown.select_by_index(1)
+# time.sleep(3)
+# print("tested")
+
+7.#dynamic dropdown
+# driver = webdriver.Chrome()
+# driver.get("https://rahulshettyacademy.com/dropdownsPractise/")
+# driver.find_element(By.ID, "autosuggest").send_keys("ind")
+# time.sleep(2)
+# country = driver.find_elements(By.CSS_SELECTOR, "li[class='ui-menu-item']")
+#
+# for countries in country:
+#     if countries.text == 'India':
+#         countries.click()
+#         break
+# time.sleep(2)
+
+8.In particular, this method is used to retrieve the value of the "value" attribute of an HTML input element. For example, if you have an input element with an id of "username" and you want to get the value that the user entered in that field   --> get_attribute('value')  
+[isko .text ke jagh use krte jab predefined text naa ho website pr, jo user value dalta hain wo aayega]
+
+9. is_selected(); is_displayed()
+--> {Checkbox can also be done as like dynamic dropdown}
+
+10. selenium sirf HTML, jo browser content hain sirf uspr kam krta h, alert java/javascript mein hote hain , selenium ko batana padta hain ki switch krne ko, jisme hum "driver.switch_to.alert" use karenge.
+aur agr pop-up mein 2 options aaye toh, "alert.accept()" ya "alert.dismiss()" use karenge.
+
+11. agr elements ko iterate krna hain toh phele <parent tag then child tag> like "//div[@dsdd=dd]/div/..." or "nb-option-list nb-option".
+CSS selector -> "<parent-tag> <tag>:nth-child(5)"
+
+12. driver.implicitely_wait(5)--> it is used to wait for every 5 second in each code line, and after getting response in range of 5 sec. ,it will run; but time.sleep(5) it will wait for 5 second.
+But also, for getting proper result if we have to wait in elements tag, to have proper list, then we have to use time, kyuki implicit toh agr khali empty list bhi milegi, aage chal jayega, fer for loop mein error ayegi isliye.
+
+13. explicit wait -->
+wait= WebDriverWait(driver,10)
+wait.until(expected_conditions.presence_of_element_located((By.CSS_SELECTOR, "...")))
+-->agr koi bhi element ko implicit wait mein jo time hain usse jyada lagega, toh explicit wait ko use kr skte h, kaam yeh wahi implicit wait ki traah krta h, response aane ka wait krta h bas, then aage chalta h code.
+
+14. action = ActionChains(driver)
+    action.'.........'.perform()
+    https://www.selenium.dev/selenium/docs/api/py/webdriver/selenium.webdriver.common.action_chains.html
+    various actions to perform on UI mostly by mouse.
+ex-> action.move_to_element(driver.find_element(By.LINK_TEXT,"Reload")).click().perform()
+
+15. new Window --> newWindows = driver.window_handles
+                   driver.switch_to.window(newWindows[1])
+
+    frames --> driver.switch_to.frame('ID')
+               assert .............
+               driver.switch_to.default_content()
+               assert .......... 
+
+16. javascript executor ->
+    driver.execute_script("window.scrollBy(0,document.body.scrollHeight")
+    -- take screenshot
+    driver.get_screenshot_as_png('file_name')
+
+17. Chromeoptions()-->
+HEADLESS:
+   chrome_options = webdriver.ChromeOptions()
+   chrome_options.add_argument('headless')
+   driver = webdriver.Chrome(options=chrome_options)
+ex-- driver.get_argument('--ignore-certificate-errors','--start-maximized')
+[[https://www.programcreek.com/python/example/100025/selenium.webdriver.ChromeOptions]] 
+
+18. if to use xpath in console, then use --> $x(//....)
+    agar apko ek variable ko 2 baar use krna h apne code mein, and phele wale element ko sort ya kuch bhi karana h, and dusre koo ek variable mein dalna h aur dono ke operation alag hain, then use "listvariable.copy()"
+   debugger se ek ek element ki value dikhti hain, and usse hum pata kr skte h, kaha mismatch ho raha h.
+ -------------------------------------------------------------------------------------------------------------------------
+
+PYTEST->
+1. python file humesha "test_''" or "''_test" se hogi.
+   Any code should be wraped in a code only.
+   pytest method should be start with "test_..."
+   method_name should have sense, as it will use to run from cmd and in jenkins.
+
+2. if this pytest, I have to run on cmd, then first go to that path --> 
+   -- py.test
+   -- py.test -v (more verbose)
+   -- py.test -v -s (if all you have to print in the code)
+
+3. to run specific file from given package, then --> {you should in specific directory, in which file is present}
+   -- py.test 'file_name' -v -s
+
+4. to run specific method test_case from given two file, as an ex. -->  {method name can be partial or absolute}
+   -- py.test -k(regex) 'method_name' -v -s
+
+5. for smoke testing, use "MARK" before each method -->
+   @pytest.mark.smoke
+   def <...>():...
+   To run it in cmd --> py.test -m(mark) <mark_name>(smoke) -v -s
+
+6. if you have to skip specific methods, then use --> "@pytest.mark.skip".
+
+7. if specific method have to run, so that its value can be used on another method, but that one is giving an error and still we want to use it and it will not come in reort.html, so --> "@pytest.mark.xfail".
+
+8. @pytest.fixtures() --> Its like pre-request script and tests in selenium, like in postman.
+"Yield" is like when test execution is completed, then defined function will be called.
+And if we give function in argument, it is executed first before test.
+EX -> @pytest.fixture
+def demo():
+    print("i will execute first")
+    yield
+    print("I will execute at last")
+
+9. To use pictures in multiple files or function, then use "contest" file, in which we define picture tag function, then just import that file/ function in different function which present in different files. In this we put all function test cases in single class. Ex->
+
+@pytest.mark.usefixture(<fixture_function>)
+Class TestFixture():
+
+Also ---> If we have to use picture at first and run multiple test functions and call yield at last of every function, then use "@pytest.fixture(scope="class").
+In this, we define to run fixture only on class, not on each test functions.
+
+10. If we have to return value in fixture function, then use that returned value in different function of different file, then we will do it like -->
+@pytest.mark.usefixtures("dataLoad")
+class Test:
+    def test_fix(self,dataLoad):
+        print(dataLoad)
+
+--> In this if we have to use that return value, then we give contest fixture function in second function argument with self and if we don't have to use it, then we will give contest fixture function in purest mark only. 
+
+9. HTML report -> 1. Pip3 install pytest-html
+                  2. Py.test --html=report.html. --> it will save in current directory only.
+
+10. Logging in Pytest HTML document ->     {IMP}
+    "test_logging.py" file on PyCharm
+Also se Baseclass.py file to see how to make class and use it in several other classes.
+
+11. Page object model --> In it we make a package, and define each page as a class and call test function in it, have two see more it. 
+We didi this all to add locators in function of that specific class and add object to test function in another class in different file--> just see 2 videos of it on udemy, its is of repetitive code, just to learn single time.  {IMP}
+
+---> In this, we have to add different each functions of different page objects, but it will be huge, we can integrate page objects; like if we click on any object then it  giving second page object so just define next page object to return in that previous page object function only, just see 92 video of udemy.
+
+
+--> We can also create custom utilities like wait, and any other in base class class, which we use as parent class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
