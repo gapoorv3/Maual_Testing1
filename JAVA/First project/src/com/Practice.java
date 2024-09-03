@@ -1,26 +1,43 @@
 package com;
 
-import java.util.Scanner;
+// class SwapCase{
+//     public static void main(String[] args) {
+        
+//         String s1 = "apoorv";
+//         String s2 = "gupta";
 
-public class Practice {
-    private static double i;
+//         s1=s1+s2;
+//         s2=s1+s2;
+
+//         s1 = s1.substring(6);
+//         s2 = s2.substring(0,6);
+
+//         System.out.println(s1);
+//         System.out.println(s2);
+
+//     }
+// }
+
+class StringSwapExample {
 
     public static void main(String[] args) {
-        
-        Scanner scanner = new Scanner(System.in);
-        int q = scanner.nextInt();
-        for(int i=0;i<q;i++){
-            int a = scanner.nextInt();
-            int b = scanner.nextInt();
-            int n = scanner.nextInt();
-            int calc = a;
-            for(int j=0;j<n;j++)
-            {
-                calc+=(Math.pow(2,j)*b);
-                System.out.print(calc+" ");
-            }
-            System.out.println();
-        }
-        scanner.close();
+    
+    // Take two string s1 and s2 which we need to swap.
+    String s1 = "Rah";
+    String s2 = "Shetu";
+    
+    // Combine both the strings s1 and s2 using the concatenation(+) operator
+    s1 = s1 + s2;
+    System.out.println(s1);
+    
+    // Use the substring method to get the subset of the combined string
+    s2 = s1.substring(0, s1.length() - s2.length());
+    System.out.println(s2);
+    s1 = s1.substring(s2.length());
+    System.out.println(s1); 
+    
+    // System.out.println("s1 =" + s1);
+    // System.out.println("s2 =" + s2);
+    
     }
 }
