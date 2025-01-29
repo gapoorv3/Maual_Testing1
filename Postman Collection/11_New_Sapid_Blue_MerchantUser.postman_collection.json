@@ -1,0 +1,5556 @@
+{
+	"info": {
+		"_postman_id": "7d0fa458-b578-4a26-a732-0981a61d1f7d",
+		"name": "11_New_Sapid_Blue_MerchantUser",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24222642",
+		"_collection_link": "https://cloudy-escape-95096.postman.co/workspace/Team-Workspace~b8f5b68b-5195-47f5-8713-287e00b57660/collection/24222642-7d0fa458-b578-4a26-a732-0981a61d1f7d?action=share&source=collection_link&creator=24222642"
+	},
+	"item": [
+		{
+			"name": "Merchant_User_registration",
+			"item": [
+				{
+					"name": "Get_Config",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{RmsUrl}}/getConfigValues",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"getConfigValues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch_oauth_tokens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" var jsonData = JSON.parse(responseBody);\r",
+									" pm.environment.set(\"oauth_tokens\",jsonData[0].token)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/sb_oauth_tokens?_where=((client_id,eq,MOBILE_APP))",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sb_oauth_tokens"
+							],
+							"query": [
+								{
+									"key": "_where",
+									"value": "((client_id,eq,MOBILE_APP))"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REGISTER_CERTIFICATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"if(+jsonData.responseData.statusCode===0)",
+									"\t{      ",
+									"\t pm.environment.set(\"requestId\",jsonData.responseData.data.id);",
+									"\t  pm.test(\"ErrorMsg I am getting from API is =\"+jsonData.responseData.message,function () {pm.expect(jsonData.responseData.message).to.eql(\"Success\")});",
+									"      postman.setNextRequest(\"Step two Business Info advanced org Registration\");",
+									"    ",
+									"    } else{ pm.test(\"errorMsg I am getting from API is =\"+jsonData.responseData.message,",
+									"",
+									"\tfunction () {pm.expect(+jsonData.responseData.message).to.eql(\"Success\")});pm.test(\"errorCode I am getting from API is =\"+jsonData.responseData.statusCode,",
+									"",
+									"\tfunction () {pm.expect(+jsonData.responseData.statusCode).to.eql(0)});postman.setNextRequest(null);",
+									"",
+									"\t}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_tokens}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestType",
+									"value": "REGISTER_CERTIFICATE",
+									"description": "REGISTER_CERTIFICATE,BUSINESS_INFO,PAPER_WORK,LOCATION,BANKING",
+									"type": "text"
+								},
+								{
+									"key": "haveRegistrationCertificate",
+									"value": "YES",
+									"type": "text"
+								},
+								{
+									"key": "businessId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "channelId",
+									"value": "74",
+									"type": "text"
+								},
+								{
+									"key": "requestId",
+									"value": "{{requestId}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "businessClassification",
+									"value": "UNREGISTERED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/clients/advanceOrgRegVerification",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"clients",
+								"advanceOrgRegVerification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBusinessType",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_tokens}}"
+							},
+							{
+								"key": "timeStamp",
+								"value": "timestamp"
+							}
+						],
+						"url": {
+							"raw": "{{RmsUrl}}/clients/getBusinessType?businessId=2&channelId=74",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"clients",
+								"getBusinessType"
+							],
+							"query": [
+								{
+									"key": "businessId",
+									"value": "2"
+								},
+								{
+									"key": "channelId",
+									"value": "74"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BUSINESS_INFO",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"emailId\", \"sapidbluee.\" +pm.environment.get(\"Iteration\")+\"@sapidblue.com\");",
+									"pm.environment.set(\"userName\",\"MerchantUser\"+pm.environment.get(\"Iteration\"));",
+									"pm.environment.set(\"mobileNumber\", +pm.environment.get(\"mobileNumber\")+1);",
+									"pm.environment.set(\"Iteration\", +pm.environment.get(\"Iteration\")+1);",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"// var rnd = Math.floor((Math.random() * 10000) + 1);",
+									"// postman.setEnvironmentVariable(\"emailId\", \"test\"+ rnd + \"@gmail.com\");",
+									"// postman.setEnvironmentVariable(\"username\", \"testuser\"+ rnd);",
+									"",
+									"// // CREATE Automation oN MOBILENUMBER",
+									"// var num= +pm.environment.get(\"mobileNumber\");",
+									"// num= num+1;",
+									"// pm.environment.set(\"mobileNumber\", num);",
+									" ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_tokens}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/octet-stream",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestType",
+									"value": "BUSINESS_INFO",
+									"description": "REGISTER_CERTIFICATE,BUSINESS_INFO,PAPER_WORK,LOCATION,BANKING",
+									"type": "text"
+								},
+								{
+									"key": "businessId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "channelId",
+									"value": "74",
+									"type": "text"
+								},
+								{
+									"key": "ownerName",
+									"value": "Business Owner Name",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "{{mobileNumber}}",
+									"type": "text"
+								},
+								{
+									"key": "orgTypeCode",
+									"value": "RET",
+									"type": "text"
+								},
+								{
+									"key": "emailId",
+									"value": "{{emailId}}",
+									"type": "text"
+								},
+								{
+									"key": "mobileNumber",
+									"value": "{{mobileNumber}}",
+									"type": "text"
+								},
+								{
+									"key": "mobileCode",
+									"value": "+1868",
+									"type": "text"
+								},
+								{
+									"key": "dob",
+									"value": "1997-06-09",
+									"type": "text"
+								},
+								{
+									"key": "addressOne",
+									"value": "my locationaddress one",
+									"type": "text"
+								},
+								{
+									"key": "addressTwo",
+									"value": "my location  address two",
+									"type": "text"
+								},
+								{
+									"key": "cityCode",
+									"value": "TT-CH-01",
+									"type": "text"
+								},
+								{
+									"key": "stateCode",
+									"value": "TT-CH",
+									"type": "text"
+								},
+								{
+									"key": "isPep",
+									"value": "YES",
+									"type": "text"
+								},
+								{
+									"key": "documents[0].docType",
+									"value": "ID_PROOF",
+									"type": "text"
+								},
+								{
+									"key": "requestId",
+									"value": "{{requestId}}",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "Business Owne",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Name",
+									"type": "text"
+								},
+								{
+									"key": "countryCode",
+									"value": "TT",
+									"type": "text"
+								},
+								{
+									"key": "documents[0].image",
+									"type": "file",
+									"src": "/home/stpl/Pictures/Screenshot from 2023-03-09 16-57-26.png"
+								},
+								{
+									"key": "businessClassification",
+									"value": "UNREGISTERED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/clients/advanceOrgRegVerification",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"clients",
+								"advanceOrgRegVerification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PAPER_WORK",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_tokens}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestType",
+									"value": "PAPER_WORK",
+									"type": "text"
+								},
+								{
+									"key": "businessId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "channelId",
+									"value": "74",
+									"type": "text"
+								},
+								{
+									"key": "businessName",
+									"value": "Sapidblue business",
+									"type": "text"
+								},
+								{
+									"key": "vatNumber",
+									"value": "ADHAR0000111",
+									"type": "text"
+								},
+								{
+									"key": "businessType",
+									"value": "FOOD",
+									"type": "text"
+								},
+								{
+									"key": "businessClassification",
+									"value": "SMALL",
+									"type": "text"
+								},
+								{
+									"key": "documents[0].docType",
+									"value": "ADDRESS_PROOF",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "documents[1].docType",
+									"value": "REGISTRATION_CERTIFICATE",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "requestId",
+									"value": "{{requestId}}",
+									"type": "text"
+								},
+								{
+									"key": "documents[0].image",
+									"type": "file",
+									"src": "/home/stpl/Pictures/Screenshot from 2022-12-07 15-24-55.png",
+									"disabled": true
+								},
+								{
+									"key": "documents[1].image",
+									"type": "file",
+									"src": "/home/stpl/Pictures/Screenshot from 2023-02-10 14-07-01.png",
+									"disabled": true
+								},
+								{
+									"key": "businessClassification",
+									"value": "UNREGISTERED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/clients/advanceOrgRegVerification",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"clients",
+								"advanceOrgRegVerification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOCATION",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_tokens}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestType",
+									"value": "LOCATION",
+									"type": "text"
+								},
+								{
+									"key": "lattitude",
+									"value": "28.6691565",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "77.45375779999999",
+									"type": "text"
+								},
+								{
+									"key": "businessId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "requestId",
+									"value": "{{requestId}}",
+									"type": "text"
+								},
+								{
+									"key": "locationAddress",
+									"value": "location address 112",
+									"type": "text"
+								},
+								{
+									"key": "openingHours.monday",
+									"value": "09:00-18:00",
+									"type": "text"
+								},
+								{
+									"key": "openingHours.tuesday",
+									"value": "09:00-18:00",
+									"type": "text"
+								},
+								{
+									"key": "openingHours.wednesday",
+									"value": "09:00-18:00",
+									"type": "text"
+								},
+								{
+									"key": "openingHours.thursday",
+									"value": "09:00-18:00",
+									"type": "text"
+								},
+								{
+									"key": "openingHours.friday",
+									"value": "09:00-18:00",
+									"type": "text"
+								},
+								{
+									"key": "openingHours.saturday",
+									"value": "NA",
+									"type": "text"
+								},
+								{
+									"key": "openingHours.sunday",
+									"value": "NA",
+									"type": "text"
+								},
+								{
+									"key": "channelId",
+									"value": "74",
+									"type": "text"
+								},
+								{
+									"key": "businessClassification",
+									"value": "UNREGISTRED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/clients/advanceOrgRegVerification",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"clients",
+								"advanceOrgRegVerification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BANKING",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_tokens}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestType",
+									"value": "BANKING",
+									"type": "text"
+								},
+								{
+									"key": "bankName",
+									"value": "RBC Royal Banks",
+									"type": "text"
+								},
+								{
+									"key": "accountNumber",
+									"value": "8899778890",
+									"type": "text"
+								},
+								{
+									"key": "accountType",
+									"value": "SAVINGS",
+									"type": "text"
+								},
+								{
+									"key": "routingNumber",
+									"value": "GB998877665",
+									"type": "text"
+								},
+								{
+									"key": "businessId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "requestId",
+									"value": "{{requestId}}",
+									"type": "text"
+								},
+								{
+									"key": "beneficiaryName",
+									"value": "Rishabh Kumar",
+									"type": "text"
+								},
+								{
+									"key": "channelId",
+									"value": "74",
+									"type": "text"
+								},
+								{
+									"key": "branchName",
+									"value": "Gurgaon Udyog Vihar",
+									"type": "text"
+								},
+								{
+									"key": "businessClassification",
+									"value": "UNREGISTRED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/clients/advanceOrgRegVerification",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"clients",
+								"advanceOrgRegVerification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Registration OTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"if(+jsonData.responseData.statusCode === 0)",
+									"{      ",
+									"     pm.test(\"-------------------------1.REQUEST APPROVED ON LEVEL_2--------------------------------\");  ",
+									" pm.environment.set(\"otp\",jsonData.responseData.data.verificationCode);",
+									"  pm.test(\"errorMsg I am getting from API is =\"+jsonData.responseData.message, function () {pm.expect(jsonData.responseData.message).to.eql(\"Success\")});",
+									"            postman.setNextRequest(\"Main Advanced Org Registration\");",
+									"            }",
+									"          else{ ",
+									"                pm.test(\"errorMsg I am getting from API is =\"+jsonData.responseData.message, function () {pm.expect(jsonData.responseData.message).to.eql(\"Success\")});",
+									"                pm.test(\"errorCode I am getting from API is =\"+jsonData.responseData.statusCode, function () {pm.expect(jsonData.responseData.statusCode).to.eql(0)});",
+									"                   postman.setNextRequest(null);",
+									"                ",
+									"          }",
+									"          "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_tokens}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"businessId\": 2,\n  \"channelId\":74,\n  \"emailId\": \"{{emailId}}\",\n  \"mobileNumber\": \"+1868{{mobileNumber}}\",\n  \"type\": \"MOBILE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/clients/sendRegOtp",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"clients",
+								"sendRegOtp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Main Advanced Org Registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_tokens}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"businessId\": 2,\n  \"channelId\":74,\n  \"otp\": \"{{otp}}\",\n  \"requestId\": {{requestId}},\n  \"emailId\": \"{{emailId}}\",\n  \"mobileNumber\": \"+1868{{mobileNumber}}\",\n  \"type\": \"MOBILE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/clients/advanceOrgRegistration",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"clients",
+								"advanceOrgRegistration"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Merchant_User_LOGIN",
+			"item": [
+				{
+					"name": "XmySql_Fetch_OrgDetail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" var jsonData = JSON.parse(responseBody);\r",
+									" pm.environment.set(\"orgId\",jsonData[0].org_id)\r",
+									" pm.environment.set(\"MerchantUserId\", jsonData[0].user_id)\r",
+									"  pm.environment.set(\"emailId\", jsonData[0].email_id)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/sb_user_master?_where=((mobile_number,eq,{{mobileNumber}}))",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sb_user_master"
+							],
+							"query": [
+								{
+									"key": "_where",
+									"value": "((mobile_number,eq,{{mobileNumber}}))"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SetMerchantPassword",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"password\":\"25d55ad283aa400af464c76d713c07ad\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/sb_user_master/{{MerchantUserId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sb_user_master",
+								"{{MerchantUserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Merchant_User_Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// let swicthCaseIteration= +pm.environment.get(\"swicthCaseIteration\");\r",
+									"// function sameLines()  {\r",
+									"// pm.variables.set(\"userName\", \"skilrock\");\r",
+									"// pm.variables.set(\"password\", 12345678);\r",
+									"// pm.variables.set(\"clientId\", \"RMS\");\r",
+									"// pm.variables.set(\"clientSecret\", \"ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD\");  }\r",
+									"// switch(swicthCaseIteration) {\r",
+									"//  case 0:\r",
+									"// \tsameLines();  break;\r",
+									"//  case 1:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"userName\", null);  break;\r",
+									"//  case 2:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"password\", null);  break;\r",
+									"//  case 3:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"clientId\", null);  break;\r",
+									"//  case 4:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"clientSecret\", null);  break;  }"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"MerchantToken\", jsonData.responseData.authToken);",
+									"pm.environment.set(\"MerchantUserId\", jsonData.responseData.userId)",
+									" ",
+									"// let swicthCaseIteration = +pm.environment.get(\"swicthCaseIteration\");",
+									"// if (jsonData.responseData.statusCode === 0 && swicthCaseIteration === 0) {",
+									"//      pm.test(\"-------------------------1.Positive scenario Of get/token api With valid key Data.--------------------------------\");",
+									"//      eval(pm.environment.get(\"IfTestCase\"))();",
+									" ",
+									"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+									"// pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+									"// pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(0) })",
+									"//      pm.test(\"authToken I am getting from Api is= \" + jsonData.responseData.authToken, function () { pm.expect(+jsonData.responseData.authToken).to.eql(+jsonData.responseData.authToken) })",
+									"//      pm.test(\"timestamp I am getting from Api is= \" + jsonData.responseData.timestamp, function () { pm.expect(+jsonData.responseData.timestamp).to.eql(+jsonData.responseData.timestamp) })",
+									"//      pm.test(\"expiryTime I am getting from Api is= \" + jsonData.responseData.expiryTime, function () { pm.expect(+jsonData.responseData.expiryTime).to.eql(+jsonData.responseData.expiryTime) })",
+									"//      pm.test(\"issueAt I am getting from Api = \" + jsonData.responseData.issueAt, function () { pm.expect(+jsonData.responseData.issueAt).to.eql(+jsonData.responseData.issueAt) })",
+									"//      pm.test(\"Login superBo User Id Is=\" + jsonData.responseData.userId);",
+									"//      pm.test(\"passwordExpired is= \" + jsonData.responseData.passwordExpired, function () { pm.expect(jsonData.responseData.passwordExpired).to.eql(false) })",
+									"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+									"//      postman.setNextRequest(\"SUPER_BO_LOGIN\");",
+									"// }",
+									"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 1 || swicthCaseIteration === 2) {",
+									"//      pm.test(\"-------------------------2.Negative scenario Of get/token api with invalid userName and Password.--------------------------------\");",
+									"//      eval(pm.environment.get(\"IfTestCase\"))();",
+									"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(+jsonData.responseData.message) === (\"Incorrect UserName Or Password/PIN, Please Try Again\") })",
+									"//      pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(303) });",
+									"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+									"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+									"// }",
+									"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 3) {",
+									"//      pm.test(\"-------------------------3.Negative scenario Of get/token api with invalid clientId.--------------------------------\");",
+									"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+									"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+									"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+									"// }",
+									"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 4) {",
+									"//      pm.test(\"-------------------------4.Negative scenario Of get/token api with invalid clientSecret.--------------------------------\");",
+									"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+									"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+									"//      postman.setNextRequest(\"validateUser\")",
+									"// }",
+									"// else {",
+									"//      { eval(pm.environment.get(\"ElseTestCase\"))(); }",
+									"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+									"// }"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userName",
+								"value": "{{mobileNumber}}",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "12345678",
+								"type": "text"
+							},
+							{
+								"key": "clientId",
+								"value": "RMS",
+								"type": "text"
+							},
+							{
+								"key": "clientSecret",
+								"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "loginWith",
+								"value": "MOBILE",
+								"description": "EMAIL,MOBILE",
+								"type": "text"
+							},
+							{
+								"key": "mobileCode",
+								"value": "+1868",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{RmsUrl}}/get/token",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"get",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifyVerificationOtp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"businessId\": 2,\n    \"channelId\":\"74\",\n    \"emailId\": \"{{emailId}}\",\n    \"mobileNo\": null\n    \"otp\": \"string\",\n    \"userId\": 0,\n    \"verificationType\": \"string\"\n}"
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/v1.0/verifyVerificationOtp",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"v1.0",
+								"verifyVerificationOtp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"confirmNewPassword\": \"string\",\n    \"newPassword\": \"string\",\n    \"oldPassword\": \"string\"\n}"
+						},
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-qa.com/RMS/v1.0/changePassword",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-qa",
+								"com"
+							],
+							"path": [
+								"RMS",
+								"v1.0",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logOut",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{BoToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://qa-rms-paypr.lottoweaver.com/RMS/v1.0/logOut",
+							"protocol": "https",
+							"host": [
+								"qa-rms-paypr",
+								"lottoweaver",
+								"com"
+							],
+							"path": [
+								"RMS",
+								"v1.0",
+								"logOut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://merchant.sapidblue.in/api/RMS/getUserDetails",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "merchant.sapidblue.in"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ucm.sapidblue.in"
+							},
+							{
+								"key": "referer",
+								"value": "https://ucm.sapidblue.in/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Google Chrome\";v=\"110\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"hRAJNpf9K2aTn6q4UKN0bmnBmf7psUYoMRdPNRqjXbXDzZS4jf6h6UPTui8ei9Un\",\n    \"userId\": 338,\n    \"channelId\": 74,\n    \"businessId\": 2\n}"
+						},
+						"url": {
+							"raw": "https://merchant.sapidblue.in/api/RMS/getUserDetails",
+							"protocol": "https",
+							"host": [
+								"merchant",
+								"sapidblue",
+								"in"
+							],
+							"path": [
+								"api",
+								"RMS",
+								"getUserDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://merchant-backend.sapidblue.in/v1.0/getUserDetails?userId=152&businessId=2&channelId=74",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer OqqrhMhYvL54tnUhBxNd7xzcK5HRC-a6Mvmha63r8Bo"
+							},
+							{
+								"key": "orgTypeCode",
+								"value": "SUPER_BO"
+							}
+						],
+						"url": {
+							"raw": "https://merchant-backend.sapidblue.in/v1.0/getUserDetails?userId=338&businessId=2&channelId=74",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"sapidblue",
+								"in"
+							],
+							"path": [
+								"v1.0",
+								"getUserDetails"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "338"
+								},
+								{
+									"key": "businessId",
+									"value": "2"
+								},
+								{
+									"key": "channelId",
+									"value": "74"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get_Location",
+			"item": [
+				{
+					"name": "getLocationWiseRetailer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 9W6AIUC3d7hsNMxR5GLrHsydBvAvU2wT88CRzYje2Ac"
+							},
+							{
+								"key": "timeStamp",
+								"value": "timestamp"
+							}
+						],
+						"url": {
+							"raw": "{{merchantUrl}}/clients/getLocationWiseRetailer?latitude=28.6691565&longitude=77.45375779999999&radius=1000&businessId=2&channelId=2",
+							"host": [
+								"{{merchantUrl}}"
+							],
+							"path": [
+								"clients",
+								"getLocationWiseRetailer"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "28.6691565"
+								},
+								{
+									"key": "longitude",
+									"value": "77.45375779999999"
+								},
+								{
+									"key": "radius",
+									"value": "1000"
+								},
+								{
+									"key": "category",
+									"value": "GROCERY",
+									"disabled": true
+								},
+								{
+									"key": "businessId",
+									"value": "2"
+								},
+								{
+									"key": "channelId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLocationWiseRetailer Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 9W6AIUC3d7hsNMxR5GLrHsydBvAvU2wT88CRzYje2Ac"
+							},
+							{
+								"key": "timeStamp",
+								"value": "timestamp"
+							}
+						],
+						"url": {
+							"raw": "{{BaseUrl}}/clients/getLocationWiseRetailer?latitude=28.6691565&longitude=77.45375779999999&radius=1000&category=GROCERY",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"clients",
+								"getLocationWiseRetailer"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "28.6691565"
+								},
+								{
+									"key": "longitude",
+									"value": "77.45375779999999"
+								},
+								{
+									"key": "radius",
+									"value": "1000"
+								},
+								{
+									"key": "category",
+									"value": "GROCERY"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update_Merchant_User",
+			"item": [
+				{
+					"name": "getAdvanceOrgDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{MerchantToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{RmsUrl}}/v1.0/getAdvanceOrgDetails?businessId=2&channelId=74&orgId={{orgId}}",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"v1.0",
+								"getAdvanceOrgDetails"
+							],
+							"query": [
+								{
+									"key": "businessId",
+									"value": "2"
+								},
+								{
+									"key": "channelId",
+									"value": "74"
+								},
+								{
+									"key": "orgId",
+									"value": "{{orgId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_BUSINESS_INFO",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									" //pm.environment.set(\"UpdateEmailId\", \"updatedrishabhmerchant.\" +pm.environment.get(\"Iteration\")+\"@sapidblue.com\");",
+									" //pm.environment.set(\"UpdateUserName\",\"UpdatedMerchantUser\"+pm.environment.get(\"Iteration\"));",
+									"// pm.environment.set(\"UpdateMobileNumber\", +pm.environment.get(\"UpdateMobileNumber\")+1);",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"// var rnd = Math.floor((Math.random() * 10000) + 1);",
+									"// postman.setEnvironmentVariable(\"emailId\", \"test\"+ rnd + \"@gmail.com\");",
+									"// postman.setEnvironmentVariable(\"username\", \"testuser\"+ rnd);",
+									"",
+									"// // CREATE Automation oN MOBILENUMBER",
+									"// var num= +pm.environment.get(\"mobileNumber\");",
+									"// num= num+1;",
+									"// pm.environment.set(\"mobileNumber\", num);",
+									" ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{MerchantToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/octet-stream",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestType",
+									"value": "BUSINESS_INFO",
+									"description": "REGISTER_CERTIFICATE,BUSINESS_INFO,PAPER_WORK,LOCATION,BANKING",
+									"type": "text"
+								},
+								{
+									"key": "domainId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "ownerName",
+									"value": "Update Business Owner Name",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "{{userName}}",
+									"type": "text"
+								},
+								{
+									"key": "orgTypeCode",
+									"value": "RET",
+									"type": "text"
+								},
+								{
+									"key": "emailId",
+									"value": "{{emailId}}",
+									"type": "text"
+								},
+								{
+									"key": "mobileNumber",
+									"value": "{{mobileNumber}}",
+									"type": "text"
+								},
+								{
+									"key": "mobileCode",
+									"value": "+1868",
+									"type": "text"
+								},
+								{
+									"key": "dob",
+									"value": "1998-07-10",
+									"type": "text"
+								},
+								{
+									"key": "addressOne",
+									"value": "updated address one",
+									"type": "text"
+								},
+								{
+									"key": "addressTwo",
+									"value": "address two updated ",
+									"type": "text"
+								},
+								{
+									"key": "cityCode",
+									"value": "IN-AP-VI",
+									"type": "text"
+								},
+								{
+									"key": "stateCode",
+									"value": "IN-AP",
+									"type": "text"
+								},
+								{
+									"key": "isPep",
+									"value": "NO",
+									"type": "text"
+								},
+								{
+									"key": "documents[0].docType",
+									"value": "ID_PROOF",
+									"type": "text"
+								},
+								{
+									"key": "documents[0].image",
+									"type": "file",
+									"src": "/D:/1_SAPID_BLUE/Imp_Test_Data/Test_Image & File/1606055794478.jfif"
+								},
+								{
+									"key": "orgId",
+									"value": "{{orgId}}",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "Update Business",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Owner Name",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/v1.0/advancedOrgUpdate",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"v1.0",
+								"advancedOrgUpdate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UDATE_PAPER_WORK",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{MerchantToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestType",
+									"value": "PAPER_WORK",
+									"type": "text"
+								},
+								{
+									"key": "businessId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "channelId",
+									"value": "74",
+									"type": "text"
+								},
+								{
+									"key": "businessName",
+									"value": "Sapidblue Technologies",
+									"type": "text"
+								},
+								{
+									"key": "vatNumber",
+									"value": "RISHABHADHAR0000111",
+									"type": "text"
+								},
+								{
+									"key": "businessType",
+									"value": "FOOD",
+									"type": "text"
+								},
+								{
+									"key": "businessClassification",
+									"value": "MICRO",
+									"type": "text"
+								},
+								{
+									"key": "orgId",
+									"value": "{{orgId}}",
+									"type": "text"
+								},
+								{
+									"key": "documents[0].docType",
+									"value": "ADDRESS_PROOF",
+									"type": "text"
+								},
+								{
+									"key": "documents[1].docType",
+									"value": "REGISTRATION_CERTIFICATE",
+									"type": "text"
+								},
+								{
+									"key": "documents[0].image",
+									"type": "file",
+									"src": "/home/stpl/Documents/TestData/Doc.jpeg"
+								},
+								{
+									"key": "documents[1].image",
+									"type": "file",
+									"src": "/home/stpl/Documents/TestData/Doc.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{RmsUrl}}/v1.0/advancedOrgUpdate",
+							"host": [
+								"{{RmsUrl}}"
+							],
+							"path": [
+								"v1.0",
+								"advancedOrgUpdate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE_LOCATION",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{MerchantToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestType",
+									"value": "LOCATION",
+									"type": "text"
+								},
+								{
+									"key": "lattitude",
+									"value": "27.2046° N",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "77.4977° E",
+									"type": "text"
+								},
+								{
+									"key": "domainId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "orgId",
+									"value": "{{orgId}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/v1.0/advancedOrgUpdate",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1.0",
+								"advancedOrgUpdate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UDATE_BANKING",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{MerchantToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestType",
+									"value": "BANKING",
+									"type": "text"
+								},
+								{
+									"key": "bankName",
+									"value": "UPDATED RBC Royal Banks",
+									"type": "text"
+								},
+								{
+									"key": "accountNumber",
+									"value": "8899778890",
+									"type": "text"
+								},
+								{
+									"key": "accountType",
+									"value": "SAVINGS",
+									"description": "CHEQUING,SAVINGS",
+									"type": "text"
+								},
+								{
+									"key": "routingNumber",
+									"value": "GB998877665",
+									"type": "text"
+								},
+								{
+									"key": "domainId",
+									"value": "94",
+									"type": "text"
+								},
+								{
+									"key": "orgId",
+									"value": "{{orgId}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/v1.0/advancedOrgUpdate",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1.0",
+								"advancedOrgUpdate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendVerificationOtp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{MerchantToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"domainId\": 1,\r\n    \"emailId\": \"{{emailId}}\",\r\n    \"mobileNo\":\"+91{{mobileNumber}}\",\r\n    \"userId\": \"{{MerchantUserId}}\",\r\n    \"verificationType\": \"EMAIL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/v1.0/sendVerificationOtp",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1.0",
+								"sendVerificationOtp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "XmySql_Fetch_OrgDetail Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" var jsonData = JSON.parse(responseBody);\r",
+									" pm.environment.set(\"orgId\",jsonData[0].org_id)\r",
+									" pm.environment.set(\"Verification_Otp\", jsonData[(jsonData.length)-1].otp)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/st_user_otp_tokens?_where=((user_id,eq,{{MerchantUserId}}))",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"st_user_otp_tokens"
+							],
+							"query": [
+								{
+									"key": "_where",
+									"value": "((user_id,eq,{{MerchantUserId}}))"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifyVerificationOtp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{MerchantToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"domainId\": 1,\r\n    \"emailId\": \"{{emailId}}\",\r\n    \"mobileNo\": \"+91{{mobileNumber}}\",\r\n    \"otp\": \"{{Verification_Otp}}\",\r\n    \"userId\": {{MerchantUserId}},\r\n    \"verificationType\": \"EMAIL\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/v1.0/verifyVerificationOtp",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1.0",
+								"verifyVerificationOtp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://qa-rms-paypr.lottoweaver.com/RMS/v1.0/getTxnReport?domainId=1&endDate=6543&orgTypeCode=7654&serviceCode=7654&startDate=765&txnTypeCode=876543&txnTypeCode=876543",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							}
+						],
+						"url": {
+							"raw": "https://qa-rms-paypr.lottoweaver.com/RMS/v1.0/getTxnReport?domainId=1&endDate=&orgTypeCode=BO&serviceCode=7654&startDate=765&txnTypeCode=876543&txnTypeCode=876543",
+							"protocol": "https",
+							"host": [
+								"qa-rms-paypr",
+								"lottoweaver",
+								"com"
+							],
+							"path": [
+								"RMS",
+								"v1.0",
+								"getTxnReport"
+							],
+							"query": [
+								{
+									"key": "domainId",
+									"value": "1"
+								},
+								{
+									"key": "endDate",
+									"value": ""
+								},
+								{
+									"key": "orgTypeCode",
+									"value": "BO"
+								},
+								{
+									"key": "serviceCode",
+									"value": "7654"
+								},
+								{
+									"key": "startDate",
+									"value": "765"
+								},
+								{
+									"key": "txnTypeCode",
+									"value": "876543"
+								},
+								{
+									"key": "txnTypeCode",
+									"value": "876543"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RMS_BACKOFFICE",
+			"item": [
+				{
+					"name": "BO_TOKEN",
+					"item": [
+						{
+							"name": "SUPER_BO_LOGIN",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// let swicthCaseIteration= +pm.environment.get(\"swicthCaseIteration\");\r",
+											"// function sameLines()  {\r",
+											"// pm.variables.set(\"userName\", \"skilrock\");\r",
+											"// pm.variables.set(\"password\", 12345678);\r",
+											"// pm.variables.set(\"clientId\", \"RMS\");\r",
+											"// pm.variables.set(\"clientSecret\", \"ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD\");  }\r",
+											"// switch(swicthCaseIteration) {\r",
+											"//  case 0:\r",
+											"// \tsameLines();  break;\r",
+											"//  case 1:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"userName\", null);  break;\r",
+											"//  case 2:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"password\", null);  break;\r",
+											"//  case 3:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"clientId\", null);  break;\r",
+											"//  case 4:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"clientSecret\", null);  break;  }"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.environment.set(\"BoToken\",jsonData.data.authToken);",
+											"pm.environment.set(\"BoUserId\",jsonData.data.userId)",
+											" ",
+											"// let swicthCaseIteration = +pm.environment.get(\"swicthCaseIteration\");",
+											"// if (jsonData.responseData.statusCode === 0 && swicthCaseIteration === 0) {",
+											"//      pm.test(\"-------------------------1.Positive scenario Of get/token api With valid key Data.--------------------------------\");",
+											"//      eval(pm.environment.get(\"IfTestCase\"))();",
+											" ",
+											"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+											"// pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+											"// pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(0) })",
+											"//      pm.test(\"authToken I am getting from Api is= \" + jsonData.responseData.authToken, function () { pm.expect(+jsonData.responseData.authToken).to.eql(+jsonData.responseData.authToken) })",
+											"//      pm.test(\"timestamp I am getting from Api is= \" + jsonData.responseData.timestamp, function () { pm.expect(+jsonData.responseData.timestamp).to.eql(+jsonData.responseData.timestamp) })",
+											"//      pm.test(\"expiryTime I am getting from Api is= \" + jsonData.responseData.expiryTime, function () { pm.expect(+jsonData.responseData.expiryTime).to.eql(+jsonData.responseData.expiryTime) })",
+											"//      pm.test(\"issueAt I am getting from Api = \" + jsonData.responseData.issueAt, function () { pm.expect(+jsonData.responseData.issueAt).to.eql(+jsonData.responseData.issueAt) })",
+											"//      pm.test(\"Login superBo User Id Is=\" + jsonData.responseData.userId);",
+											"//      pm.test(\"passwordExpired is= \" + jsonData.responseData.passwordExpired, function () { pm.expect(jsonData.responseData.passwordExpired).to.eql(false) })",
+											"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+											"//      postman.setNextRequest(\"SUPER_BO_LOGIN\");",
+											"// }",
+											"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 1 || swicthCaseIteration === 2) {",
+											"//      pm.test(\"-------------------------2.Negative scenario Of get/token api with invalid userName and Password.--------------------------------\");",
+											"//      eval(pm.environment.get(\"IfTestCase\"))();",
+											"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(+jsonData.responseData.message) === (\"Incorrect UserName Or Password/PIN, Please Try Again\") })",
+											"//      pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(303) });",
+											"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+											"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+											"// }",
+											"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 3) {",
+											"//      pm.test(\"-------------------------3.Negative scenario Of get/token api with invalid clientId.--------------------------------\");",
+											"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+											"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+											"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+											"// }",
+											"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 4) {",
+											"//      pm.test(\"-------------------------4.Negative scenario Of get/token api with invalid clientSecret.--------------------------------\");",
+											"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+											"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+											"//      postman.setNextRequest(\"validateUser\")",
+											"// }",
+											"// else {",
+											"//      { eval(pm.environment.get(\"ElseTestCase\"))(); }",
+											"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+											"// }"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "userName",
+										"value": "hrishabhbo",
+										"type": "text"
+									},
+									{
+										"key": "password",
+										"value": "Qwert@12",
+										"type": "text"
+									},
+									{
+										"key": "clientId",
+										"value": "UCM",
+										"type": "text"
+									},
+									{
+										"key": "clientSecret",
+										"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{UcmUrl}}/get/token",
+									"host": [
+										"{{UcmUrl}}"
+									],
+									"path": [
+										"get",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logOut",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									}
+								],
+								"url": {
+									"raw": "{{UcmUrl}}/v1.0/logOut",
+									"host": [
+										"{{UcmUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"logOut"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Config Management",
+					"item": [
+						{
+							"name": "getLoginData",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getLoginData?appType=Web_Panel&businessId=2&channelId=74&loginType=BO",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getLoginData"
+									],
+									"query": [
+										{
+											"key": "appType",
+											"value": "Web_Panel"
+										},
+										{
+											"key": "businessId",
+											"value": "2"
+										},
+										{
+											"key": "channelId",
+											"value": "74"
+										},
+										{
+											"key": "loginType",
+											"value": "BO"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getUserMenus",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getUserMenus?engineCode=RMS&userRequired=NO&userId=8",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getUserMenus"
+									],
+									"query": [
+										{
+											"key": "appType",
+											"value": "Web_Panel",
+											"disabled": true
+										},
+										{
+											"key": "engineCode",
+											"value": "RMS"
+										},
+										{
+											"key": "languageCode",
+											"value": "en",
+											"disabled": true
+										},
+										{
+											"key": "userRequired",
+											"value": "NO"
+										},
+										{
+											"key": "userId",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getRegionList",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getRegionList?businessId=2&channelId=74",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getRegionList"
+									],
+									"query": [
+										{
+											"key": "businessId",
+											"value": "2"
+										},
+										{
+											"key": "channelId",
+											"value": "74"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getBusinessType",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer 9W6AIUC3d7hsNMxR5GLrHsydBvAvU2wT88CRzYje2Ac"
+									},
+									{
+										"key": "timeStamp",
+										"value": "timestamp"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/clients/getBusinessType?businessId=2&channelId=74",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"clients",
+										"getBusinessType"
+									],
+									"query": [
+										{
+											"key": "businessId",
+											"value": "2"
+										},
+										{
+											"key": "channelId",
+											"value": "74"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getCountryList",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getCountryList",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getCountryList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getStateList",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getStateList?countryCode=TT",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getStateList"
+									],
+									"query": [
+										{
+											"key": "countryCode",
+											"value": "TT"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getCityList",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getCityList?stateCode=TT-SG",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getCityList"
+									],
+									"query": [
+										{
+											"key": "stateCode",
+											"value": "TT-SG"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Org Management",
+					"item": [
+						{
+							"name": "Search Org",
+							"item": [
+								{
+									"name": "getConfigurations",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getConfigurations?businessId=0&channelApplicable=true&configType=BACKOFFICE&fetchCache=false",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getConfigurations"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "0"
+												},
+												{
+													"key": "channelApplicable",
+													"value": "true"
+												},
+												{
+													"key": "channelId",
+													"value": "0",
+													"disabled": true
+												},
+												{
+													"key": "configType",
+													"value": "BACKOFFICE"
+												},
+												{
+													"key": "fetchCache",
+													"value": "false"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getBusinessList",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getBusinessList",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getBusinessList"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getChannelList",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getChannelList?businessId=2",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getChannelList"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74",
+													"disabled": true
+												},
+												{
+													"key": "channelName",
+													"value": "d",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getOrgTypeList",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getOrgTypeList?businessId=2&channelId=74&isBankRequired=YES",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getOrgTypeList"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												},
+												{
+													"key": "isBankRequired",
+													"value": "YES"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getChainType",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getChainType?businessId=2&channelId=74&orgTypeCode=BO",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getChainType"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												},
+												{
+													"key": "orgTypeCode",
+													"value": "BO"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "doOrgSearch",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"walletMode\": \"COMMISSION\",\n    \"walletType\": \"PREPAID\",\n    \"status\":\"ACTIVE\",\n    \"orgTypeCode\": \"RET\"\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/doOrgSearch",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"doOrgSearch"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "doOrgSearch Copy",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n \n    \"businessId\": 2,\n    \"orgTypeCode\": \"RET\",\n    \"channelId\": 74,\n    \"chainTypeCode\": \"DIRECT\",\n    \"walletMode\": \"COMMISSION\",\n    \"walletType\": \"PREPAID\"\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/doOrgSearch",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"doOrgSearch"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getOrgDetails",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{MerchantUrl}}/v1.0/getOrgDetails?orgId={{orgId}}",
+											"host": [
+												"{{MerchantUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getOrgDetails"
+											],
+											"query": [
+												{
+													"key": "orgId",
+													"value": "{{orgId}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "blockOrg",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/blockOrg?orgId={{orgId}}",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"blockOrg"
+											],
+											"query": [
+												{
+													"key": "orgId",
+													"value": "{{orgId}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "unblockOrg",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/unblockOrg?orgId={{orgId}}",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"unblockOrg"
+											],
+											"query": [
+												{
+													"key": "orgId",
+													"value": "{{orgId}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateOrgDetails",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"contactPerson\": \"test User\",\n    \"orgName\":\"Sapidblue org\",\n    \"orgId\": {{orgId}},\n    \"mobileCode\":\"+1868\",\n    \"mobileNumber\": \"{{mobileNumber}}\",\n    \"emailId\": \"{{emailId}}\"\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateOrgDetails",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateOrgDetails"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateOrgDetails_bank",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orgId\": {{orgId}},\n    \"channelId\": 74,\n    \"businessId\": 2,\n    \"bankName\": null,\n    \"branchName\": null,\n    \"accountNumber\": null,\n    \"beneficiaryName\": null\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateOrgDetails",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateOrgDetails"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateOrgDetails_Adress",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orgId\": {{orgId}},\n    \"channelId\": 74,\n    \"businessId\": 2,\n    \"addressOne\": \"Add 2\",\n    \"addressTwo\": \"Add 2\",\n    \"countryCode\": null,\n    \"stateCode\": null,\n    \"cityCode\": null,\n    \"zipCode\": null\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateOrgDetails",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateOrgDetails"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "raiseCreditConfigChangeRequest",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"billConfigId\": null,\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"creditLimit\": 100,\n    \"orgId\": {{orgId}},\n    \"remark\": null\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/raiseCreditConfigChangeRequest",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"raiseCreditConfigChangeRequest"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Search User",
+							"item": [
+								{
+									"name": "doUserSearch",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);",
+													"pm.environment.set(\"retailerId\",jsonData.responseData.data[0].systemUserId);",
+													"pm.environment.set(\"orgId\",jsonData.responseData.data[0].orgId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"country\": null,\n    \"emailId\": null,\n    \"firstName\": null,\n    \"mobileCode\": null,\n    \"mobileNumber\": null,\n    \"chainTypeId\":\"1\",\n    \"orgId\": {{orgId}},\n    \"orgTypeCode\": \"RET\",\n    \"state\": null,\n    \"userId\": null,\n    \"userName\": null,\n    \"status\":1\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/doUserSearch",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"doUserSearch"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getUserDetails",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getUserDetails?userId={{retailerId}}&businessId=2&ChannelId=74",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getUserDetails"
+											],
+											"query": [
+												{
+													"key": "mobileCode",
+													"value": "+1868",
+													"disabled": true
+												},
+												{
+													"key": "mobileNumber",
+													"value": "{{mobileNo}}",
+													"disabled": true
+												},
+												{
+													"key": "userId",
+													"value": "{{retailerId}}"
+												},
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "ChannelId",
+													"value": "74"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getUserAccessDetails",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getUserAccessDetails?userId={{retailerId}}&channelId=74&businessId=2",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getUserAccessDetails"
+											],
+											"query": [
+												{
+													"key": "userId",
+													"value": "{{retailerId}}"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												},
+												{
+													"key": "businessId",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getUserMenusData",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getUserMenusData?userId={{retailerId}}&roleId=5",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getUserMenusData"
+											],
+											"query": [
+												{
+													"key": "userId",
+													"value": "{{retailerId}}"
+												},
+												{
+													"key": "roleId",
+													"value": "5"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateUserAccessDetails",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"monday\":\"NA\",\n    \"tuesday\": \"00:00-23:59\",\n    \"wednesday\": \"00:00-23:59\",\n    \"thursday\": \"NA\",\n    \"friday\": \"00:00-23:59\",\n    \"saturday\": \"00:00-23:59\",\n    \"sunday\": \"00:00-23:59\",\n    \"userId\": {{retailerId}},\n    \"businessId\": 2,\n    \"channelId\": 74\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateUserAccessDetails",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateUserAccessDetails"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "blockUser",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/blockUser?userId={{retailerId}}&businessId=2&channelId=74",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"blockUser"
+											],
+											"query": [
+												{
+													"key": "userId",
+													"value": "{{retailerId}}"
+												},
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "unblockUser",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/unblockUser?userId={{retailerId}}&businessId=2&channelId=74",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"unblockUser"
+											],
+											"query": [
+												{
+													"key": "userId",
+													"value": "{{retailerId}}"
+												},
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateUserDetails_Email",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": {{retailerId}},\n    \"channelId\": 74,\n    \"businessId\": 2,\n    \"emailId\": \"{{emailId}}\"\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateUserDetails",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateUserDetails"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateUserDetails_Address",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"addressOne\": \"Address 1\",\n    \"addressTwo\": \"Address 2\",\n    \"countryCode\": \"TT\",\n    \"state\": \"TT-WO\",\n    \"city\": \"TT-WO-01\",\n    \"zipCode\": \"12345\",\n    \"userId\": {{retailerId}},\n    \"channelId\": 74,\n    \"businessId\": 2\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateUserDetails",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateUserDetails"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateUserDetails_mobile",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": {{retailerId}},\n    \"channelId\": 74,\n    \"businessId\": 2,\n    \"mobileCode\":\"+1868\",\n    \"mobileNumber\": \"8009015\"\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateUserDetails",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateUserDetails"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateUserDetails_password",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": {{retailerId}},\n    \"channelId\": 74,\n    \"businessId\": 2,\n    \"password\": \"12345678\"\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateUserDetails",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateUserDetails"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateUserDetails Copy",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer XXXX"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": ""
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"addressOne\": \"string\",\n    \"addressTwo\": \"string\",\n    \"altMobileCode\": \"string\",\n    \"altMobileNumber\": \"string\",\n    \"blockStatus\": \"string\",\n    \"city\": \"string\",\n    \"cityCode\": \"string\",\n    \"contactPerson\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\",\n    \"emailId\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"middleName\": \"string\",\n    \"mobileCode\": \"string\",\n    \"mobileNumber\": \"string\",\n    \"password\": \"string\",\n    \"perDayTxnLimit\": 0,\n    \"perTxnLimit\": 0,\n    \"regionIds\": [\n        0\n    ],\n    \"state\": \"string\",\n    \"stateCode\": \"string\",\n    \"userId\": 0,\n    \"username\": \"string\",\n    \"warehouseId\": 0,\n    \"zipCode\": \"string\"\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateUserDetails",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateUserDetails"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Pending Verification Request",
+							"item": [
+								{
+									"name": "getSelfOrgVerficationRequest",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"const moment = require('moment');",
+													"var Date =moment().subtract(2, 'days').format(\"YYYY-MM-DD\")",
+													"pm.environment.set(\"currentDate\", moment().format(\"YYYY-MM-DD\"));",
+													"pm.environment.set(\"fromDate\", moment().subtract(2, 'days').format(\"YYYY-MM-DD\"));"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);",
+													"pm.environment.set(\"requestId\", +jsonData.responseData.data[(jsonData.responseData.data.length)-1].requestId);",
+													"",
+													"pm.test(jsonData.responseData.data.length);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getSelfOrgVerficationRequest?actionType=ALL&businessId=2&channelId=74&fromDate=2023-03-01&profileStatusType=ALL&toDate={{currentDate}}",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getSelfOrgVerficationRequest"
+											],
+											"query": [
+												{
+													"key": "actionType",
+													"value": "ALL"
+												},
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												},
+												{
+													"key": "fromDate",
+													"value": "2023-03-01"
+												},
+												{
+													"key": "profileStatusType",
+													"value": "ALL"
+												},
+												{
+													"key": "toDate",
+													"value": "{{currentDate}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "canAssignVerificationRequest",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"businessId\": 2,\n        \"channelId\": 74,\n        \"requestId\": {{requestId}},\n        \"userId\": {{BoUserId}},\n        \"remarks\": null\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/canAssignVerificationRequest",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"canAssignVerificationRequest"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getOrgDocumentDetails",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getOrgDocumentDetails?businessId=2&channelId=74&orgId={{orgId}}",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getOrgDocumentDetails"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												},
+												{
+													"key": "orgId",
+													"value": "{{orgId}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getProfileStatus",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getProfileStatus?businessId=2&channelId=74",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getProfileStatus"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getDocumentTypeList",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getDocumentTypeList?businessId=2&channelId=74",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getDocumentTypeList"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getOrgDocumentDetails",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);",
+													"pm.environment.set(\"ADDRESS_PROOF\", +jsonData.responseData.data[(jsonData.responseData.data.length)-3].documents[0].docId);",
+													"pm.environment.set(\"ID_PROOF\", +jsonData.responseData.data[(jsonData.responseData.data.length)-1].documents[0].docId);",
+													"pm.environment.set(\"REGISTRATION_CERTIFICATE\", +jsonData.responseData.data[(jsonData.responseData.data.length)-2].documents[0].docId);",
+													"// pm.environment.set(\"ID_PROOF\", +jsonData.data[(jsonData.data.length)-4].documents[0].docId);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getOrgDocumentDetails?businessId=2&channelId=74&orgId={{orgId}}",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getOrgDocumentDetails"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												},
+												{
+													"key": "orgId",
+													"value": "{{orgId}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateDocumentStatus_REGISTER_CERTIFICATE",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"docName\": \"REGISTER_CERTIFICATE\",\n    \"docValue\": \"test\",\n    \"documentId\": {{REGISTRATION_CERTIFICATE}},\n    \"documentStatus\": \"ACTIVE\",\n    \"orgId\": {{orgId}}\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateDocumentStatus",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateDocumentStatus"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateDocumentStatus_ID_PROOF",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"docName\": \"PASSPORT\",\n    \"docValue\": \"test\",\n    \"documentId\": {{ID_PROOF}},\n    \"documentStatus\": \"REJECTED\",\n    \"orgId\": {{orgId}},\n    \"remark\":\"Rjected\"\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateDocumentStatus",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateDocumentStatus"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateDocumentStatus_ADDRESS_PROOF",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"docName\": \"UTILITY_DOC\",\n    \"docValue\": \"test\",\n    \"documentId\": {{ADDRESS_PROOF}},\n    \"documentStatus\": \"ACTIVE\",\n    \"orgId\": {{orgId}}\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateDocumentStatus",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateDocumentStatus"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateDocumentStatus_Rejected",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \n        \"docName\": \"UTILITY_DOC\",\n        \"docValue\": \"23456789\",\n        \"documentId\": {{ADDRESS_PROOF}},\n        \"documentStatus\": \"REJECTED\",\n        \"channelId\": 74,\n        \"businessId\": 2,\n        \"orgId\": {{orgId}},\n        \"remark\": \"3456789\"\n    \n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateDocumentStatus",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateDocumentStatus"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateOrgProfileStatus",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"businessId\": 2,\n        \"channelId\": 74,\n        \"orgIds\": [\n            342\n        ],\n        \"remark\": \"\",\n        \"status\": \"ACTIVE\",\n        \"sourceDocType\": [\n            \"ADDRESS_PROOF\",\n            \"REGISTRATION_CERTIFICATE\",\n            \"ID_PROOF\"\n        ]\n    \n}"
+										},
+										"url": {
+											"raw": "{{MerchantUrl}}/v1.0/updateOrgProfileStatus",
+											"host": [
+												"{{MerchantUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateOrgProfileStatus"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Reassign Verification Requests",
+							"item": [
+								{
+									"name": "getOtherOrgVerificationRequest",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getOtherOrgVerificationRequest?businessId=2&channelId=74&duration=12",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getOtherOrgVerificationRequest"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												},
+												{
+													"key": "duration",
+													"value": "12"
+												},
+												{
+													"key": "orgId",
+													"value": "{{orgId}}",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "doUserSearch",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 0\n}"
+										},
+										"url": {
+											"raw": "https://merchant-backend.sapidblue.in/v1.0/doUserSearch",
+											"protocol": "https",
+											"host": [
+												"merchant-backend",
+												"sapidblue",
+												"in"
+											],
+											"path": [
+												"v1.0",
+												"doUserSearch"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "canAssignVerificationRequest",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \r\n        \"channelId\": 74,\r\n        \"businessId\": 2,\r\n        \"userId\": \"15\",\r\n        \"requestId\": {{requestId}},\r\n        \"remarks\": \"Assign\"\r\n    \r\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/canAssignVerificationRequest",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"canAssignVerificationRequest"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Manage_Credit_Limit",
+							"item": [
+								{
+									"name": "raiseCreditConfigChangeRequest",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"billConfigId\":null,\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"creditLimit\": 1001,\n    \"orgId\": {{orgId}},\n    \"remark\": null\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/raiseCreditConfigChangeRequest",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"raiseCreditConfigChangeRequest"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getCreditConfigChangeRequestList",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);",
+													"pm.environment.set(\"CRrequestId\",jsonData.responseData.data[0].requestId);",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "SUPER_BO",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/getCreditConfigChangeRequestList?businessId=2&channelId=74&fromDate=2023-03-27&toDate=2023-03-27",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"getCreditConfigChangeRequestList"
+											],
+											"query": [
+												{
+													"key": "businessId",
+													"value": "2"
+												},
+												{
+													"key": "channelId",
+													"value": "74"
+												},
+												{
+													"key": "fromDate",
+													"value": "2023-03-27"
+												},
+												{
+													"key": "toDate",
+													"value": "2023-03-27"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateCreditConfig",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{BoToken}}"
+											},
+											{
+												"key": "orgTypeCode",
+												"value": "BO"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orgId\": {{orgId}},\n    \"requestId\": 9\n}"
+										},
+										"url": {
+											"raw": "{{RmsUrl}}/v1.0/updateCreditConfig",
+											"host": [
+												"{{RmsUrl}}"
+											],
+											"path": [
+												"v1.0",
+												"updateCreditConfig"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "ACCOUNT",
+					"item": [
+						{
+							"name": "getTxnRemarks",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getTxnRemarks?txnTypeCode=PAYMENT",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getTxnRemarks"
+									],
+									"query": [
+										{
+											"key": "txnTypeCode",
+											"value": "PAYMENT"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "doPayment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"confirmAmount\": 100,\n    \"remarks\": \"Wallet Topup [{{orgName}}]\",\n    \"orgId\": \"{{orgId}}\",\n    \"channelId\": 74,\n    \"businessId\": 2,\n    \"appType\":\"Web_Panel\",\n    \"device\":\"API\"\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/doPayment",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"doPayment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "doPayment Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountNumber\": \"string\",\n    \"accountType\": \"string\",\n    \"aliasName\": \"string\",\n    \"amount\": \"string\",\n    \"appType\": \"string\",\n    \"bankName\": \"string\",\n    \"beneficiaryName\": \"string\",\n    \"branchName\": \"string\",\n    \"businessId\": 0,\n    \"channelId\": 0,\n    \"clientIp\": \"string\",\n    \"confirmAmount\": \"string\",\n    \"debitNoteType\": \"string\",\n    \"device\": \"string\",\n    \"isClient\": true,\n    \"orgCode\": \"string\",\n    \"orgId\": 0,\n    \"otp\": \"string\",\n    \"remarks\": \"string\",\n    \"routingNumber\": \"string\",\n    \"systemConsumerId\": \"string\",\n    \"type\": \"string\"\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/doPayment",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"doPayment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "doCreditNote",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 10,\n    \"confirmAmount\": 10,\n    \"remarks\": \"remarks\",\n    \"orgId\": \"{{orgId}}\",\n    \"channelId\": 74,\n    \"businessId\": 2,\n    \"type\": \"OTHER\",\n    \"bankName\": \"\",\n    \"branchName\": \"\",\n    \"accountNumber\": \"\",\n    \"beneficiaryName\": \"\",\n    \"organizationType\": \"RET\",\n     \"appType\":\"Web_Panel\",\n    \"device\":\"MOBILE\"\n\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/doCreditNote",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"doCreditNote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getImmediateChildOrgList",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getImmediateChildOrgList?businessId=2&channelId=74&orgTypeCode=RET&parentOrgId=57&searchOrgTypeCode=RET",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getImmediateChildOrgList"
+									],
+									"query": [
+										{
+											"key": "businessId",
+											"value": "2"
+										},
+										{
+											"key": "channelId",
+											"value": "74"
+										},
+										{
+											"key": "orgTypeCode",
+											"value": "RET"
+										},
+										{
+											"key": "parentOrgId",
+											"value": "57"
+										},
+										{
+											"key": "searchOrgTypeCode",
+											"value": "RET"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "doDebitNote",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 13,\n    \"confirmAmount\": 13,\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"remarks\": \"Amount Adjustment\",\n    \"orgId\": \"{{orgId}}\",\n    \"type\": \"SETTLEMENT\",\n    \"debitNoteType\": null,\n    \"bankName\": \"\",\n    \"branchName\": \"\",\n    \"accountNumber\": \"\",\n    \"beneficiaryName\": \"\",\n    \"organizationType\": \"RET\",\n       \"appType\":\"Web_Panel\",\n    \"device\":\"MOBILE\"\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/doDebitNote",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"doDebitNote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sendPayoutOtp",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.environment.set(\"payoutOtp\", jsonData.responseData.data.otp);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/sendPayoutOtp?orgId={{orgId}}",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"sendPayoutOtp"
+									],
+									"query": [
+										{
+											"key": "orgId",
+											"value": "{{orgId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "doPayout_BANK",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountNumber\": \"94499479\",\n    \"accountType\": \"SAVINGS\",\n    \"amount\": \"200\",\n     \"confirmAmount\": \"200\",\n    \"device\": \"DESKTOP\",\n    \"appType\": \"Web_Panel\",\n    \"bankName\": \"Scotiabank\",\n    \"beneficiaryName\": \"Test Bank\",\n    \"branchName\": null,\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"clientIp\": \"127.0.0.1\",\n    \"orgId\": {{orgId}},\n    \"routingNumber\": \"979494949\",\n    \"remarks\": \"settle\",\n    \"type\": \"BANK\",\n    \"otp\": \"{{payoutOtp}}\"\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/doPayout",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"doPayout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "doPayout_CASH",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": \"1\",\n    \"confirmAmount\": \"1\",\n    \"device\": \"DESKTOP\",\n    \"appType\": \"Web_Panel\",\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"clientIp\": \"127.0.0.1\",\n    \"orgId\": {{orgId}},\n    \"remarks\": \"settle\",\n    \"type\": \"CASH\",\n    \"otp\": \"{{payoutOtp}}\"\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/doPayout",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"doPayout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "REPORT",
+					"item": [
+						{
+							"name": "getTxnReport",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getTxnReport?endDate=2023-03-15 &orgTypeCode=RET&startDate=2023-03-15&businessId=2&channelId=74",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getTxnReport"
+									],
+									"query": [
+										{
+											"key": "endDate",
+											"value": "2023-03-15 "
+										},
+										{
+											"key": "orgId",
+											"value": "37",
+											"disabled": true
+										},
+										{
+											"key": "orgTypeCode",
+											"value": "RET"
+										},
+										{
+											"key": "serviceCode",
+											"value": "PAY",
+											"disabled": true
+										},
+										{
+											"key": "startDate",
+											"value": "2023-03-15"
+										},
+										{
+											"key": "txnTypeCode",
+											"value": "PAYOUT",
+											"disabled": true
+										},
+										{
+											"key": "businessId",
+											"value": "2"
+										},
+										{
+											"key": "channelId",
+											"value": "74"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getBankTransferReport",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"fromDate\": \"2023-02-01\",\n    \"orgId\": 73,\n    \"orgTypeCode\": \"RET\",\n    \"toDate\": \"2023-04-01\",\n    \"txnTypeCode\": \"PAYOUT\"\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getBankTransferReport",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getBankTransferReport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getConsumerCollectionReport",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"endDate\": \"2023-03-15\",\n    \"reportType\": \"DAY_WISE\",\n    \"startDate\": \"2023-03-15\"\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getConsumerCollectionReport",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getConsumerCollectionReport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getPaymentReport",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"appType\": null,\n    \"businessId\": 2,\n    \"chainTypeCode\": \"DIRECT\",\n    \"channelId\": 74,\n    \"endDate\": \"2023-03-15\",\n    \"languageCode\": null,\n    \"orgId\": 203,\n    \"orgTypeCode\": \"RET\",\n    \"parentAgtOrgId\": null,\n    \"parentMagtOrgId\": null,\n    \"parentSagtOrgId\": null,\n    \"startDate\": \"2023-03-15\"\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getPaymentReport",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getPaymentReport"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Qr_Code",
+					"item": [
+						{
+							"name": "Update_Merchant_Password_In Databse",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"password\":\"25d55ad283aa400af464c76d713c07ad\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/st_user_master/{{MerchantUserId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"st_user_master",
+										"{{MerchantUserId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Merchant_User_Login",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// let swicthCaseIteration= +pm.environment.get(\"swicthCaseIteration\");\r",
+											"// function sameLines()  {\r",
+											"// pm.variables.set(\"userName\", \"skilrock\");\r",
+											"// pm.variables.set(\"password\", 12345678);\r",
+											"// pm.variables.set(\"clientId\", \"RMS\");\r",
+											"// pm.variables.set(\"clientSecret\", \"ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD\");  }\r",
+											"// switch(swicthCaseIteration) {\r",
+											"//  case 0:\r",
+											"// \tsameLines();  break;\r",
+											"//  case 1:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"userName\", null);  break;\r",
+											"//  case 2:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"password\", null);  break;\r",
+											"//  case 3:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"clientId\", null);  break;\r",
+											"//  case 4:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"clientSecret\", null);  break;  }"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.environment.set(\"MerchantToken\", jsonData.responseData.authToken);",
+											"pm.environment.set(\"MerchantUserId\", jsonData.responseData.userId)",
+											" ",
+											"// let swicthCaseIteration = +pm.environment.get(\"swicthCaseIteration\");",
+											"// if (jsonData.responseData.statusCode === 0 && swicthCaseIteration === 0) {",
+											"//      pm.test(\"-------------------------1.Positive scenario Of get/token api With valid key Data.--------------------------------\");",
+											"//      eval(pm.environment.get(\"IfTestCase\"))();",
+											" ",
+											"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+											"// pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+											"// pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(0) })",
+											"//      pm.test(\"authToken I am getting from Api is= \" + jsonData.responseData.authToken, function () { pm.expect(+jsonData.responseData.authToken).to.eql(+jsonData.responseData.authToken) })",
+											"//      pm.test(\"timestamp I am getting from Api is= \" + jsonData.responseData.timestamp, function () { pm.expect(+jsonData.responseData.timestamp).to.eql(+jsonData.responseData.timestamp) })",
+											"//      pm.test(\"expiryTime I am getting from Api is= \" + jsonData.responseData.expiryTime, function () { pm.expect(+jsonData.responseData.expiryTime).to.eql(+jsonData.responseData.expiryTime) })",
+											"//      pm.test(\"issueAt I am getting from Api = \" + jsonData.responseData.issueAt, function () { pm.expect(+jsonData.responseData.issueAt).to.eql(+jsonData.responseData.issueAt) })",
+											"//      pm.test(\"Login superBo User Id Is=\" + jsonData.responseData.userId);",
+											"//      pm.test(\"passwordExpired is= \" + jsonData.responseData.passwordExpired, function () { pm.expect(jsonData.responseData.passwordExpired).to.eql(false) })",
+											"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+											"//      postman.setNextRequest(\"SUPER_BO_LOGIN\");",
+											"// }",
+											"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 1 || swicthCaseIteration === 2) {",
+											"//      pm.test(\"-------------------------2.Negative scenario Of get/token api with invalid userName and Password.--------------------------------\");",
+											"//      eval(pm.environment.get(\"IfTestCase\"))();",
+											"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(+jsonData.responseData.message) === (\"Incorrect UserName Or Password/PIN, Please Try Again\") })",
+											"//      pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(303) });",
+											"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+											"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+											"// }",
+											"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 3) {",
+											"//      pm.test(\"-------------------------3.Negative scenario Of get/token api with invalid clientId.--------------------------------\");",
+											"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+											"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+											"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+											"// }",
+											"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 4) {",
+											"//      pm.test(\"-------------------------4.Negative scenario Of get/token api with invalid clientSecret.--------------------------------\");",
+											"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+											"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+											"//      postman.setNextRequest(\"validateUser\")",
+											"// }",
+											"// else {",
+											"//      { eval(pm.environment.get(\"ElseTestCase\"))(); }",
+											"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+											"// }"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "userName",
+										"value": "{{mobileNumber}}",
+										"type": "text"
+									},
+									{
+										"key": "password",
+										"value": "12345678",
+										"type": "text"
+									},
+									{
+										"key": "clientId",
+										"value": "RMS",
+										"type": "text"
+									},
+									{
+										"key": "clientSecret",
+										"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "loginWith",
+										"value": "EMAIL",
+										"description": "EMAIL,MOBILE",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "mobileCode",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{BaseUrl}}/get/token",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"get",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Backoffice_User_Login",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// let swicthCaseIteration= +pm.environment.get(\"swicthCaseIteration\");\r",
+											"// function sameLines()  {\r",
+											"// pm.variables.set(\"userName\", \"skilrock\");\r",
+											"// pm.variables.set(\"password\", 12345678);\r",
+											"// pm.variables.set(\"clientId\", \"RMS\");\r",
+											"// pm.variables.set(\"clientSecret\", \"ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD\");  }\r",
+											"// switch(swicthCaseIteration) {\r",
+											"//  case 0:\r",
+											"// \tsameLines();  break;\r",
+											"//  case 1:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"userName\", null);  break;\r",
+											"//  case 2:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"password\", null);  break;\r",
+											"//  case 3:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"clientId\", null);  break;\r",
+											"//  case 4:\r",
+											"// \tsameLines();\r",
+											"// \tpm.variables.set(\"clientSecret\", null);  break;  }"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.environment.set(\"BackofficeToken\", jsonData.responseData.authToken);",
+											"pm.environment.set(\"BackofficeUserId\", jsonData.responseData.userId)",
+											" ",
+											"// let swicthCaseIteration = +pm.environment.get(\"swicthCaseIteration\");",
+											"// if (jsonData.responseData.statusCode === 0 && swicthCaseIteration === 0) {",
+											"//      pm.test(\"-------------------------1.Positive scenario Of get/token api With valid key Data.--------------------------------\");",
+											"//      eval(pm.environment.get(\"IfTestCase\"))();",
+											" ",
+											"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+											"// pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+											"// pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(0) })",
+											"//      pm.test(\"authToken I am getting from Api is= \" + jsonData.responseData.authToken, function () { pm.expect(+jsonData.responseData.authToken).to.eql(+jsonData.responseData.authToken) })",
+											"//      pm.test(\"timestamp I am getting from Api is= \" + jsonData.responseData.timestamp, function () { pm.expect(+jsonData.responseData.timestamp).to.eql(+jsonData.responseData.timestamp) })",
+											"//      pm.test(\"expiryTime I am getting from Api is= \" + jsonData.responseData.expiryTime, function () { pm.expect(+jsonData.responseData.expiryTime).to.eql(+jsonData.responseData.expiryTime) })",
+											"//      pm.test(\"issueAt I am getting from Api = \" + jsonData.responseData.issueAt, function () { pm.expect(+jsonData.responseData.issueAt).to.eql(+jsonData.responseData.issueAt) })",
+											"//      pm.test(\"Login superBo User Id Is=\" + jsonData.responseData.userId);",
+											"//      pm.test(\"passwordExpired is= \" + jsonData.responseData.passwordExpired, function () { pm.expect(jsonData.responseData.passwordExpired).to.eql(false) })",
+											"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+											"//      postman.setNextRequest(\"SUPER_BO_LOGIN\");",
+											"// }",
+											"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 1 || swicthCaseIteration === 2) {",
+											"//      pm.test(\"-------------------------2.Negative scenario Of get/token api with invalid userName and Password.--------------------------------\");",
+											"//      eval(pm.environment.get(\"IfTestCase\"))();",
+											"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(+jsonData.responseData.message) === (\"Incorrect UserName Or Password/PIN, Please Try Again\") })",
+											"//      pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(303) });",
+											"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+											"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+											"// }",
+											"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 3) {",
+											"//      pm.test(\"-------------------------3.Negative scenario Of get/token api with invalid clientId.--------------------------------\");",
+											"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+											"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+											"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+											"// }",
+											"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 4) {",
+											"//      pm.test(\"-------------------------4.Negative scenario Of get/token api with invalid clientSecret.--------------------------------\");",
+											"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+											"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+											"//      postman.setNextRequest(\"validateUser\")",
+											"// }",
+											"// else {",
+											"//      { eval(pm.environment.get(\"ElseTestCase\"))(); }",
+											"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+											"// }"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "userName",
+										"value": "skilrock",
+										"type": "text"
+									},
+									{
+										"key": "password",
+										"value": "12345678",
+										"type": "text"
+									},
+									{
+										"key": "clientId",
+										"value": "RMS",
+										"type": "text"
+									},
+									{
+										"key": "clientSecret",
+										"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "loginWith",
+										"value": "EMAIL",
+										"description": "EMAIL,MOBILE",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "mobileCode",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{BaseUrl}}/get/token",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"get",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getQrCodes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.environment.set(\"qrCode\", jsonData.responseData.data[0].qrCode);\r",
+											"pm.environment.set(\"BackofficeUserId\", jsonData.responseData.userId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/getQrCodes?orgId={{orgId}}",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"getQrCodes"
+									],
+									"query": [
+										{
+											"key": "orgId",
+											"value": "{{orgId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateQrCodeStatus",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{MerchantToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orgId\": {{orgId}},\r\n    \"qrCode\": \"{{qrCode}}\",\r\n    \"status\": \"ACTIVE\"\r\n}"
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/v1.0/updateQrCodeStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"updateQrCodeStatus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createQrCodes",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{BoToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "orgTypeCode",
+										"value": "BO",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"businessId\": 2,\n    \"channelId\": 74,\n    \"engineCode\": \"RMS\",\n    \"qrCodeCount\": 1\n}"
+								},
+								"url": {
+									"raw": "{{RmsUrl}}/v1.0/createQrCodes",
+									"host": [
+										"{{RmsUrl}}"
+									],
+									"path": [
+										"v1.0",
+										"createQrCodes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Consumer_Refund",
+			"item": [
+				{
+					"name": "getTxnReport",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							}
+						],
+						"url": {
+							"raw": "https://qa-paypr-merchant-backend.sapidblue.in/RMS/v1.0/getTxnReport?domainId=32&endDate=43&orgId=543&orgTypeCode=543&serviceCode=543&startDate=543&txnTypeCode=6543",
+							"protocol": "https",
+							"host": [
+								"qa-paypr-merchant-backend",
+								"sapidblue",
+								"in"
+							],
+							"path": [
+								"RMS",
+								"v1.0",
+								"getTxnReport"
+							],
+							"query": [
+								{
+									"key": "domainId",
+									"value": "32"
+								},
+								{
+									"key": "endDate",
+									"value": "43"
+								},
+								{
+									"key": "orgId",
+									"value": "543"
+								},
+								{
+									"key": "orgTypeCode",
+									"value": "543"
+								},
+								{
+									"key": "serviceCode",
+									"value": "543"
+								},
+								{
+									"key": "startDate",
+									"value": "543"
+								},
+								{
+									"key": "txnTypeCode",
+									"value": "6543"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doConsumerPaymentReturn",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{MerchantToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"domainId\": 1,\r\n    \"orgId\": {{orgId}},\r\n    \"remark\": \"Refund Payment done for Wrong Product\",\r\n    \"transactionId\": 1196\r\n}"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/v1.0/doConsumerPaymentReturn",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1.0",
+								"doConsumerPaymentReturn"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "initiateForgotPassword Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "merchantCode",
+						"value": "INFINITI"
+					}
+				],
+				"url": {
+					"raw": "{{Ram_BaseUrl}}/preLogin/initiateForgotPassword?domainName={{DomainName}}&emailId={{emailId}}&mobileNumber={{mobileNo}}&type=EMAIL",
+					"host": [
+						"{{Ram_BaseUrl}}"
+					],
+					"path": [
+						"preLogin",
+						"initiateForgotPassword"
+					],
+					"query": [
+						{
+							"key": "domainName",
+							"value": "{{DomainName}}"
+						},
+						{
+							"key": "emailId",
+							"value": "{{emailId}}"
+						},
+						{
+							"key": "mobileNumber",
+							"value": "{{mobileNo}}"
+						},
+						{
+							"key": "type",
+							"value": "EMAIL"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MAGT-initiateForgotPassword",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8"
+					}
+				],
+				"url": {
+					"raw": "https://merchant-backend.sapidblue.in/initiateForgotPassword?userName=saketmagt&mobileNumber=6786786771&mobileCode=%2B91&userType=MAGT&type=MOBILE",
+					"protocol": "https",
+					"host": [
+						"merchant-backend",
+						"sapidblue",
+						"in"
+					],
+					"path": [
+						"initiateForgotPassword"
+					],
+					"query": [
+						{
+							"key": "userName",
+							"value": "saketmagt"
+						},
+						{
+							"key": "mobileNumber",
+							"value": "6786786771"
+						},
+						{
+							"key": "mobileCode",
+							"value": "%2B91"
+						},
+						{
+							"key": "userType",
+							"value": "MAGT"
+						},
+						{
+							"key": "type",
+							"value": "MOBILE"
+						},
+						{
+							"key": "emailId",
+							"value": "saketmagt@gmail.com",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resetPassword",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"userName\":\"saketmagt\",\n\"mobileNumber\":null,\n\"mobileCode\" : null,\n\"otp\":\"623492\",\n\"newPassword\":\"Qwert@12\",\n\"confirmNewPassword\":\"Qwert@12\",\n\"emailId\": \"saketmagt@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{MerchantUrl}}/resetPassword",
+					"host": [
+						"{{MerchantUrl}}"
+					],
+					"path": [
+						"resetPassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://qa-rms-paypr.lottoweaver.com/RMS/resetPassword",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"userName\":\"testuser2687\",\n\"mobileNumber\":\"2233445576\",\n\"mobileCode\" : \"+91\",\n\"otp\":\"9716\",\n\"newPassword\":\"12345678\",\n\"confirmNewPassword\":\"12345678\"\n}"
+				},
+				"url": {
+					"raw": "https://qa-rms-paypr.lottoweaver.com/RMS/resetPassword",
+					"protocol": "https",
+					"host": [
+						"qa-rms-paypr",
+						"lottoweaver",
+						"com"
+					],
+					"path": [
+						"RMS",
+						"resetPassword"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

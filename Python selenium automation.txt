@@ -29,7 +29,7 @@ xpath - "//input[@type='submit']" , CSSselector - "input[name='name']" and (//bu
 
 5. if that element is not unique, then --> ("//placeholer[@attribute='value'][1]")
 
-6. Parent to Chile method --> XPATh - "//form/div[1]/input" ; CSS - "form div:nth-child(2) input"
+6. Parent to Child method --> XPATh - "//form/div[1]/input" ; CSS - "form div:nth-child(2) input"
 
 3.static dropdown -> Select(driver.......) --> select by TEXT, INDEX, VALUE. [yeh sirf <select> tag ke saath chalega]
 

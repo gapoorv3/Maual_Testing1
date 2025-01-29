@@ -1,0 +1,1911 @@
+{
+	"info": {
+		"_postman_id": "3902e142-84d4-4572-9aa6-751cf71c4e03",
+		"name": "PAYPR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24222642",
+		"_collection_link": "https://cloudy-escape-95096.postman.co/workspace/Team-Workspace~b8f5b68b-5195-47f5-8713-287e00b57660/collection/24222642-3902e142-84d4-4572-9aa6-751cf71c4e03?action=share&source=collection_link&creator=24222642"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "validateUserFor2FA Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Create new otp even if re send otp Maximum Limit Reached For Otp.Please Try After Some Time."
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"rishabhbo\",\n    \"password\": \"P@ssw0rd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ucm-backend.getpaypr-uat.com/validateUserFor2FA",
+							"protocol": "https",
+							"host": [
+								"ucm-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"validateUserFor2FA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendOtpFor2FA Copy UCM",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// {",
+									"//     \"errorMessage\": \"Success\",",
+									"//     \"errorCode\": 0",
+									"// }"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "CAM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ucm-backend.getpaypr-uat.com/sendOtpFor2FA?userName=sapidblue",
+							"protocol": "https",
+							"host": [
+								"ucm-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"sendOtpFor2FA"
+							],
+							"query": [
+								{
+									"key": "userName",
+									"value": "sapidblue"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UCM LOGIN Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// let swicthCaseIteration= +pm.environment.get(\"swicthCaseIteration\");\r",
+									"// function sameLines()  {\r",
+									"// pm.variables.set(\"userName\", \"skilrock\");\r",
+									"// pm.variables.set(\"password\", 12345678);\r",
+									"// pm.variables.set(\"clientId\", \"RMS\");\r",
+									"// pm.variables.set(\"clientSecret\", \"ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD\");  }\r",
+									"// switch(swicthCaseIteration) {\r",
+									"//  case 0:\r",
+									"// \tsameLines();  break;\r",
+									"//  case 1:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"userName\", null);  break;\r",
+									"//  case 2:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"password\", null);  break;\r",
+									"//  case 3:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"clientId\", null);  break;\r",
+									"//  case 4:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"clientSecret\", null);  break;  }"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"BoToken\",jsonData.data.authToken);",
+									"pm.environment.set(\"BoUserId\",jsonData.data.userId)",
+									" ",
+									"// let swicthCaseIteration = +pm.environment.get(\"swicthCaseIteration\");",
+									"// if (jsonData.responseData.statusCode === 0 && swicthCaseIteration === 0) {",
+									"//      pm.test(\"-------------------------1.Positive scenario Of get/token api With valid key Data.--------------------------------\");",
+									"//      eval(pm.environment.get(\"IfTestCase\"))();",
+									" ",
+									"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+									"// pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+									"// pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(0) })",
+									"//      pm.test(\"authToken I am getting from Api is= \" + jsonData.responseData.authToken, function () { pm.expect(+jsonData.responseData.authToken).to.eql(+jsonData.responseData.authToken) })",
+									"//      pm.test(\"timestamp I am getting from Api is= \" + jsonData.responseData.timestamp, function () { pm.expect(+jsonData.responseData.timestamp).to.eql(+jsonData.responseData.timestamp) })",
+									"//      pm.test(\"expiryTime I am getting from Api is= \" + jsonData.responseData.expiryTime, function () { pm.expect(+jsonData.responseData.expiryTime).to.eql(+jsonData.responseData.expiryTime) })",
+									"//      pm.test(\"issueAt I am getting from Api = \" + jsonData.responseData.issueAt, function () { pm.expect(+jsonData.responseData.issueAt).to.eql(+jsonData.responseData.issueAt) })",
+									"//      pm.test(\"Login superBo User Id Is=\" + jsonData.responseData.userId);",
+									"//      pm.test(\"passwordExpired is= \" + jsonData.responseData.passwordExpired, function () { pm.expect(jsonData.responseData.passwordExpired).to.eql(false) })",
+									"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+									"//      postman.setNextRequest(\"SUPER_BO_LOGIN\");",
+									"// }",
+									"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 1 || swicthCaseIteration === 2) {",
+									"//      pm.test(\"-------------------------2.Negative scenario Of get/token api with invalid userName and Password.--------------------------------\");",
+									"//      eval(pm.environment.get(\"IfTestCase\"))();",
+									"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(+jsonData.responseData.message) === (\"Incorrect UserName Or Password/PIN, Please Try Again\") })",
+									"//      pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(303) });",
+									"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+									"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+									"// }",
+									"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 3) {",
+									"//      pm.test(\"-------------------------3.Negative scenario Of get/token api with invalid clientId.--------------------------------\");",
+									"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+									"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+									"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+									"// }",
+									"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 4) {",
+									"//      pm.test(\"-------------------------4.Negative scenario Of get/token api with invalid clientSecret.--------------------------------\");",
+									"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+									"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+									"//      postman.setNextRequest(\"validateUser\")",
+									"// }",
+									"// else {",
+									"//      { eval(pm.environment.get(\"ElseTestCase\"))(); }",
+									"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+									"// }"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userName",
+								"value": "rishabhbo",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "P@ssw0rd",
+								"type": "text"
+							},
+							{
+								"key": "clientId",
+								"value": "UCM",
+								"type": "text"
+							},
+							{
+								"key": "clientSecret",
+								"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "otp",
+								"value": "257951",
+								"type": "text"
+							},
+							{
+								"key": "LoginType",
+								"value": "Mobile",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://ucm-backend.getpaypr-uat.com/get/token",
+							"protocol": "https",
+							"host": [
+								"ucm-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"get",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendOtpFor2FA CAM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "CAM"
+							},
+							{
+								"key": "clientPwd",
+								"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"aliasName\": \"www.paypr.com\",\n    //\"loginToken\": \"string\",\n    \"loginType\": \"EMAIL\",\n    \"mobileCode\": \"+1868\",\n    //\"otp\": \"string\",\n    //\"password\": \"string\",\n    \"userName\": \"email4@yopmail.com\"\n}"
+						},
+						"url": {
+							"raw": "https://cam-backend.getpaypr-uat.com/client/sendOtpFor2FA",
+							"protocol": "https",
+							"host": [
+								"cam-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"client",
+								"sendOtpFor2FA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateUserFor2FA CAM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "CAM"
+							},
+							{
+								"key": "clientPwd",
+								"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"aliasName\": \"www.paypr.com\",\n    \"loginToken\": \"INFINITI\",\n    \"loginType\": \"MOBILE\",\n    \"mobileCode\": \"+1868\",\n    \"password\": \"b6e27d2f6ed7abdd0ce74e6e7f7809f0\",\n    \"userName\": \"email4@yopmail.com\"\n}"
+						},
+						"url": {
+							"raw": "https://cam-backend.getpaypr-uat.com/client/validateUserFor2FA",
+							"protocol": "https",
+							"host": [
+								"cam-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"client",
+								"validateUserFor2FA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "playerLogin PC BROWSER Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"consumerToken\", jsonData.data.consumerToken);\r",
+									"pm.environment.set(\"consumerId\",jsonData.data.consumerLoginInfo.consumerId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var loginToken = \"Rishabh\";\r",
+									"var password_Ecyrpt = pm.environment.get(\"password_Ecyrpt\")\r",
+									"var password = CryptoJS.MD5(password_Ecyrpt+loginToken).toString();\r",
+									"pm.variables.set('loginToken', loginToken);\r",
+									"pm.environment.set('password', password);\r",
+									"\r",
+									"//console.log(password);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "clientCode",
+								"value": "CAM",
+								"description": "(Required) Merchant Code"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"aliasName\": \"www.paypr.com\",\n    \"device\": \"PC\",\n    \"loginToken\": \"{{loginToken}}\",\n    \"password\": \"233a2f5dc9336187c58f83868b1fe115\",\n    \"requestIp\":  \"132.154.253.254\",\n    \"userAgent\": null,\n    \"userName\": \"email4@yopmail.com\",\n    \"mobileCode\":\"+1868\",\n    \"ussd\": false,\n    \"otp\" : \"368700\",\n    \"loginType\" : \"EMAIL\"\n}\n\n"
+						},
+						"url": {
+							"raw": "https://cam-backend.getpaypr-uat.com/preLogin/consumerLogin",
+							"protocol": "https",
+							"host": [
+								"cam-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"preLogin",
+								"consumerLogin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://merchant-backend.getpaypr-uat.com/clients/sendOtpFor2FA?loginType=MOBILE&mobileCode=%2B1868&userName=232323",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer p3Ec-3yaJOWfEIVFVRt0oirQs7hgA71dA9gDtab2iHU"
+							},
+							{
+								"key": "timeStamp",
+								"value": "timestamp"
+							}
+						],
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/clients/sendOtpFor2FA?loginType=MOBILE&mobileCode=%2B1868&userName=6457879",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"clients",
+								"sendOtpFor2FA"
+							],
+							"query": [
+								{
+									"key": "loginType",
+									"value": "MOBILE"
+								},
+								{
+									"key": "mobileCode",
+									"value": "%2B1868"
+								},
+								{
+									"key": "userName",
+									"value": "6457879"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateUserFor2FA RMS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer p3Ec-3yaJOWfEIVFVRt0oirQs7hgA71dA9gDtab2iHU"
+							},
+							{
+								"key": "timeStamp",
+								"value": "timestamp"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loginType\": \"EMAIL\",\n    \"mobileCode\": \"+1868\",\n    \"orgTypeCode\": \"RET\",\n    \"password\": \"P@ssw0rd\",\n    \"userName\": \"jitendar@yopmail.com\"\n}"
+						},
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/clients/validateUserFor2FA",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"clients",
+								"validateUserFor2FA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateUserFor2FA MAGT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer p3Ec-3yaJOWfEIVFVRt0oirQs7hgA71dA9gDtab2iHU"
+							},
+							{
+								"key": "timeStamp",
+								"value": "timestamp"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loginType\": \"OTHER\",\n    \"mobileCode\": \"+1868\",\n    \"orgTypeCode\": \"MAGT\",\n    \"password\": \"P@ssw0rd\",\n    \"userName\": \"test_magt\"\n}"
+						},
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/clients/validateUserFor2FA",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"clients",
+								"validateUserFor2FA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateUserFor2FA SAGT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer p3Ec-3yaJOWfEIVFVRt0oirQs7hgA71dA9gDtab2iHU"
+							},
+							{
+								"key": "timeStamp",
+								"value": "timestamp"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loginType\": \"OTHER\",\n    //\"mobileCode\": \"+1868\",\n    //\"orgTypeCode\": \"RET\",\n    \"password\": \"P@ssw0rd\",\n    \"userName\": \"commagent\",\n    \"loginFromPortal\": \"YES\"\n}"
+						},
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/clients/validateUserFor2FA",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"clients",
+								"validateUserFor2FA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Merchant_User_Login Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// let swicthCaseIteration= +pm.environment.get(\"swicthCaseIteration\");\r",
+									"// function sameLines()  {\r",
+									"// pm.variables.set(\"userName\", \"skilrock\");\r",
+									"// pm.variables.set(\"password\", 12345678);\r",
+									"// pm.variables.set(\"clientId\", \"RMS\");\r",
+									"// pm.variables.set(\"clientSecret\", \"ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD\");  }\r",
+									"// switch(swicthCaseIteration) {\r",
+									"//  case 0:\r",
+									"// \tsameLines();  break;\r",
+									"//  case 1:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"userName\", null);  break;\r",
+									"//  case 2:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"password\", null);  break;\r",
+									"//  case 3:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"clientId\", null);  break;\r",
+									"//  case 4:\r",
+									"// \tsameLines();\r",
+									"// \tpm.variables.set(\"clientSecret\", null);  break;  }"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"MerchantToken\", jsonData.responseData.authToken);",
+									"pm.environment.set(\"MerchantUserId\", jsonData.responseData.userId)",
+									" ",
+									"// let swicthCaseIteration = +pm.environment.get(\"swicthCaseIteration\");",
+									"// if (jsonData.responseData.statusCode === 0 && swicthCaseIteration === 0) {",
+									"//      pm.test(\"-------------------------1.Positive scenario Of get/token api With valid key Data.--------------------------------\");",
+									"//      eval(pm.environment.get(\"IfTestCase\"))();",
+									" ",
+									"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+									"// pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(jsonData.responseData.message).to.eql(\"Success\") })",
+									"// pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(0) })",
+									"//      pm.test(\"authToken I am getting from Api is= \" + jsonData.responseData.authToken, function () { pm.expect(+jsonData.responseData.authToken).to.eql(+jsonData.responseData.authToken) })",
+									"//      pm.test(\"timestamp I am getting from Api is= \" + jsonData.responseData.timestamp, function () { pm.expect(+jsonData.responseData.timestamp).to.eql(+jsonData.responseData.timestamp) })",
+									"//      pm.test(\"expiryTime I am getting from Api is= \" + jsonData.responseData.expiryTime, function () { pm.expect(+jsonData.responseData.expiryTime).to.eql(+jsonData.responseData.expiryTime) })",
+									"//      pm.test(\"issueAt I am getting from Api = \" + jsonData.responseData.issueAt, function () { pm.expect(+jsonData.responseData.issueAt).to.eql(+jsonData.responseData.issueAt) })",
+									"//      pm.test(\"Login superBo User Id Is=\" + jsonData.responseData.userId);",
+									"//      pm.test(\"passwordExpired is= \" + jsonData.responseData.passwordExpired, function () { pm.expect(jsonData.responseData.passwordExpired).to.eql(false) })",
+									"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+									"//      postman.setNextRequest(\"SUPER_BO_LOGIN\");",
+									"// }",
+									"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 1 || swicthCaseIteration === 2) {",
+									"//      pm.test(\"-------------------------2.Negative scenario Of get/token api with invalid userName and Password.--------------------------------\");",
+									"//      eval(pm.environment.get(\"IfTestCase\"))();",
+									"//      pm.test(\"Message I am getting from Api is= \" + jsonData.responseData.message, function () { pm.expect(+jsonData.responseData.message) === (\"Incorrect UserName Or Password/PIN, Please Try Again\") })",
+									"//      pm.test(\"Status Code I am getting from Api is= \" + jsonData.responseData.statusCode, function () { pm.expect(+jsonData.responseData.statusCode).to.eql(303) });",
+									"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+									"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+									"// }",
+									"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 3) {",
+									"//      pm.test(\"-------------------------3.Negative scenario Of get/token api with invalid clientId.--------------------------------\");",
+									"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+									"//      pm.environment.set(\"swicthCaseIteration\", swicthCaseIteration + 1);",
+									"//      postman.setNextRequest(\"SUPER_BO_LOGIN\")",
+									"// }",
+									"// else if (jsonData.responseData.statusCode > 0 && swicthCaseIteration === 4) {",
+									"//      pm.test(\"-------------------------4.Negative scenario Of get/token api with invalid clientSecret.--------------------------------\");",
+									"//      { eval(pm.environment.get(\"IfTestCase\"))(); }",
+									"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+									"//      postman.setNextRequest(\"validateUser\")",
+									"// }",
+									"// else {",
+									"//      { eval(pm.environment.get(\"ElseTestCase\"))(); }",
+									"//      pm.environment.set(\"swicthCaseIteration\", 0);",
+									"// }"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userName",
+								"value": "test_magt",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "P@ssw0rd",
+								"type": "text"
+							},
+							{
+								"key": "clientId",
+								"value": "RMS",
+								"type": "text"
+							},
+							{
+								"key": "clientSecret",
+								"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "loginWith",
+								"value": "MOBILE",
+								"description": "EMAIL,MOBILE, OTHER (MAGT)",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "mobileCode",
+								"value": "+1868",
+								"type": "text"
+							},
+							{
+								"key": "otp",
+								"value": "720223",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/get/token",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"get",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "initiateForgotPassword",
+			"item": [
+				{
+					"name": "initiateForgotPassword Copy UCM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clinetCode",
+								"value": "UCM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"rishabhbo\",\n    \"userType\": \"BO\",\n    \"mobileNumber\": \"1100999\",\n    \"mobileCode\": \"+1868\"\n    //\"emailId\": \"hrishabh.0538@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ucm-backend.getpaypr-uat.com/initiateForgotPassword",
+							"protocol": "https",
+							"host": [
+								"ucm-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"initiateForgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword Copy UCM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "UCM"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"rishabhbo\",\n    \"confirmNewPassword\": \"Qwert@1234\",\n    \"mobileCode\": \"+1868\",\n    \"mobileNumber\": \"1100999\",\n    \"newPassword\": \"Qwert@1234\",\n    \"otp\": \"704285\"\n}"
+						},
+						"url": {
+							"raw": "https://ucm-backend.getpaypr-uat.com/resetPassword",
+							"protocol": "https",
+							"host": [
+								"ucm-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "initiateForgotPassword CAM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "CAM"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"aliasName\": \"www.paypr.com\",\n  \"emailId\": \"email4@yopmail.com\",\n  \"mobileCode\": \"+1868\",\n  \"mobileNumber\": \"4998687\",\n  \"type\": \"EMAIL\"\n}"
+						},
+						"url": {
+							"raw": "https://cam-backend.getpaypr-uat.com/preLogin/initiateForgotPassword",
+							"protocol": "https",
+							"host": [
+								"cam-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"preLogin",
+								"initiateForgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword CAM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "CAM"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"aliasName\": \"www.paypr.com\",\n    \"confirmNewPassword\": \"P@ssw0rd12345\",\n    \"emailId\": \"email4@yopmail.com\",\n    // \"mobileCode\": \"+1868\",\n    // \"mobileNumber\": \"1115555\",\n    \"newPassword\": \"P@ssw0rd12345\",\n    \"otp\": \"992169\"\n}"
+						},
+						"url": {
+							"raw": "https://cam-backend.getpaypr-uat.com/preLogin/resetPassword",
+							"protocol": "https",
+							"host": [
+								"cam-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"preLogin",
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "initiateForgotPassword RMS Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "RMS",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    //\"type\": \"EMAIL\",  // type is not mandatory\n    // \"mobileNumber\": \"5598889\",\n    // \"mobileCode\": \"+1868\"\n    \"emailId\": \"email@yopmail.com\"\n}"
+						},
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/initiateForgotPassword",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"initiateForgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "initiateForgotPassword MAGT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "RMS",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"EMAIL\",\n    // \"mobileNumber\": \"3112235\",\n    // \"mobileCode\": \"+1868\",\n    \"emailId\": \"email6@yopmail.com\",\n    \"userType\":\"MAGT\",\n    \"userName\":\"test_magt\",\n    \"PortalLogin\":\"YES\"\n}"
+						},
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/initiateForgotPassword",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"initiateForgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword RMS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "RMS"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"5598889\",\n    \"confirmNewPassword\": \"P@ssw0rd\",\n    //\"emailId\":\"rishabh.0532@sb.in\",\n    \"mobileCode\": \"+1868\",\n    \"mobileNumber\": \"5598889\",\n    \"newPassword\": \"P@ssw0rd\",\n    \"otp\": \"884613\"\n}"
+						},
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/resetPassword",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ConsumerDetailsForPayment",
+			"item": [
+				{
+					"name": "getConsumerDetailsForPayments (CAM)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "clientCode",
+								"value": "CAM"
+							},
+							{
+								"key": "clientPwd",
+								"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD"
+							}
+						],
+						"url": {
+							"raw": "https://cam-backend.getpaypr-uat.com/client/getConsumerDetailsForPayments?businessId=1&channelId=1&mobileCode=%2B1868&mobileNumber=4998687",
+							"protocol": "https",
+							"host": [
+								"cam-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"client",
+								"getConsumerDetailsForPayments"
+							],
+							"query": [
+								{
+									"key": "businessId",
+									"value": "1"
+								},
+								{
+									"key": "channelId",
+									"value": "1"
+								},
+								{
+									"key": "mobileCode",
+									"value": "%2B1868"
+								},
+								{
+									"key": "mobileNumber",
+									"value": "4998687"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserDetailsForPayments (RMS)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer p3Ec-3yaJOWfEIVFVRt0oirQs7hgA71dA9gDtab2iHU"
+							},
+							{
+								"key": "timeStamp",
+								"value": "timestamp"
+							}
+						],
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/clients/getUserDetailsForPayments?mobileCode=%2B1868&mobileNumber=5598889",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"clients",
+								"getUserDetailsForPayments"
+							],
+							"query": [
+								{
+									"key": "mobileCode",
+									"value": "%2B1868"
+								},
+								{
+									"key": "mobileNumber",
+									"value": "5598889"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Configuration",
+			"item": [
+				{
+					"name": "https://ucm.getpaypr-uat.com/api/UCM/getConfigValues",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "ucm.getpaypr-uat.com"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ucm.getpaypr-uat.com"
+							},
+							{
+								"key": "referer",
+								"value": "https://ucm.getpaypr-uat.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"macOS\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "https://ucm.getpaypr-uat.com/api/UCM/getConfigValues",
+							"protocol": "https",
+							"host": [
+								"ucm",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"api",
+								"UCM",
+								"getConfigValues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getConfigurations Copy UCM",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eLdxeRa-mCnJPQZqg19tgvjp-T8HSCbxJNivHBCNajM"
+							},
+							{
+								"key": "orgTypeCode",
+								"value": "RET",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ucm-backend.getpaypr-uat.com/v1.0/getConfigurations?businessId=1&channelApplicable=true&channelId=1&configType=BACKOFFICE&engineApplicable=true&fetchCache=false",
+							"protocol": "https",
+							"host": [
+								"ucm-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"getConfigurations"
+							],
+							"query": [
+								{
+									"key": "businessId",
+									"value": "1"
+								},
+								{
+									"key": "channelApplicable",
+									"value": "true"
+								},
+								{
+									"key": "channelId",
+									"value": "1"
+								},
+								{
+									"key": "configType",
+									"value": "BACKOFFICE"
+								},
+								{
+									"key": "engineApplicable",
+									"value": "true"
+								},
+								{
+									"key": "orgTypeCode",
+									"value": "RET",
+									"disabled": true
+								},
+								{
+									"key": "fetchCache",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://wallet-backend.getpaypr-uat.com/v1.0/getChannelConfig?businessId=1&channelId=1&configType=BACKOFFICE",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eLdxeRa-mCnJPQZqg19tgvjp-T8HSCbxJNivHBCNajM"
+							}
+						],
+						"url": {
+							"raw": "https://wallet-backend.getpaypr-uat.com/v1.0/getChannelConfig?businessId=1&channelId=1&configType=BACKOFFICE",
+							"protocol": "https",
+							"host": [
+								"wallet-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"getChannelConfig"
+							],
+							"query": [
+								{
+									"key": "businessId",
+									"value": "1"
+								},
+								{
+									"key": "channelId",
+									"value": "1"
+								},
+								{
+									"key": "configType",
+									"value": "BACKOFFICE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://cam-backend.getpaypr-uat.com/postLogin/getConfigurations?configType=CAM",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "aliasName",
+								"value": "www.paypr.com"
+							},
+							{
+								"key": "userId",
+								"value": "206"
+							},
+							{
+								"key": "userToken",
+								"value": "66c6e253650300c1dc2df6f2a924e8eb"
+							}
+						],
+						"url": {
+							"raw": "https://cam-backend.getpaypr-uat.com/postLogin/getConfigurations?configType=CAM",
+							"protocol": "https",
+							"host": [
+								"cam-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"postLogin",
+								"getConfigurations"
+							],
+							"query": [
+								{
+									"key": "configType",
+									"value": "CAM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://reporting-backend.sapidblue.in/v1.0/getConfiguration?businessId=2&channelId=2&configType=s QA",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer xBH3L6oJvzv-ZXUf8y5P_fu3_7MXaD3d_MWz46UkyYY"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "89AokcpohnavyHhVeii74ugLTl2tNZSvxoxKbZ9VyguPXMBQya3i1ldPmYO09HgC"
+							}
+						],
+						"url": {
+							"raw": "https://reporting-backend.sapidblue.in/v1.0/getConfiguration?businessId=2&channelId=2&configType=BACKOFFICE",
+							"protocol": "https",
+							"host": [
+								"reporting-backend",
+								"sapidblue",
+								"in"
+							],
+							"path": [
+								"v1.0",
+								"getConfiguration"
+							],
+							"query": [
+								{
+									"key": "businessId",
+									"value": "2"
+								},
+								{
+									"key": "channelId",
+									"value": "2"
+								},
+								{
+									"key": "configType",
+									"value": "BACKOFFICE"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TxnLimitMeter & Balance",
+			"item": [
+				{
+					"name": "getTxnLimitMeter CAM",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "userId",
+								"value": "206"
+							},
+							{
+								"key": "userToken",
+								"value": "a0bde62f7126781650f8e1cbf9d78441"
+							},
+							{
+								"key": "aliasName",
+								"value": "www.paypr.com",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://wallet-backend.getpaypr-uat.com/postLogin/getTxnLimitMeter?systemUserId=206",
+							"protocol": "https",
+							"host": [
+								"wallet-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"postLogin",
+								"getTxnLimitMeter"
+							],
+							"query": [
+								{
+									"key": "systemUserId",
+									"value": "206"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBalance CAM",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "userId",
+								"value": "206",
+								"description": "157(ret) , 186(cam)"
+							},
+							{
+								"key": "userToken",
+								"value": "a0bde62f7126781650f8e1cbf9d78441"
+							},
+							{
+								"key": "aliasName",
+								"value": "www.paypr.com",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://wallet-backend.getpaypr-uat.com/postLogin/getBalance?aliasName=www.paypr.com&systemUserId=206",
+							"protocol": "https",
+							"host": [
+								"wallet-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"postLogin",
+								"getBalance"
+							],
+							"query": [
+								{
+									"key": "aliasName",
+									"value": "www.paypr.com"
+								},
+								{
+									"key": "systemUserId",
+									"value": "206"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTxnLimitMeter RMS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer tzU-Osg16Iw2eQR0EjvU_grRrQ_h1G6JTfBjKWUL-R0"
+							},
+							{
+								"key": "orgTypeCode",
+								"value": "RET",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/v1.0/getTxnLimitMeter",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"getTxnLimitMeter"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "doPayout",
+			"item": [
+				{
+					"name": "doPayout_BANK RET",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer UG7HLajH7CvfSz0WRgxNDTCbSbt2IEJCFZYREQ3GzdI"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "orgTypeCode",
+								"value": "MAGT"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountNumber\": \"94499479\",\n    \"accountType\": \"SAVINGS\",\n    \"amount\": \"1\",\n    \"confirmAmount\": \"1\",\n    \"device\": \"DESKTOP\",\n    \"appType\": \"Web_Panel\",\n    \"bankName\": \"Scotiabank\",\n    \"beneficiaryName\": \"Test Bank\",\n    \"branchName\": null,\n    \"businessId\": 1,\n    \"channelId\": 2,\n    \"clientIp\": \"127.0.0.1\",\n    \"orgId\": 135,\n    \"routingNumber\": \"979494949\",\n    \"remarks\": \"settle\",\n    \"type\": \"BANK\"\n    //\"otp\": \"{{payoutOtp}}\"\n}"
+						},
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/v1.0/doPayout",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"doPayout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doPayout_CASH RET",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer HOSFZIE3IcwjWh8xUY8_CkLps7qZBTo5Nvqm3WEmKNM"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "orgTypeCode",
+								"value": "RET"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"1\",\n    \"confirmAmount\": \"1\",\n    \"device\": \"DESKTOP\",\n    \"appType\": \"Web_Panel\",\n    \"businessId\": 1,\n    \"channelId\": 2,\n    \"clientIp\": \"127.0.0.1\",\n    \"orgId\": 177,\n    \"remarks\": \"settle\",\n    \"type\": \"CASH\"\n    //\"otp\": \"{{payoutOtp}}\"\n}"
+						},
+						"url": {
+							"raw": "https://merchant-backend.getpaypr-uat.com/v1.0/doPayout",
+							"protocol": "https",
+							"host": [
+								"merchant-backend",
+								"getpaypr-uat",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"doPayout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getLoginData Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer dFS-q6pN13MLbR3ZxSkb0deg7mbG8_McI3t4BVIPHn0"
+					},
+					{
+						"key": "orgTypeCode",
+						"value": "RET"
+					}
+				],
+				"url": {
+					"raw": "https://merchant-backend.getpaypr-uat.com/v1.0/getLoginData?appType=Web_Panel&businessId=1&channelId=2&loginType=RET",
+					"protocol": "https",
+					"host": [
+						"merchant-backend",
+						"getpaypr-uat",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"getLoginData"
+					],
+					"query": [
+						{
+							"key": "appType",
+							"value": "Web_Panel"
+						},
+						{
+							"key": "businessId",
+							"value": "1"
+						},
+						{
+							"key": "channelId",
+							"value": "2"
+						},
+						{
+							"key": "loginType",
+							"value": "RET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getConsumerDetails Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "clientCode",
+						"value": "CAM"
+					},
+					{
+						"key": "clientPwd",
+						"value": "ph2Nj5knd4IjWBVLc4mhmYHo1hQDEdS3FlIC2KskHpeHFhsqxD"
+					}
+				],
+				"url": {
+					"raw": "https://cam-backend.getpaypr-uat.com/client/getConsumerDetails?businessId=1&channelId=1&mobileCode=%2B1868&mobileNumber=5656565&systemConsumerId=219&userName=18685656565",
+					"protocol": "https",
+					"host": [
+						"cam-backend",
+						"getpaypr-uat",
+						"com"
+					],
+					"path": [
+						"client",
+						"getConsumerDetails"
+					],
+					"query": [
+						{
+							"key": "businessId",
+							"value": "1"
+						},
+						{
+							"key": "channelId",
+							"value": "1"
+						},
+						{
+							"key": "mobileCode",
+							"value": "%2B1868"
+						},
+						{
+							"key": "mobileNumber",
+							"value": "5656565"
+						},
+						{
+							"key": "systemConsumerId",
+							"value": "219"
+						},
+						{
+							"key": "userName",
+							"value": "18685656565"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update_Business_Info",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer XXXX"
+					}
+				],
+				"url": {
+					"raw": "https://merchant-backend.getpaypr-uat.com/v1.0/advancedOrgUpdate?businessId=0&businessName=gg&businessType=jj&channelId=0&orgId=77&orgTypeCode=%20RET&vatNumber=hyu",
+					"protocol": "https",
+					"host": [
+						"merchant-backend",
+						"getpaypr-uat",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"advancedOrgUpdate"
+					],
+					"query": [
+						{
+							"key": "businessId",
+							"value": "0"
+						},
+						{
+							"key": "businessName",
+							"value": "gg"
+						},
+						{
+							"key": "businessType",
+							"value": "jj"
+						},
+						{
+							"key": "channelId",
+							"value": "0"
+						},
+						{
+							"key": "orgId",
+							"value": "77"
+						},
+						{
+							"key": "orgTypeCode",
+							"value": "%20RET"
+						},
+						{
+							"key": "vatNumber",
+							"value": "hyu"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refund",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer XXXX"
+					},
+					{
+						"key": "orgTypeCode",
+						"value": "RET"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"businessId\": 0, \"orgId\": 0, \"remark\": \"string\", \"sourceChannelId\": 0, \"targetChannelId\": 0, \"transactionId\": 0}"
+				},
+				"url": {
+					"raw": "https://merchant-backend.getpaypr-uat.com/v1.0/doConsumerPaymentReturn",
+					"protocol": "https",
+					"host": [
+						"merchant-backend",
+						"getpaypr-uat",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"doConsumerPaymentReturn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://payments-backend.getpaypr-uat.com/postLogin/payment/depositRequest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "aliasName",
+						"value": "alias"
+					},
+					{
+						"key": "userId",
+						"value": "1"
+					},
+					{
+						"key": "userToken",
+						"value": "XXXX"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"actionType\": \"string\", \"aliasName\": \"string\", \"amount\": 0, \"consumerId\": \"string\", \"consumerToken\": \"string\", \"currencyCode\": \"string\", \"depositData\": {}, \"deviceType\": \"string\", \"isRetLogin\": true, \"paymentAccId\": 0, \"paymentTypeCode\": \"string\", \"paymentTypeId\": 0, \"respError\": \"string\", \"respSuccess\": \"string\", \"subTypeId\": 0, \"targetCurrencyCode\": \"string\", \"txnType\": \"string\", \"userAgent\": \"string\"}"
+				},
+				"url": {
+					"raw": "https://payments-backend.getpaypr-uat.com/postLogin/payment/depositRequest",
+					"protocol": "https",
+					"host": [
+						"payments-backend",
+						"getpaypr-uat",
+						"com"
+					],
+					"path": [
+						"postLogin",
+						"payment",
+						"depositRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://payments-backend.getpaypr-uat.com/postLogin/payment/depositRequest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "userId",
+						"value": "224"
+					},
+					{
+						"key": "userToken",
+						"value": "40ab253009f61ab9cd6d1babc0f33c5f"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=8AE3F1B1F0FAB6BF401F58414CD3886A"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r  \"amount\": 102,\r  \"currencyCode\": \"TTD\",\r  \"depositData\": {\r    \"cardCVV2\": \"123\",\r    \"cardNumber\": \"4111111111111111\",\r    \"cardExpiryDate\": \"0925\",\r    \"rememberMe\": \"YES\",\r    \"cardType\": \"VISA\"\r  },\r  \"deviceType\": \"MOBILE\",\r  \"aliasName\": \"https://www.paypr.com\",\r  \"paymentTypeId\": 1,\r  \"consumerId\": 224,\r  \"subTypeId\": 1,\r  \"txnType\": \"DEPOSIT\",\r  \"userAgent\": \"saket\"\r}\r"
+				},
+				"url": {
+					"raw": "https://payments-backend.getpaypr-uat.com/postLogin/payment/depositRequest",
+					"protocol": "https",
+					"host": [
+						"payments-backend",
+						"getpaypr-uat",
+						"com"
+					],
+					"path": [
+						"postLogin",
+						"payment",
+						"depositRequest"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,1912 @@
+{
+	"info": {
+		"_postman_id": "0b161839-fd12-4832-ac6e-d5e47744bbfc",
+		"name": "Inspired_Client",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24222642",
+		"_collection_link": "https://cloudy-escape-95096.postman.co/workspace/Team-Workspace~b8f5b68b-5195-47f5-8713-287e00b57660/collection/24222642-0b161839-fd12-4832-ac6e-d5e47744bbfc?action=share&source=collection_link&creator=24222642"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Teller",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "clientSecret",
+								"value": "XXXX"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"pin\": \"string\", \"userName\": \"string\"}"
+						},
+						"url": {
+							"raw": "https://inspired-mock-backend.sapidblue.in/preLogin/login",
+							"protocol": "https",
+							"host": [
+								"inspired-mock-backend",
+								"sapidblue",
+								"in"
+							],
+							"path": [
+								"preLogin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supervisor (Unlocked)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "clientSecret",
+								"value": "XXXX"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"pin\": \"string\", \"userName\": \"string\"}"
+						},
+						"url": {
+							"raw": "https://inspired-mock-backend.sapidblue.in/preLogin/login",
+							"protocol": "https",
+							"host": [
+								"inspired-mock-backend",
+								"sapidblue",
+								"in"
+							],
+							"path": [
+								"preLogin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supervisor (Locked)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "clientSecret",
+								"value": "XXXX"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"pin\": \"string\", \"userName\": \"string\"}"
+						},
+						"url": {
+							"raw": "https://inspired-mock-backend.sapidblue.in/preLogin/login",
+							"protocol": "https",
+							"host": [
+								"inspired-mock-backend",
+								"sapidblue",
+								"in"
+							],
+							"path": [
+								"preLogin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "heartbeat",
+			"item": [
+				{
+					"name": "postLogin/heartbeat",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"lastTransactionNumber\": 0, \"peripheralStatus\": [ { \"barCodeScanner\": \"string\", \"printer\": \"string\", \"scanner\": \"string\" } ]}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/heartbeat",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"heartbeat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "preLogin/heartbeat",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "clientSecret",
+								"value": "XXXX"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"lastTransactionNumber\": 0, \"peripheralStatus\": [ { \"barCodeScanner\": \"string\", \"printer\": \"string\", \"scanner\": \"string\" } ]}"
+						},
+						"url": {
+							"raw": "https://inspired-mock-backend.sapidblue.in/preLogin/heartbeat",
+							"protocol": "https",
+							"host": [
+								"inspired-mock-backend",
+								"sapidblue",
+								"in"
+							],
+							"path": [
+								"preLogin",
+								"heartbeat"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getLastResults",
+			"item": [
+				{
+					"name": "getLastResults?gameId=1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							}
+						],
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/getLastResults?gameId=67&noOfResults=3",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"getLastResults"
+							],
+							"query": [
+								{
+									"key": "gameId",
+									"value": "67"
+								},
+								{
+									"key": "noOfResults",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLastResults?gameId=Any",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							}
+						],
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/getLastResults?gameId=1&noOfResults=1",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"getLastResults"
+							],
+							"query": [
+								{
+									"key": "gameId",
+									"value": "1"
+								},
+								{
+									"key": "noOfResults",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLastResults?gameId=All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							}
+						],
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/getLastResults?gameId=All&noOfResults=1",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"getLastResults"
+							],
+							"query": [
+								{
+									"key": "gameId",
+									"value": "All"
+								},
+								{
+									"key": "noOfResults",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cancelTicket",
+			"item": [
+				{
+					"name": "CANCELLED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketNumber\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/cancelTicket",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"cancelTicket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INVALID_CANCELLATION",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketNumber\": \"0000000000000001\"\n}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/cancelTicket",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"cancelTicket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CANCELLATION_ERROR",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketNumber\": \"0000000000000002\"\n}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/cancelTicket",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"cancelTicket"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "drawGameWinning",
+			"item": [
+				{
+					"name": "CLAIMED_SUCCESSFULLY",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketNumber\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/drawGameWinning",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"drawGameWinning"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INVALID_CLAIM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketNumber\": \"0000000000000011\",\n    \"requestId\":\"2323\"\n}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/drawGameWinning",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"drawGameWinning"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ALREADY_CLAIMED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketNumber\": \"0000000000000012\"\n}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/drawGameWinning",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"drawGameWinning"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "scratchWinning",
+			"item": [
+				{
+					"name": "CLAIMED_SUCCESSFULLY",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketNumber\": \"1\",\n    \"vrnCode\": \"efd\"\n}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/scratchWinning",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"scratchWinning"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INVALID_CLAIM",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketNumber\": \"0000000000000011\",\n    \"vrnCode\": \"efd\"\n}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/scratchWinning",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"scratchWinning"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ALREADY_CLAIMED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticketNumber\": \"0000000000000012\",\n    \"vrnCode\": \"efd\"\n}"
+						},
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/scratchWinning",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"scratchWinning"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ticketScan",
+			"item": [
+				{
+					"name": "CLAIMABLE_AT_RETAILER",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							}
+						],
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/ticketScan?ticketNumber=1",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"ticketScan"
+							],
+							"query": [
+								{
+									"key": "ticketNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SOLD_SUCCESSFULLY",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							}
+						],
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/ticketScan?ticketNumber=0000000000000001",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"ticketScan"
+							],
+							"query": [
+								{
+									"key": "ticketNumber",
+									"value": "0000000000000001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ALREADY_SOLD",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							}
+						],
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/ticketScan?ticketNumber=0000000000000002",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"ticketScan"
+							],
+							"query": [
+								{
+									"key": "ticketNumber",
+									"value": "0000000000000002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RESULT_AWAITED",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							}
+						],
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/ticketScan?ticketNumber=0000000000000003",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"ticketScan"
+							],
+							"query": [
+								{
+									"key": "ticketNumber",
+									"value": "0000000000000003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HIGH_WINNING",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							}
+						],
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/ticketScan?ticketNumber=0000000000000004",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"ticketScan"
+							],
+							"query": [
+								{
+									"key": "ticketNumber",
+									"value": "0000000000000004"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NO_WINNING",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer XXXX"
+							},
+							{
+								"key": "appVersion",
+								"value": "1.0.0"
+							},
+							{
+								"key": "deviceIp",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "deviceNumber",
+								"value": "XYHTS888"
+							},
+							{
+								"key": "deviceType",
+								"value": "AERO1"
+							},
+							{
+								"key": "isFailure",
+								"value": "NO"
+							},
+							{
+								"key": "languageCode",
+								"value": "en"
+							}
+						],
+						"url": {
+							"raw": "{{InspiredUrl}}/postLogin/ticketScan?ticketNumber=0000000000000005",
+							"host": [
+								"{{InspiredUrl}}"
+							],
+							"path": [
+								"postLogin",
+								"ticketScan"
+							],
+							"query": [
+								{
+									"key": "ticketNumber",
+									"value": "0000000000000005"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getDraws",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer XXXX"
+					},
+					{
+						"key": "appVersion",
+						"value": "1.0.0"
+					},
+					{
+						"key": "deviceIp",
+						"value": "127.0.0.1"
+					},
+					{
+						"key": "deviceNumber",
+						"value": "XYHTS888"
+					},
+					{
+						"key": "deviceType",
+						"value": "AERO1"
+					},
+					{
+						"key": "isFailure",
+						"value": "NO"
+					},
+					{
+						"key": "languageCode",
+						"value": "en"
+					}
+				],
+				"url": {
+					"raw": "{{InspiredUrl}}/postLogin/getDraws",
+					"host": [
+						"{{InspiredUrl}}"
+					],
+					"path": [
+						"postLogin",
+						"getDraws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer XXXX"
+					},
+					{
+						"key": "appVersion",
+						"value": "1.0.0"
+					},
+					{
+						"key": "deviceIp",
+						"value": "127.0.0.1"
+					},
+					{
+						"key": "deviceNumber",
+						"value": "XYHTS888"
+					},
+					{
+						"key": "deviceType",
+						"value": "AERO1"
+					},
+					{
+						"key": "isFailure",
+						"value": "NO"
+					},
+					{
+						"key": "languageCode",
+						"value": "en"
+					}
+				],
+				"url": {
+					"raw": "{{InspiredUrl}}/postLogin/logout",
+					"host": [
+						"{{InspiredUrl}}"
+					],
+					"path": [
+						"postLogin",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lock",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer XXXX"
+					},
+					{
+						"key": "appVersion",
+						"value": "1.0.0"
+					},
+					{
+						"key": "deviceIp",
+						"value": "127.0.0.1"
+					},
+					{
+						"key": "deviceNumber",
+						"value": "XYHTS888"
+					},
+					{
+						"key": "deviceType",
+						"value": "AERO1"
+					},
+					{
+						"key": "isFailure",
+						"value": "NO"
+					},
+					{
+						"key": "languageCode",
+						"value": "en"
+					}
+				],
+				"url": {
+					"raw": "https://inspired-mock-backend.sapidblue.in/postLogin/lock",
+					"protocol": "https",
+					"host": [
+						"inspired-mock-backend",
+						"sapidblue",
+						"in"
+					],
+					"path": [
+						"postLogin",
+						"lock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unLock",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer XXXX"
+					},
+					{
+						"key": "appVersion",
+						"value": "1.0.0"
+					},
+					{
+						"key": "deviceIp",
+						"value": "127.0.0.1"
+					},
+					{
+						"key": "deviceNumber",
+						"value": "XYHTS888"
+					},
+					{
+						"key": "deviceType",
+						"value": "AERO1"
+					},
+					{
+						"key": "isFailure",
+						"value": "NO"
+					},
+					{
+						"key": "languageCode",
+						"value": "en"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"pin\": \"string\"}"
+				},
+				"url": {
+					"raw": "https://inspired-mock-backend.sapidblue.in/postLogin/unLock",
+					"protocol": "https",
+					"host": [
+						"inspired-mock-backend",
+						"sapidblue",
+						"in"
+					],
+					"path": [
+						"postLogin",
+						"unLock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cashOut",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer XXXX"
+					},
+					{
+						"key": "appVersion",
+						"value": "1.0.0"
+					},
+					{
+						"key": "deviceIp",
+						"value": "127.0.0.1"
+					},
+					{
+						"key": "deviceNumber",
+						"value": "XYHTS888"
+					},
+					{
+						"key": "deviceType",
+						"value": "AERO1"
+					},
+					{
+						"key": "isFailure",
+						"value": "NO"
+					},
+					{
+						"key": "languageCode",
+						"value": "en"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"amount\": 0, \"cashOutForUserName\": \"string\"}"
+				},
+				"url": {
+					"raw": "{{InspiredUrl}}/postLogin/cashOut",
+					"host": [
+						"{{InspiredUrl}}"
+					],
+					"path": [
+						"postLogin",
+						"cashOut"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "drawGameSale",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer XXXX"
+					},
+					{
+						"key": "appVersion",
+						"value": "1.0.0"
+					},
+					{
+						"key": "deviceIp",
+						"value": "127.0.0.1"
+					},
+					{
+						"key": "deviceNumber",
+						"value": "XYHTS888"
+					},
+					{
+						"key": "deviceType",
+						"value": "AERO1"
+					},
+					{
+						"key": "isFailure",
+						"value": "NO"
+					},
+					{
+						"key": "languageCode",
+						"value": "en"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"currentDrawID\": 0, \"gameCode\": \"string\", \"gameId\": 0, \"lineData\": [ { \"pickedValues\": \"string\", \"playType\": \"string\", \"quickPick\": true, \"unitCost\": 0 } ], \"noOfDraws\": 0, \"purchaseTime\": \"string\", \"totalPurchaseAmount\": 0}"
+				},
+				"url": {
+					"raw": "{{InspiredUrl}}/postLogin/drawGameSale",
+					"host": [
+						"{{InspiredUrl}}"
+					],
+					"path": [
+						"postLogin",
+						"drawGameSale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getConfigValues",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "appVersion",
+						"value": "1.0.0"
+					},
+					{
+						"key": "clientSecret",
+						"value": "XXXX"
+					},
+					{
+						"key": "deviceIp",
+						"value": "127.0.0.1"
+					},
+					{
+						"key": "deviceNumber",
+						"value": "XYHTS888"
+					},
+					{
+						"key": "deviceType",
+						"value": "AERO1"
+					},
+					{
+						"key": "isFailure",
+						"value": "NO"
+					},
+					{
+						"key": "languageCode",
+						"value": "en"
+					}
+				],
+				"url": {
+					"raw": "{{InspiredUrl}}/preLogin/getConfigValues",
+					"host": [
+						"{{InspiredUrl}}"
+					],
+					"path": [
+						"preLogin",
+						"getConfigValues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkPosLock",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "appVersion",
+						"value": "1.0.0"
+					},
+					{
+						"key": "clientSecret",
+						"value": "XXXX"
+					},
+					{
+						"key": "deviceIp",
+						"value": "127.0.0.1"
+					},
+					{
+						"key": "deviceNumber",
+						"value": "XYHTS888"
+					},
+					{
+						"key": "deviceType",
+						"value": "AERO1"
+					},
+					{
+						"key": "isFailure",
+						"value": "NO"
+					},
+					{
+						"key": "languageCode",
+						"value": "en"
+					}
+				],
+				"url": {
+					"raw": "https://inspired-mock-backend.sapidblue.in/preLogin/checkPosLock",
+					"protocol": "https",
+					"host": [
+						"inspired-mock-backend",
+						"sapidblue",
+						"in"
+					],
+					"path": [
+						"preLogin",
+						"checkPosLock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "otherProductsSale",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer XXXX"
+					},
+					{
+						"key": "appVersion",
+						"value": "1.0.0"
+					},
+					{
+						"key": "deviceIp",
+						"value": "127.0.0.1"
+					},
+					{
+						"key": "deviceNumber",
+						"value": "XYHTS888"
+					},
+					{
+						"key": "deviceType",
+						"value": "AERO1"
+					},
+					{
+						"key": "isFailure",
+						"value": "NO"
+					},
+					{
+						"key": "languageCode",
+						"value": "en"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productCategory\": \"string\",\n    \"productDetails\": {\n        \"amount\": 0,\n        \"mobileNumber\": \"string\",\n        \"productName\": \"string\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://inspired-mock-backend.sapidblue.in/postLogin/otherProductsSale",
+					"protocol": "https",
+					"host": [
+						"inspired-mock-backend",
+						"sapidblue",
+						"in"
+					],
+					"path": [
+						"postLogin",
+						"otherProductsSale"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
