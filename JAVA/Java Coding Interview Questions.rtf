@@ -1,8 +1,13 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2709
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww19140\viewh10300\viewkind0
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Georgia-Bold;\f2\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red27\green27\blue27;\red255\green255\blue255;\red38\green38\blue38;
+\red87\green96\blue106;\red203\green35\blue57;\red27\green31\blue34;\red91\green40\blue180;\red7\green68\blue184;
+}
+{\*\expandedcolortbl;;\cssrgb\c14118\c14118\c14118;\cssrgb\c100000\c100000\c100000;\cssrgb\c20000\c20000\c20000;
+\cssrgb\c41569\c45098\c49020;\cssrgb\c84314\c22745\c28627;\cssrgb\c14118\c16078\c18039;\cssrgb\c43529\c25882\c75686;\cssrgb\c0\c36078\c77255;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww24740\viewh12960\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 1. Reverse a string ->   In this for length() it gives 6 characters and for indexing it starts with 0 character\
@@ -10,6 +15,21 @@
 Staring r = \'93Apoorv\'94;\
 For (int I = r.length()-1 ; I>=0; I\'97);\
 \{ system.out.print(r.charAt(i));\
+\}\
+\
+\'96\'96\'96\'96\'96\'96OR\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\
+public class Main \{\
+    public static void main(String[] args) \{\
+      \
+      System.out.print(reverseStr("hello"));\
+    \}\
+    public static String reverseStr(String str)\{\
+      StringBuilder res = new StringBuilder();\
+     for (int i=str.length()-1; i>=0; i--)\{\
+       res.append(str.charAt(i));\
+     \}\
+     return res.toString();\
+    \}\
 \}\
 \
 2. Reversed a array -> \
@@ -44,7 +64,7 @@ public class Main \{\
 \
 public class Main \{\
     public static void main(String[] args) \{\
-        String sentence = "Hello This is worl JAVA";\
+        String sentence = "Hello This is world JAVA";\
         \
         String ReversedSentence = reversed(sentence);\
         \
@@ -58,9 +78,6 @@ public class Main \{\
         String reversed = "";\
         for (int i = words.length - 1; i>=0; i--)\{\
           reversed+=words[i];\
-          if (i!=0)\{\
-            reversed+="";\
-          \}\
         \}\
         return reversed;\
     \}\
@@ -81,4 +98,407 @@ public class Main \{\
         \}\
         return true;\
     \}\
-\}}
+\}\
+\
+5. String Pallaindrome\
+public class Main \{\
+    public static void main(String[] args) \{\
+        System.out.println(isPal("horn"));\
+    \}\
+    \
+    public static Boolean isPal(String str)\{\
+        \
+        int start = 0;\
+        int end = str.length()-1;\
+        \
+        while (start<end)\{\
+          if (str.charAt(start) != str.charAt(end))\{\
+            return false;\
+          \}\
+        start ++;\
+        end --;\
+        \}\
+      return true;  \
+\}\
+\}\
+\
+5.Reverse an Int -> \
+\
+Output in string ->\
+\
+public class Main \{\
+    public static void main(String[] args) \{\
+      int num = 123;\
+      String stringNum = Integer.toString(num);\
+      for (int i = stringNum.length()-1; i>=0; i--)\{\
+        System.out.print(stringNum.charAt(i));\
+      \}\
+    \}\
+\}  \
+\
+Output in int -> \
+\
+public class Main \{\
+    public static void main(String[] args) \{\
+      \
+      int num = 123;\
+      String stringNum = Integer.toString(num);\
+      String reversedNum = "";\
+      \
+      for (int i = stringNum.length()-1; i>=0; i--)\{\
+        reversedNum = reversedNum + stringNum.charAt(i);\
+      \} \
+      \
+      int reverseInt = Integer.parseInt(reversedNum);\
+      System.out.print(reverseInt);\
+    \}    \
+\}  \'97\'97\'97>>> Isko int mein vapis kro hi mat kyuki agr hum aisa krenge tok jaise humne 100 diya int, toh yeh jab hum for loop mein reversedNum ka output lete hain toh 0+ home 1 hojata h disse ladt emin s\uc0\u305 rf 1 aata h response mein.\
+\
+6. Number pallaindrome -> \
+\
+public class Main \{\
+    public static void main(String[] args) \{\
+\
+    int num = 123;\
+    String strNum = Integer.toString(num);\
+    \
+    int start = 0;\
+    int end = strNum.length()-1;\
+    \
+    while (start<end)\{\
+      if (strNum.charAt(start) != strNum.charAt(end))\{\
+        System.out.print("No is not pallaindrome");\
+        return;\
+      \}\
+    start ++;\
+    end --;\
+    \}\
+    System.out.print("No is pallaindrome");\
+    \}\
+\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96 Another method \'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96>>>>\
+\
+public class Main \{\
+    public static void main(String[] args) \{\
+    System.out.print(NoIsPal(547));  \
+    \}\
+    \
+    public static boolean NoIsPal(int num)\{\
+    String strNum = Integer.toString(num);\
+    \
+    int start = 0;\
+    int end = strNum.length()-1;\
+    \
+    while (start<end)\{\
+      if (strNum.charAt(start) != strNum.charAt(end))\{\
+        return false;\
+      \}\
+    start ++;\
+    end --;\
+    \}\
+    return true;\
+    \}\
+\}\
+\
+\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96Another method \'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96>>>>>\
+\
+public class Main \{\
+    public static void main(String[] args) \{\
+      System.out.print(NoIsPal(121));\
+    \}\
+    \
+    public static Boolean NoIsPal(int num)\{\
+    \
+    int originalNo = num;\
+    int reverseNo = 0;\
+    \
+    while(num>0)\{\
+      int remainder = num%10;\
+      reverseNo = (reverseNo*10) + remainder;\
+      num = num/10;\
+    \}\
+    return originalNo == reverseNo;\
+    \}\
+\}\
+\
+7. 
+\f1\b \cf2 \cb3 \expnd0\expndtw0\kerning0
+Max/min number from an array \'97> \
+\
+
+\f0\b0 public class Main \{\
+    public static void main(String[] args) \{\
+      System.out.print(min(new int[] \{45,2,13,144,12\}));\
+    \}\
+    \
+    public static int min(int[] arrNum)\{\
+      \
+      int min = arrNum[0];\
+      \
+      for (int num : arrNum)\{\
+        if (min > num)\{\
+          min = num;\
+        \}\
+      \}\
+      return min;\
+    \}\
+\}\cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\
+MAX \'97>\
+\
+public class Main \{\
+    public static void main(String[] args) \{\
+      System.out.print(max(new int[] \{45,2,13,144,12\}));\
+    \}\
+    \
+    public static int max(int[] arrNum)\{\
+      \
+      int max = arrNum[0];\
+      \
+      for (int num : arrNum)\{\
+        if (max < num)\{\
+          max = num;\
+        \}\
+      \}\
+      return max;\
+    \}\
+\}\
+\
+8. Second Max/Min from an array \'97> \
+\
+public class Main \{\
+    public static void main(String[] args) \{\
+      System.out.print(secMax(new int[] \{4, 781, 8, 99, 103\}));\
+    \}\
+    \
+    public static int secMax(int[] arrNum)\{\
+    \
+    int maxIndex = 0;\
+    int max = arrNum[0];\
+    \
+    for (int i = 0; i<arrNum.length; i++)\{\
+      if (max<arrNum[i])\{\
+        max = arrNum[i];\
+        maxIndex = i;\
+      \}\
+    \}\
+    \
+    int secondMax = Integer.MIN_VALUE;\
+    for (int i = 0; i<arrNum.length; i++)\{\
+      if (i != maxIndex && secondMax < arrNum[i])\{\
+        secondMax = arrNum[i];\
+      \}\
+    \}\
+    return secondMax;\
+    \}\
+\}\
+\
+\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96>>\
+\
+public class Main \{\
+    public static void main(String[] args) \{\
+      System.out.print(secMin(new int[] \{4, 781, 8, 99, 103\}));\
+    \}\
+    \
+    public static int secMin(int[] arrNum)\{\
+    \
+    int minIndex = 0;\
+    int min = arrNum[0];\
+    \
+    for (int i = 0; i<arrNum.length; i++)\{\
+      if (min>arrNum[i])\{\
+        min = arrNum[i];\
+        minIndex = i;\
+      \}\
+    \}\
+    \
+    int secondMin = Integer.MAX_VALUE;\
+    for (int i = 0; i<arrNum.length; i++)\{\
+      if (i != minIndex && secondMin > arrNum[i])\{\
+        secondMin = arrNum[i];\
+      \}\
+    \}\
+    return secondMin;\
+    \}\
+\}\
+\
+\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96\'96>>>\
+\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clmrg \clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4    \cf5 \strokec5 /**\cf4 \strokec4 \cell 
+\pard\intbl\itap1\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf5 \strokec5      * Return n biggest value from array.\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf5 \strokec5      *\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf5 \strokec5      * nMax([4, 3, 2, 8, 9, 5], 1);   -> 9\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf5 \strokec5      * nMax([4, 3, 2, 8, 9, 5], 2);   -> 8\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf5 \strokec5      * nMax([4, 3, 2, 8, 9, 5], 3);   -> 5\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf5 \strokec5      * nMax([4, 3, 2, 8, 9, 5], 100); -> 0\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf5 \strokec5      */\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4     \cf6 \strokec6 public\cf4 \strokec4  \cf6 \strokec6 static\cf4 \strokec4  \cf7 \strokec7 int\cf4 \strokec4  \cf8 \strokec8 nMax\cf4 \strokec4 (\cf7 \strokec7 int\cf4 \strokec4 [] arr, \cf7 \strokec7 int\cf4 \strokec4  n) \{\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4         \cf5 \strokec5 // handle negative case\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4         \cf6 \strokec6 if\cf4 \strokec4  (n > arr.length || n < \cf9 \strokec9 1\cf4 \strokec4 ) \{\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4             \cf6 \strokec6 return\cf4 \strokec4  \cf9 \strokec9 0\cf4 \strokec4 ;\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4         \}\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4         \cf5 \strokec5 // sort array\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4         \cf7 \strokec7 Arrays\cf4 \strokec4 .\cf8 \strokec8 sort\cf4 \strokec4 (arr);\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\cell
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4 \
+\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4         \cf5 \strokec5 // return n the biggest n value by using array length and n\cf4 \strokec4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4         \cf6 \strokec6 return\cf4 \strokec4  arr[arr.length - n];\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4     \}\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth890\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth9940\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl200 \clpadb20 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf4 \}\cell \lastrow\row
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 9. \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

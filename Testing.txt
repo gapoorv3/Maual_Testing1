@@ -1,0 +1,165 @@
+-------------------------------------------- 1.BASICS ---------------------------------------------------------
+-Testing in Software Engineering is a process of evaluating a software product to find whether the current software product meets the required conditions or not.The testing process involves evaluating the features of the software product for requirements in terms of any missing requirements, bugs or errors, security, reliability and performance.
+Some prefer saying Software testing definition as a White Box and Black Box Testing. In simple terms, Software Testing means the Verification of Application Under Test (AUT).
+
+Typically Testing is classified into three categories.
+-Functional Testing
+-Non-Functional Testing or Performance Testing
+-Maintenance (Regression and Maintenance)
+
+Here are important strategies in software engineering:
+-Unit Testing: This software testing basic approach is followed by the programmer to test the unit of the program. It helps developers to know whether the individual unit of the code is working properly or not.
+-Integration testing: It focuses on the construction and design of the software. You need to see that the integrated units are working without errors or not.
+-System testing: In this method, your software is compiled as a whole and then tested as a whole. This testing strategy checks the functionality, security, portability, amongst others.
+
+{NOTE:Program Testing in software testing is a method of executing an actual software program with the aim of testing program behavior and finding errors. The software program is executed with test case data to analyse the program behavior or response to the test data. A good program testing is one which has high chances of finding bugs}
+
+------------------------------------------- 2.Principles ------------------------------------------------------
+7 Principles of Software Testing :-
+-Testing shows presence of defects
+-Exhaustive testing is not possible (multitasking)
+-Early testing 
+-Defect clustering (small unit have high probability of errors) 
+-Pesticide paradox
+-Testing is context dependent
+-Absence of errors fallacy (business requirement dependent)
+
+---------------------------------------------3.V-Model --------------------------------------------------------
+V Model is a highly disciplined SDLC model which has a testing phase parallel to each development phase. The V model is an extension of the waterfall model wherein software development and testing is executed in a sequential way. It is known as the Validation or Verification Model. {Image - Downloads}
+
+-------------------------------------------- 4.STLC ----------------------------------------------------------
+STLC Model Phases:-
+-Requirement Analysis  [Requirement Traceability Matrix (RTM)]
+-Test Planning
+-Test case development
+-Test Environment setup (smoke testing)
+-Test Execution
+-Test Cycle closure
+
+Each of these stages has a definite Entry and Exit criteria, Activities & Deliverables associated with it.
+What is Entry and Exit Criteria in STLC?
+Entry Criteria: Entry Criteria gives the prerequisite items that must be completed before testing can begin.
+Exit Criteria: Exit Criteria defines the items that must be completed before testing can be concluded
+
+--------------------------------------------5.Manual Testing---------------------------------------------------
+How to perform Manual Testing
+-Read and understand the software project documentation/guides. Also, study the Application Under Test (AUT) if  available.
+-Draft Test cases that cover all the requirements mentioned in the documentation.
+-Review and baseline the test cases with Team Lead, Client (as applicable)
+-Execute the test cases on the AUT
+-Report bugs.
+-Once bugs are fixed, again execute the failing test cases to verify they pass.
+
+*Tools to Automate Manual Testing:                              
+Selenium                                                          
+QTP
+Jmeter
+Loadrunner
+TestLink
+Quality Center(ALM)
+
+*Types of Manual Testing:                 {Ad-hoc and monkey testing ---> Random Testing}
+Black Box Testing
+White Box Testing
+Unit Testing
+System Testing
+Integration Testing
+Acceptance Testing
+
+---------------------------------------6.Automation Testing--------------------------------------------------
+Automated Testing Process:
+
+Step 1) Test Tool Selection
+Step 2) Define scope of Automation
+Step 3) Planning, Design and Development
+Step 4) Test Execution
+Step 5) Maintenance
+
+*Types of Automated Testing
+Smoke Testing
+Unit Testing
+Integration Testing
+Functional Testing
+Keyword Testing
+Regression Testing
+Data Driven Testing
+Black Box Testing
+
+Summary->
+Test Automation is a software testing technique that performs using special automated testing software tools to execute a test case suite.
+
+Test Automation is the best way to increase the effectiveness, test coverage, and execution speed in software testing.
+
+Test Tool selection largely depends on the technology the Application Under Test is built on.
+
+Test Automation Maintenance Approach is an automation testing phase carried out to test whether the new functionalities added to the software are working fine or not.
+
+The right selection of automation tool, testing process, and team, are important players for automation to be successful. Manual and automation methods go hand-in-hand for successful testing.
+
+-----------------------------------------------Unit Testing--------------------------------------------------
+Unit Testing is a type of software testing where individual units or components of a software are tested. The purpose is to validate that each unit of the software code performs as expected. Unit Testing is done during the development (coding phase) of an application by the developers. Unit Tests isolate a section of code and verify its correctness. A unit may be an individual function, method, procedure, module, or object.
+In SDLC, STLC, V Model, Unit testing is first level of testing done before integration testing. Unit testing is a WhiteBox testing
+Tool - Junit(UnitTest Framework)
+
+
+Under the automated approach-
+
+-A developer writes a section of code in the application just to test the function. They would later comment out and finally remove the test code when the application is deployed.
+-A developer could also isolate the function to test it more rigorously. This is a more thorough unit testing practice that involves copy and paste of code to its own testing environment than its natural environment. Isolating the code helps in revealing unnecessary dependencies between the code being tested and other units or data spaces in the product. These dependencies can then be eliminated.
+-A coder generally uses a UnitTest Framework to develop automated test cases. Using an automation framework, the developer codes criteria into the test to verify the correctness of the code. During execution of the test cases, the framework logs failing test cases. Many frameworks will also automatically flag and report, in summary, these failed test cases. Depending on the severity of a failure, the framework may halt subsequent testing.
+The workflow of Unit Testing is 1) Create Test Cases 2) Review/Rework 3) Baseline 4) Execute Test Cases.
+
+----------------------------------------------Integration testing--------------------------------------------
+Integration Testing is defined as a type of testing where software modules are integrated logically and tested as a group. A typical software project consists of multiple software modules, coded by different programmers. The purpose of this level of testing is to expose defects in the interaction between these software modules when they are integrated
+Integration Testing focuses on checking data communication amongst these modules. Hence it is also termed as ‘I & T’ (Integration and Testing), ‘String Testing’ and sometimes ‘Thread Testing’.
+
+Types of Integration Testing
+-Big Bang Testing
+Big Bang Testing is an Integration testing approach in which all the components or modules are integrated together at once and then tested as a unit. This combined set of components is considered as an entity while testing. If all of the components in the unit are not completed, the integration process will not execute.
+
+-Incremental Testing
+In the Incremental Testing approach, testing is done by integrating two or more modules that are logically related to each other and then tested for proper functioning of the application. Then the other related modules are integrated incrementally and the process continues until all the logically related modules are integrated and tested successfully.
+Incremental Approach, in turn, is carried out by two different Methods:
+-Bottom Up (driver)
+-Top Down (stub)
+
+Stubs and Drivers
+Stubs and Drivers are the dummy programs in Integration testing used to facilitate the software testing activity. These programs act as a substitutes for the missing models in the testing. They do not implement the entire programming logic of the software module but they simulate data communication with the calling module while testing.
+
+Stub: Is called by the Module under Test.
+Driver: Calls the Module to be tested.
+
+-Sandwich Testing is a strategy in which top level modules are tested with lower level modules at the same time lower modules are integrated with top modules and tested as a system. It is a combination of Top-down and Bottom-up approaches therefore it is called Hybrid Integration Testing. It makes use of both stubs as well as drivers.
+
+-----------------------------------------------System Testing------------------------------------------------
+System Testing is a level of testing that validates the complete and fully integrated software product. The purpose of a system test is to evaluate the end-to-end system specifications. 
+
+System Testing is Blackbox
+Two Category of Software Testing
+
+Black Box Testing
+White Box Testing
+System test falls under the black box testing category of software testing.
+
+White box testing is the testing of the internal workings or code of a software application. In contrast, black box or System Testing is the opposite. System test involves the external workings of the software from the user’s perspective.
+
+-Hardware/Software Testing – IBM refers to Hardware/Software testing as “HW/SW Testing”. This is when the tester focuses his/her attention on the interactions between the hardware and software during system testing.
+-Recovery Testing – is done to demonstrate a software solution is reliable, trustworthy and can successfully recoup from possible crashes.
+-Usability Testing – mainly focuses on the user’s ease to use the application, flexibility in handling controls and ability of the system to meet its objectives
+
+--------------------------------------------------------------------------------------------------------------
+What is Smoke Testing?
+Smoke Testing is a software testing technique performed post software build to verify that the critical functionalities of software are working fine. It is executed before any detailed functional or regression tests are executed. The main purpose of smoke testing is to reject a software application with defects so that QA team does not waste time testing broken software application.
+
+In Smoke Testing, the test cases chose to cover the most important functionality or component of the system. The objective is not to perform exhaustive testing, but to verify that the critical functionalities of the system are working fine.
+For Example, a typical smoke test would be – Verify that the application launches successfully, Check that the GUI is responsive … etc.
+
+What is Sanity Testing?
+Sanity testing is a kind of Software Testing performed after receiving a software build, with minor changes in code, or functionality, to ascertain that the bugs have been fixed and no further issues are introduced due to these changes. The goal is to determine that the proposed functionality works roughly as expected. If sanity test fails, the build is rejected to save the time and costs involved in a more rigorous testing.
+
+The objective is “not” to verify thoroughly the new functionality but to determine that the developer has applied some rationality (sanity) while producing the software. For instance, if your scientific calculator gives the result of 2 + 2 =5! Then, there is no point testing the advanced functionalities like sin 30 + cos 50.
+
+-------------------------------------------Regression Testing-------------------------------------------------
+Regression Testing is defined as a type of software testing to confirm that a recent program or code change has not adversely affected existing features. Regression Testing is nothing but a full or partial selection of already executed test cases that are re-executed to ensure existing functionalities work fine.
+
+This testing is done to ensure that new code changes do not have side effects on the existing functionalities. It ensures that the old code still works once the latest code changes are done.

@@ -1,0 +1,97 @@
+---------------------------------------------Aggregate Report-------------------------------------------------
+Latency. JMeter measures the latency from just before sending the request to just after the first response has been received
+
+Label: Basically it is the name of the URL that we provided, in the above example, we provide two HTTP requests that are nothing but the Label of the report.
+
+Sample: It is used to show the number of virtual users per request that we added to the Thread Group.
+Average: It is used to specify how much time is taken by a specific request or Label. In the above example, the total average time is 2682 milliseconds as shown in the above screenshot.
+
+Median: It is the time in a bunch of test results. It demonstrates that half of the examples took something like this time i.e. the rest of at minimum as long.
+
+90% Line: It is the Value under which 90 Percent of the examples fall. The rest tests took essentially as long as they were worth. (90th percentile)To work out 90%, Make a rundown of all the exchange values and yet again orchestrate their qualities in dropping requests. Presently wipe out the top 10% exchanges of your all-out list. Staying most noteworthy is the 90th percentile.
+
+95% Line: It is the Value under which 95 Percent of the examples fall. The rest tests took essentially as long as they were worth. (95th percentile) To compute 95%, Make a rundown of all the exchange values and once again orchestrate their qualities in plummeting requests. Presently kill the top 5% exchanges of your all-out list. Staying most elevated worth is the 95th percentile.
+
+99% Line: It is the Value under which 99 Percent of the examples fall. The rest of the tests took basically as long as they were worth. (99th percentile) To compute close to 100%, Make a rundown of all the exchange values and yet again organize by their qualities in plummeting requests. Presently kill the top 1% exchanges of your absolute rundown. Staying most elevated worth is the 99th percentile.
+
+Min: It is used to show the minimum amount of time taken by the label and it is shown in milliseconds.
+
+Max: It is used to show the maximum amount of time taken by the label or we can say that HTTP request.
+
+Error%: It shows failed HTTP requests per label.
+
+Throughput: It shows a number of requests are processed per second.
+
+KB/Sec: It is used to show the average amount of data received from the server during Test Plan execution.
+
+
+-----------------------------------------------Summary Report--------------------------------------------------
+
+Label: It is the name/URL for the specific HTTP(s) Request. If you have selected “Include group name in label?” option then the name of the Thread Group is applied as the prefix to each label.
+
+Samples: This indicates the number of virtual users per request.
+
+Average: It is the average time taken by all the samples to execute specific label. In our case, the average time for Label 1 is 942 milliseconds & total average time is 584 milliseconds.
+
+Min: The shortest time taken by a sample for specific label. If we look at Min value for Label 1 then, out of 20 samples shortest response time one of the sample had was 584 milliseconds.
+
+Max: The longest time taken by a sample for specific label. If we look at Max value for Label 1 then, out of 20 samples longest response time one of the sample had was 2867 milliseconds.
+
+Std. Dev.: This shows the set of exceptional cases which were deviating from the average value of sample response time. The lesser this value more consistent the data. Standard deviation should be less than or equal to half of the average time for a label.
+{https://www.mathsisfun.com/data/standard-deviation.html}
+
+Error%: Percentage of Failed requests per Label.
+
+Throughput: Throughput is the number of request that are processed per time unit(seconds, minutes, hours) by the server. This time is calculated from the start of first sample to the end of the last sample. Larger throughput is better.
+
+KB/Sec: This indicates the amount of data downloaded from server during the performance test execution. In short, it is the Throughput measured in Kilobytes per second.
+
+-----------------------------------------------Response Time Graph-------------------------------------------
+Line jitni seedhi hogi utna acha h and also jitni neeche ji taraf ho.
+
+-------------------------------------------------HTML Reports--------------------------------------------------
+
+jmeter -n -t "D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\demo\Ultimate_Thread_Group.jmx" -l "D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\demo\Result1.csv" -e -o "D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\demo\Report"
+
+--------------------------------------------------------------------------------------------------------------
+
+Non GUI commands with explanation:
+
+# Jmeter -n : This command tells the command prompt I want to run my Jmeter script in Non GUI mode.
+
+#Jmeter -t : This will pick the Jmeter .jmx file and execute it. Here we give the path of jmx file which is under bin folder by default or could be in other folder.
+
+# Jmeter -l : Here we give the path where we want to save the executed results into .csv format. We give the path of bin/example folder along with the same name of csv file. Better to create a folder named “csv” in bin/example folder to keep separate your csv and html files.
+
+# Jmeter -e : This command is used to convert the .csv results into HTML format at the end of the test.
+
+# Jmeter -g : [path to CSV file] generate report dashboard only.
+
+# Jmeter -o : This command saves the html results into given output folder. Better to create a folder named “html” in bin/example folder to keep separate your csv and html files.
+
+------------------------------------------------------\
+APDEX(Application Performance Index) ---> yeh median ya avg. ko dekhe calculate krti h ;
+toleration min. hota h and frustration max. , aur avg. ya median inke beech hona chaiyeh.
+jitna 1.0 value ke aur hoga utna acha h aur jitna 0 ke karib utna khraab.
+
+Latency jitni kam hogi utna acha h
+
+Connect Time : JMeter measures the time it took to establish the connection, including SSL handshake. Note that connect time is not automatically subtracted from latency. In case of connection error, the metric will be equal to the time it took to face the error, for example in case of Timeout, it should be equal to connection timeout. 
+
+Elapsed time : JMeter measures the elapsed time from just before sending the request to just after the last response has been received.
+
+???median latency time???
+
+----> report through CLI mode
+jmeter -n -t D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\Sapid_Blue_MerchantUser.jmx -l D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5
+
+jmeter -n -t D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\Sapid_Blue_MerchantUser.jmx -l D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5 -e -o D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\New1
+
+overwrite file, if it's not empty-
+jmeter -n -t D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\Recording.jmx -l D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\test -f -e -o D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\New1
+
+throttling -
+jmeter -Jhttpclient.socket.https.cps=28111 -n -t D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\Sapid_Blue_MerchantUser.jmx
+
+throttling and generating csv file and report dashboard - 
+jmeter -Jhttpclient.socket.https.cps=28111 -n -t D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\Sapid_Blue_MerchantUser.jmx -l D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\test2.csv -e -o D:\OneDrive\Desktop\JMeter\apache-jmeter-5.5\New1
