@@ -1,12 +1,13 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2709
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Georgia-Bold;\f2\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;
-}
+\f3\fnil\fcharset0 Georgia;\f4\fnil\fcharset0 Georgia-BoldItalic;\f5\fnil\fcharset0 Georgia-Italic;
+\f6\fnil\fcharset0 AppleColorEmoji;}
 {\colortbl;\red255\green255\blue255;\red27\green27\blue27;\red255\green255\blue255;\red38\green38\blue38;
 \red87\green96\blue106;\red203\green35\blue57;\red27\green31\blue34;\red91\green40\blue180;\red7\green68\blue184;
-}
+\red27\green27\blue27;}
 {\*\expandedcolortbl;;\cssrgb\c14118\c14118\c14118;\cssrgb\c100000\c100000\c100000;\cssrgb\c20000\c20000\c20000;
 \cssrgb\c41569\c45098\c49020;\cssrgb\c84314\c22745\c28627;\cssrgb\c14118\c16078\c18039;\cssrgb\c43529\c25882\c75686;\cssrgb\c0\c36078\c77255;
-}
+\cssrgb\c14118\c14118\c14118;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww24740\viewh12960\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
@@ -509,10 +510,105 @@ public class Main \{\
     \}\
 \}\
 \
-11. \
+11. 
+\f1\b\fs40 \cf10 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec10 Remove duplicates from a string \'97> 
+\f0\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
 \
+public class Main \{\
+    public static void main(String[] args) \{\
+      String sent = "aaaaa";\
+      System.out.print(removeDup(sent));\
+    \
+    \}\
 \
+    public static String removeDup(String str)\{\
+      \
+      HashSet<Character> set = new HashSet<>();\
+      StringBuilder result = new StringBuilder();\
+      \
+      for (char ch : str.toCharArray())\{\
+        if ( !set.contains(ch))\{\
+          set.add(ch);\
+          result.append(ch);\
+        \}\
+      \}\
+      return result.toString();\
+      \
+    \}  \
+  \
+\}\
+     \
 \
+12. 
+\f1\b\fs40 \cf10 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec10 FizzBuzz
+\f3\b0 \cf10 \cb3 \strokec10 . Print numbers from 1 to 100\
+\pard\pardeftab720\partightenfactor0
+\cf10 - If a number is divisible by 3 print\'a0
+\f4\i\b Fizz
+\f5\b0 \cb1 \
+\cb3 -
+\f3\i0 \'a0If a number is divisible by 5 print\'a0
+\f4\i\b Buzz\cb1 \
+
+\f3\i0\b0 \cb3 - If a number is divisible by both 3 and 5 print\'a0
+\f4\i\b FizzBuzz
+\f0\i0\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+public class Main \{\
+    public static void main(String[] args) \{\
+        fizzbuzz();\
+    \}\
+\
+    public static void fizzbuzz() \{\
+        for (int i = 1; i <= 100; i++) \{\
+            if (i % 3 == 0 && i % 5 == 0) \{\
+                System.out.println("FizzBuzz");  // 
+\f6 \uc0\u9989 
+\f0  Print instead of return\
+            \} else if (i % 3 == 0) \{\
+                System.out.println("Fizz");\
+            \} else if (i % 5 == 0) \{\
+                System.out.println("Buzz");  // 
+\f6 \uc0\u9989 
+\f0  Fixed typo (was Bizz)\
+            \} else \{\
+                System.out.println(i);  // 
+\f6 \uc0\u9989 
+\f0  Use System.out.println instead of return\
+            \}\
+        \}\
+    \}\
+\}\
+\
+13. 
+\f1\b\fs40 \cf10 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec10 Even or Odd \'97> 
+\f0\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+public class Main \{\
+    public static void main(String[] args) \{\
+      evenOdd(12);\
+    \}\
+\
+    public static void evenOdd(int n)\{\
+      \
+      if (n%2 == 0 && n>0)\{\
+        System.out.println("Even");\
+      \}\
+      else if(n%2!=0 && n>0)\{\
+        System.out.println("Odd");\
+      \}\
+      else\{\
+        System.out.println("Incorrrect Number");\
+      \}\
+   \}\
+      \
+ \}\
+\
+14. \
 \
 \
 \
